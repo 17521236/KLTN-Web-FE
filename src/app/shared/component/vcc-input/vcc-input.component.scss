@@ -1,0 +1,29 @@
+@import "variable.scss";
+.size18 {
+    font-size: 18px;
+}
+.times-icon {
+    margin-right: 8px;
+}
+.size20 {
+    font-size: 20px;
+}
+.clear-icon {
+    cursor: pointer;
+    color: $color-bluish-grey;
+}
+
+.color-bluish-grey {
+    color: $color-bluish-grey;
+}
+
+input {
+    color: $color-dark-grey;
+}
+.error-msg {
+    line-height: 1.2;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    color: $color-nets-red;
+}
