@@ -1,0 +1,12 @@
+<nz-pagination 
+    #paginator
+    [nzPageIndex]="currentPage"
+    [nzTotal]="total" 
+    [nzPageSize]="pageSize"
+    nzShowSizeChanger 
+    [nzPageSizeOptions]="pageSizeOptions" 
+    [nzDisabled]="isDisabled"
+    (nzPageIndexChange)="changePage($event)"
+    (nzPageSizeChange)="changePageSize($event)"
+    
+></nz-pagination>

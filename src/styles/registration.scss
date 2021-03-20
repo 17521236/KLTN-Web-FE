@@ -1,0 +1,13 @@
+.registration-step-contain{
+    max-width: 542px;
+    border-radius: 16px;
+    padding: 40px;
+    margin: 40px auto 0 auto;
+}
+
+@media screen and (min-width: $screen-type-tablet) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .registration-step-contain {
+        border: $border-bluish-grey-10;
+    }
+}

@@ -1,0 +1,78 @@
+@import "variable.scss";
+.vcc-input {
+    height: 50px;
+    font-size: 16px;
+    border-radius: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: 1px solid $color-bluish-grey-10;
+    box-shadow: none;
+}
+.vcc-input.small {
+    height: 33px;
+    font-size: 14px;
+    border-radius: 8px;
+    input {
+        font-size: 14px;
+    }
+}
+.vcc-input:hover,
+.vcc-input:focus,
+.vcc-input-group:hover,
+.vcc-input-group:focus {
+    border-color: $color-dark-grey;
+    box-shadow: none;
+}
+.vcc-input:disabled,
+.vcc-input-group:disabled {
+    border-color: $color-light-grey;
+    background-color: $color-light-grey;
+    box-shadow: none;
+}
+.vcc-input-group {
+    border-radius: 16px;
+    padding: 0 14px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: 1px solid $color-bluish-grey-10;
+    box-shadow: none;
+    input {
+        background: transparent;
+    }
+}
+
+.ant-input-prefix {
+    margin-right: 16px;
+}
+
+.rise {
+    .ant-input[disabled] {
+        color: $color-black !important;
+        background: transparent;
+        background-color: $color-light-grey !important;
+        border: none;
+    }
+}
+.ip-black {
+    .ant-input {
+        color: $color-black;
+    }
+}
+.border-blue {
+    .vcc-input,
+    .vcc-input:hover {
+        border: solid 1px $color-nets-blue;
+    }
+}
+.input-label {
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    color: $color-dark-grey;
+}

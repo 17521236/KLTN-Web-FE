@@ -1,0 +1,11 @@
+@import 'variable.scss';
+.snackbars .snack{
+    background: $color-deep-blue;
+    padding: 16px;
+    border-radius: 16px;
+    font-weight: 300;
+    line-height: 1.21;
+}
+.snack .snack-text {
+    margin-right: 0;
+}

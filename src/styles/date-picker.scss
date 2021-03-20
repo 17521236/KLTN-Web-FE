@@ -1,0 +1,46 @@
+@import "variable.scss";
+.ant-picker-panel {
+    border: none !important;
+}
+nz-date-picker.ant-picker {
+    padding: 16px;
+    border: $border-bluish-grey-10;
+    border-radius: 16px;
+    height: 52px;
+}
+nz-date-picker:not(.ant-picker-disabled).ant-picker:hover,
+.ant-picker-focused {
+    border: $border-dark-grey;
+}
+
+nz-date-picker.ant-picker .ant-picker-clear {
+    padding: 0;
+    font-size: 20px;
+}
+
+nz-date-picker.ant-picker .ant-picker-input {
+    input {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.19;
+        color: $color-dark-grey;
+    }
+    .ant-picker-suffix {
+        font-size: 20px;
+    }
+}
+.ant-picker .ant-picker-input {
+    input {
+        cursor: pointer;
+    }
+}
+
+.ant-picker-panel-container.ng-star-inserted{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ant-picker-panel-container{
+    margin-left:  -5px;
+    margin-right: -5px;
+}

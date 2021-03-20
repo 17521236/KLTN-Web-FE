@@ -1,0 +1,19 @@
+@import "variable";
+.pill {
+    padding: 4px 8px;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1.11;
+    letter-spacing: 0.16px;
+    border-radius: 8px;
+}
+.pill.gray {
+    background-color: $color-bluish-grey-35;
+}
+.pill.red {
+    background-color: $color-nets-red;
+}
+.pill.blue {
+    background-color: $color-nets-blue;
+}

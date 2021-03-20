@@ -1,0 +1,304 @@
+@import "variable.scss";
+
+//card btn
+.vcc-card-btn {
+    padding: 16px 29px 16px 16px;
+    border-radius: 16px;
+    background: $color-white;
+    color: $color-dark-grey;
+}
+.vcc-card-btn.red {
+    .card-btn-title {
+        color: $color-red;
+        font-weight: bold;
+    }
+}
+.vcc-card-btn.blue {
+    .card-btn-title {
+        color: $color-nets-blue;
+        font-weight: bold;
+    }
+}
+.vcc-card-btn:hover {
+    background: $color-light-grey;
+}
+.vcc-card-btn.press.red {
+    color: $color-white;
+    background: $color-red;
+}
+.vcc-card-btn.press.blue {
+    color: $color-white;
+    background: $color-nets-blue;
+}
+.vcc-card-logo-btn {
+    padding: 30px 15px;
+    border-radius: 16px;
+    background: $color-white;
+}
+.vcc-card-logo-btn:hover {
+    padding: 30px 15px;
+    border-radius: 16px;
+    background: $color-light-grey;
+}
+
+.vcc-card-btn.press {
+    .card-btn-title {
+        color: white;
+    }
+    .card-btn-text{
+        color: $color-bluish-grey-5;
+    }
+}
+
+.vcc-card-btn > .card-btn-title {
+    font-size: 16px;
+}
+//btn
+
+.vcc-btn-fill {
+    color: $color-white;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 13px 25px;
+    height: unset;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+}
+.vcc-btn-fill.blue {
+    background: $color-nets-blue;
+    border: $color-nets-blue;
+}
+.vcc-btn-fill.blue:hover {
+    background: $color-bright-blue;
+    color: $color-white;
+    border: $color-bright-blue;
+}
+.vcc-btn-fill.red {
+    background: $color-nets-red;
+    border: $color-nets-red;
+}
+.vcc-btn-fill.red:hover {
+    background: $color-dark-red;
+    border: $color-dark-red;
+    color: $color-white;
+}
+.vcc-btn-fill:disabled,
+.vcc-btn-fill[disabled="disabled"] {
+    background: $color-bluish-grey-35 !important;
+}
+
+// btn -fill white
+
+.vcc-btn-fill.white{
+    color: $color-black;
+    background: white;
+    border: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 6px 0px;
+    &:hover{
+        background-color: $color-light-grey;
+    }
+}
+.vcc-btn-fill.white.press{
+    background: $color-nets-blue;
+    color: white;
+}
+
+//btn-sencond
+
+.vcc-btn-unfill {
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 13px 25px;
+    height: unset;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+}
+.vcc-btn-unfill.blue {
+    background: transparent;
+    border: $color-nets-blue 1px solid;
+    color: $color-nets-blue;
+}
+.vcc-btn-unfill.blue:hover {
+    color: $color-bright-blue;
+    border: $color-bright-blue 1px solid;
+}
+.vcc-btn-unfill.red {
+    background: transparent;
+    border: $color-nets-red 1px solid;
+    color: $color-nets-red;
+}
+.vcc-btn-unfill.red:hover {
+    border: $color-dark-red 1px solid;
+    color: $color-dark-red;
+}
+.vcc-btn-unfill:disabled,
+.vcc-btn-unfill[disabled="disabled"] {
+    border: $color-bluish-grey-35 1px solid !important;
+    color: $color-bluish-grey-35 !important;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+//btn- round
+
+.vcc-btn-round-fill {
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px 16px;
+    height: unset;
+    &:focus {
+        outline: none;
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+.vcc-btn-round-fill.blue {
+    background: $color-nets-blue;
+    border: $color-nets-blue 1px solid;
+    color: $color-white;
+}
+.vcc-btn-round-fill.blue:hover {
+    background: $color-bright-blue;
+    border: $color-bright-blue 1px solid;
+    color: white;
+}
+.vcc-btn-round-fill.red {
+    background: $color-nets-red;
+    border: $color-nets-red 1px solid;
+    color: white;
+}
+.vcc-btn-round-fill.red:hover {
+    border: $color-dark-red 1px solid;
+    background: $color-dark-red;
+    color: $color-white;
+}
+.vcc-btn-round-fill:disabled,
+.vcc-btn-round-fill[disabled="disabled"] {
+    border: $color-bluish-grey-35 1px solid !important;
+    color: $color-white !important;
+    background: $color-bluish-grey-35 !important ;
+    cursor: not-allowed;
+}
+
+.vcc-btn-round-unfill {
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px 16px;
+    height: unset;
+    &:focus {
+        outline: none;
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+.vcc-btn-round-unfill.blue {
+    background: transparent;
+    border: $color-nets-blue 1px solid;
+    color: $color-nets-blue;
+}
+.vcc-btn-round-unfill.blue:hover {
+    color: $color-bright-blue;
+    border: $color-bright-blue 1px solid;
+}
+.vcc-btn-round-unfill.red {
+    background: transparent;
+    border: $color-nets-red 1px solid;
+    color: $color-nets-red;
+}
+.vcc-btn-round-unfill.red:hover {
+    border: $color-dark-red 1px solid;
+    color: $color-dark-red;
+    cursor: pointer;
+}
+.vcc-btn-round-unfill.white {
+    background: $color-white;
+    border: $color-white 1px solid;
+    color: $color-nets-blue;
+}
+.vcc-btn-round-unfill.white:hover {
+    background-color: $color-bluish-grey-10;
+}
+
+.vcc-btn-round-unfill:disabled,
+.vcc-btn-round-unfill[disabled="disabled"] {
+    border: $color-bluish-grey-35 1px solid !important;
+    color: $color-bluish-grey-35 !important;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.vcc-none-border{
+    border: none !important;
+}
+.vcc-btn-border-white{
+    border: 1px solid $color-white !important;
+}
+// text-btn
+
+.vcc-text-btn {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.19;
+    color: $color-nets-blue;
+    cursor: pointer;
+    &:hover {
+        color: $color-bright-blue;
+    }
+}
+
+.vcc-text-btn:disabled,
+.vcc-text-btn[disabled="disabled"]{
+    color: $color-bluish-grey-35;
+}
+
+
+// marketing card
+.vcc-marketing-card-btn{
+    border-radius: 16px;
+    display: flex;
+    box-shadow: $box-shadow-1;
+    cursor: pointer;
+    .image{
+        border-radius: 16px;
+        width: 115px;
+        height: 115px;
+    }
+    .contain{
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: column;
+        .marketing-card-title{
+            color: $color-black;
+            line-height: 1.19;
+        }
+    }
+    &:hover>.contain{
+        background-color: $color-light-grey;
+    }
+}
+.btn-header-user{
+    background: transparent;
+    border: none;
+    outline: none;
+    span{
+        width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

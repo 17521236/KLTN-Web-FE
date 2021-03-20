@@ -1,0 +1,34 @@
+<table class="vcc-table mb-32">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên Block</th>
+            <th scope="col">Căn hộ</th>
+            <th scope="col">Số dân</th>
+            <th scope="col">Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-row" *ngFor="let block of (blocks$|async) , index as id">
+            <td>{{id}} </td>
+            <td>{{block.name}} </td>
+            <td>{{block.totalApartment}} </td>
+            <td>{{block.totalResident}} </td>
+            <td>{{block.desc}} </td>
+        </tr>
+    </tbody>
+</table>
+<div class="text-center">
+    <app-paginator [total]="50" (onPageChange)="onPageChange($event)"></app-paginator>
+</div>
+
+
+
+<!-- RIGHT MENU -->
+<div class="right-menu-container" *ngIf="showRightMenu">
+    <div class="right-menu">
+        <i class="mb-24 pointer" nz-icon nzType="close" nzTheme="outline" (click)="showRightMenu = false"></i>
+        <h6 class="lh-20 text-black mb-32"> Add block </h6>
+        Hello
+    </div>
+</div>

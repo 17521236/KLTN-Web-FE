@@ -1,0 +1,28 @@
+<ng-template #suffixDown>
+  <i nz-icon nzType="down" class="size18" nzTheme="outline"></i>
+</ng-template>
+<ng-template #notFoundData>
+  <div class="not-found-text-container">
+    No results found.
+  </div>
+</ng-template>
+
+<div class="medium-body-text text-dark-grey lh-19 mb-16" *ngIf="label">{{label}}</div>
+<nz-select 
+  [nzSuffixIcon]="suffixDown" 
+  [nzNotFoundContent]="notFoundData"
+  (nzBlur)="onBlur()" 
+  [nzAllowClear]="clearable" 
+  (ngModelChange)="onValueChange($event)" 
+  [nzDisabled]="disabled"
+  class="dropdown-container w-100" 
+  nzOptionHeightPx="50" 
+  nzOptionOverflowSize='7' 
+  [nzShowSearch]="showSearch"
+  [nzAllowClear]="clearable" 
+  [nzPlaceHolder]="placeholder" 
+  [(ngModel)]="value"
+  >
+  <nz-option class="dropdown-item" *ngFor="let item of options" [nzValue]="item.id" [nzLabel]="item.text">
+  </nz-option>
+</nz-select>

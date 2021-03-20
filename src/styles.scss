@@ -1,1 +1,684 @@
-/* You can add global styles to this file, and also import other style files */
+@import "variable.scss";
+@import "font.scss";
+@import "button.scss";
+@import "dropdown.scss";
+@import "checkbox-radio.scss";
+@import "input.scss";
+@import "tooltip.scss";
+@import "modal.scss";
+@import "paginator.scss";
+@import "range-picker.scss";
+@import "date-picker.scss";
+@import "multi-screen.scss";
+@import "flex.scss";
+@import "sprites.scss";
+@import "registration.scss";
+@import "table.scss";
+@import "card.scss";
+@import "pill.scss";
+@import "snackbar.scss";
+@import "side-filter.scss";
+html,
+body {
+    font-family: "Nunito";
+    color: $color-dark-grey;
+}
+h1 {
+    font-weight: 700;
+    font-size: 72px;
+}
+h2 {
+    font-weight: 700;
+    font-size: 68px;
+}
+h3 {
+    font-weight: 700;
+    font-size: 56px;
+}
+h4 {
+    font-weight: 700;
+    font-size: 48px;
+}
+h5 {
+    font-weight: 700;
+    font-size: 40px;
+}
+h6 {
+    font-weight: 700;
+    font-size: 32px;
+}
+.title-1 {
+    font-weight: 700;
+    font-size: 24px;
+}
+.extra-large-body {
+    font-weight: 600;
+    font-size: 24px;
+}
+.title-2 {
+    font-weight: 700;
+    font-size: 20px;
+}
+.large-body {
+    font-weight: 600;
+    font-size: 20px;
+}
+.title-3 {
+    font-weight: 700;
+    font-size: 16px;
+}
+.title-4 {
+    font-weight: 700;
+    font-size: 14px;
+}
+.medium-body-text {
+    font-weight: 600;
+    font-size: 16px;
+}
+.body-text {
+    font-weight: 300;
+    font-size: 14px;
+}
+.small-body-text {
+    font-weight: 600;
+    font-size: 14px;
+}
+.extra-small-body-text {
+    font-weight: 600;
+    font-size: 12px;
+}
+hr {
+    border: 1px solid $color-grey;
+}
+
+//TEXT COLOR
+.text-danger {
+    color: $color-dull-red;
+}
+.text-error {
+    color: $color-nets-red;
+}
+.text-light-grey {
+    color: $color-bluish-grey-10;
+}
+.text-dark-grey {
+    color: $color-dark-grey;
+}
+.text-link {
+    color: #003da5;
+}
+.text-light {
+    font-weight: 300;
+}
+.text-black {
+    color: $color-black;
+}
+
+.text-nets-blue {
+    color: $color-nets-blue;
+}
+.text-white {
+    color: white;
+}
+
+
+//LAYOUT
+
+.font12 {
+    font-size: 12px;
+}
+.font16 {
+    font-size: 16px;
+}
+.font20 {
+    font-size: 20px;
+}
+.d-fixed {
+    position: fixed;
+}
+.d-flex {
+    display: flex;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.jc-space-between {
+    justify-content: space-between;
+}
+.flex-v-center {
+    display: flex;
+    align-items: center;
+}
+.d-flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+.relative {
+    position: relative;
+}
+.right {
+    text-align: right;
+}
+
+.thin {
+    font-weight: 300;
+}
+
+//PADDING
+.p-20{
+    padding: 20px;
+}
+.px-auto{
+    padding-left: auto;
+    padding-right: auto;
+}
+.p-auto{
+    padding: auto;
+}
+.pl-7-5{
+    padding-left: 7.5px !important;
+}
+.pr-7-5{
+    padding-right: 7.5px !important;
+}
+.p-t-10 {
+    padding-top: 10px;
+}
+.p-t-20 {
+    padding-top: 20px;
+}
+.p-t-30 {
+    padding-top: 30px;
+}
+.p-t-40 {
+    padding-top: 40px;
+}
+
+.p-b-10 {
+    padding-bottom: 10px;
+}
+.p-b-20 {
+    padding-bottom: 20px;
+}
+.p-b-30 {
+    padding-bottom: 30px;
+}
+.p-b-40 {
+    padding-bottom: 40px;
+}
+
+.pb-8 {
+    padding-bottom: 8px;
+}
+.pb-12 {
+    padding-bottom: 12px;
+}
+.pb-16 {
+    padding-bottom: 16px;
+}
+
+.pb-24 {
+    padding-bottom: 24px;
+}
+
+.pb-32 {
+    padding-bottom: 32px;
+}
+
+.pb-48 {
+    padding-bottom: 48px;
+}
+.pb-50{
+    padding-bottom: 50px;
+}
+
+.pl-8 {
+    padding-left: 8px;
+}
+
+.pl-16 {
+    padding-left: 16px;
+}
+
+.pl-24 {
+    padding-left: 24px;
+}
+
+.pl-32 {
+    padding-left: 32px;
+}
+
+.pl-48 {
+    padding-left: 48px;
+}
+
+.pt-0 {
+    padding-top: 0;
+}
+.pt-8 {
+    padding-top: 8px;
+}
+.pt-12 {
+    padding-top: 12px;
+}
+.pt-16 {
+    padding-top: 16px;
+}
+
+.pt-24 {
+    padding-top: 24px;
+}
+
+.pt-32 {
+    padding-top: 32px;
+}
+
+.pt-48 {
+    padding-top: 48px;
+}
+
+.pr-8 {
+    padding-right: 8px;
+}
+
+.pr-16 {
+    padding-right: 16px;
+}
+
+.pr-24 {
+    padding-right: 24px;
+}
+
+.pr-32 {
+    padding-right: 32px;
+}
+
+.pr-48 {
+    padding-right: 48px;
+}
+.p-0 {
+    padding: 0px;
+}
+.p-8 {
+    padding:8px;
+}
+.p-16 {
+    padding: 16px;
+}
+.p-24 {
+    padding: 24px;
+}
+.p-32 {
+    padding: 32px;
+}
+.p-48{
+    padding: 48px;
+}
+
+
+// margin
+.m-auto{
+    margin: auto;
+}
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+.mb-32 {
+    margin-bottom: 32px;
+}
+
+.mb-48 {
+    margin-bottom: 48px;
+}
+.mb-56 {
+    margin-bottom: 56px;
+}
+.mb-12 {
+    margin-bottom: 12px;
+}
+.ml-8 {
+    margin-left: 8px;
+}
+
+.ml-16 {
+    margin-left: 16px;
+}
+
+.ml-24 {
+    margin-left: 24px;
+}
+
+.ml-32 {
+    margin-left: 32px;
+}
+
+.ml-48 {
+    margin-left: 48px;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+.mt-12 {
+    margin-top: 12px;
+}
+.mt-16 {
+    margin-top: 16px;
+}
+
+.mt-24 {
+    margin-top: 24px;
+}
+
+.mt-32 {
+    margin-top: 32px;
+}
+
+.mt-48 {
+    margin-top: 48px;
+}
+
+.mr-8 {
+    margin-right: 8px;
+}
+
+.mr-16 {
+    margin-right: 16px;
+}
+.mr-20 {
+    margin-right: 16px;
+}
+.mr-24 {
+    margin-right: 24px;
+}
+
+.mr-32 {
+    margin-right: 32px;
+}
+
+.mr-48 {
+    margin-right: 48px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+.text-end {
+    text-align: end;
+}
+
+
+.loading {
+    margin: auto;
+    padding: 30px 10px;
+    text-align: center;
+}
+
+.m-0 {
+    margin: 0;
+}
+.mt-0 {
+    margin-top: 0;
+}
+.mb-0 {
+    margin-bottom: 0;
+}
+.mr-0 {
+    margin-right: 0;
+}
+.ml-0 {
+    margin-left: 0;
+}
+.p-0 {
+    padding: 0 !important;
+}
+.pt-0 {
+    padding-top: 0 !important;
+}
+.pb-0 {
+    padding-bottom: 0 !important;
+}
+.pr-0 {
+    padding-right: 0 !important;
+}
+.pl-0 {
+    padding-left: 0 !important;
+}
+//MAIN
+.main-form {
+    margin-top: 40px;
+    max-width: 542px;
+    padding: 40px;
+    border: solid 1px $color-bluish-grey-10;
+    border-radius: 16px;
+    margin: auto;
+    .input-error-message {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .register-note-content {
+        font-weight: 600;
+        font-size: 16px;
+    }
+}
+.main-form.main-form-lg {
+    max-width: 760px;
+}
+@media screen and (min-width: $screen-type-mobile) and (max-width: $screen-type-tablet) {
+    .main-form {
+        border: none;
+        padding: 30px 20px;
+    }
+}
+
+// LINE HEIGHT
+.lh-19 {
+    line-height: 1.19;
+}
+.lh-20 {
+    line-height: 1.2;
+}
+.lh-21 {
+    line-height: 1.21;
+}
+
+//MASK
+.mask-vehicle-status {
+    padding: 4px 8px;
+    color: white;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+}
+.mask-blue {
+    background-color: $color-nets-blue;
+}
+.mask-grey-35 {
+    background-color: $color-bluish-grey-35;
+}
+
+// BORDER
+.bd-grey {
+    border: $border-grey;
+}
+.bd-bottom-grey {
+    border-bottom: $border-grey;
+}
+.bd-16 {
+    border-radius: 16px;
+}
+.bd-grey-10{
+    border: $border-bluish-grey-10;
+}
+.bd-bottom{
+    border-radius: 0 0 16px 16px;
+}
+// Name of page (main module)
+.page-name {
+    color: $color-black;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+@media screen and (min-width: $screen-type-desktop) {
+    .page-name {
+        position: fixed;
+        top: 40px;
+        z-index: 10;
+        .parent {
+            font-size: 14px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.21;
+            letter-spacing: normal;
+            color: $color-nets-blue;
+        }
+    }
+    .only-tablet-mb {
+        display: none;
+    }
+}
+
+@media screen and (max-width: $screen-type-desktop - 1px) {
+    .only-desktop {
+        display: none;
+    }
+}
+
+.error-msg {
+    line-height: 1.2;
+    font-size: 14px;
+    font-weight: 300;
+    color: $color-nets-red;
+}
+
+.att-name {
+    font-size: 16px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    color: $color-dark-grey;
+}
+
+.card-demo {
+    width: 327px;
+    height: 219px;
+    padding: 24px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    border: 1px solid $color-bluish-grey-5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .card-number {
+        font-size: 16px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.19;
+        letter-spacing: 3.04px;
+        color: $color-dark-grey;
+    }
+    .card-info {
+        font-size: 14px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.21;
+        letter-spacing: normal;
+        color: #66748f;
+    }
+}
+
+//PILL
+.pill {
+    font-size: 9px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.11;
+    letter-spacing: 0.16px;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+.pill-red {
+    background-color: $color-nets-red;
+}
+.pill-nets-blue {
+    background-color: $color-nets-blue;
+}
+.pill-dark-grey {
+    background-color: $color-dark-grey;
+}
+.pill-light-grey {
+    background-color: $color-bluish-grey-35;
+}
+// box shadow
+.box-shadow-1{
+    box-shadow: $box-shadow-1;
+}
+.hover-light-grey:hover {
+        background-color: $color-light-grey;
+}
+
+// ip group
+.input-group{
+    margin-bottom: 32px;
+}
+.toast-container .ngx-toastr{
+    text-align: center;
+    border-radius: 16px;
+    padding: 15px;
+
+}
+.toast-success  {
+    background-color: $color-nets-blue !important;
+    background-image: none!important;
+
+}
+ .toast-error {
+    background-color: $color-nets-red;
+    background-image: none!important;
+}
+
+li:focus{
+    outline: none;
+}

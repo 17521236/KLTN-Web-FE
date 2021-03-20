@@ -1,0 +1,19 @@
+<nz-layout class="h-100">
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <app-navigation></app-navigation>
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <!-- <nz-breadcrumb>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb> -->
+      <div class="inner-content h-100 mt-16">
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

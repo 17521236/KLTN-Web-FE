@@ -1,0 +1,43 @@
+@import "variable.scss";
+.main-content{
+    padding-top: 114px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    .main-container{
+        width: 100%;
+        max-width: 1280px;
+        //overflow: hidden;
+        height: 100%;
+    }
+}
+@media screen and (min-width: $screen-type-mobile) and (max-width:$screen-type-tablet) {
+    /* smartphones, iPhone, portrait 480x320 phones */
+    
+}
+
+@media screen and (min-width: $screen-type-tablet) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    
+}
+@media screen and (min-width: $screen-type-tablet-l) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+@media screen and (min-width: $screen-type-desktop) {
+    /* big landscape tablets, laptops, and desktops */
+    
+
+}
+@media screen and (min-width: $screen-type-desktop-l) {
+    /* hi-res laptops and desktops */
+    .main-content{
+        padding-top: 114px;
+        display: flex;
+        justify-content: center;
+        .main-container{
+            width: 100%;
+            max-width: 1280px;
+            //overflow: hidden;
+        }
+    }
+}

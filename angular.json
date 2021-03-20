@@ -28,9 +28,18 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
+            "allowedCommonJsDependencies": [
+              "angular2-text-mask"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,6 +100,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -124,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "KLTN-Web-FE"
+  "defaultProject": "KLTN-Web-FE",
+  "cli": {
+    "analytics": false
+  }
 }

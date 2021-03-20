@@ -1,0 +1,13 @@
+@import "variable.scss";
+
+.card-wrapper {
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: $box-shadow-1;
+}
+
+.card-text {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.21;
+}

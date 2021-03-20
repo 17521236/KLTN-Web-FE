@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpEventType, HttpParameterCodec, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { HTTP_ERROR_CODE_HEADER, LOGIN_TOKEN } from '../../const/system.const';
 import { forkJoin } from 'rxjs';
 declare const ENDPOINT_PRO;
 @Injectable({
@@ -11,20 +10,14 @@ declare const ENDPOINT_PRO;
 
 export class HttpService {
     constructor(private http: HttpClient, private router: Router) { }
-    /*
-    *method : http method.
-    *api : api url
-    *body : request body/header in json
-    *onSuccess : callback function when http return success
-    *onError: (optional) callback when response error. Default function is showing toast message or default action by erorr code
-    */
+
     public sendToServer(method: string, api: string, body: any, header: any, onSuccess, onError?) {
         api = (environment.production ? ENDPOINT_PRO : environment.endPoint) + api;
         let bd = body || {};
         let head = header || { 'Content-Type': 'application/json' };
-        if (localStorage.getItem(LOGIN_TOKEN)) {
-            head["Authorization"] = localStorage.getItem(LOGIN_TOKEN);
-        }
+        // if (localStorage.getItem(LOGIN_TOKEN)) {
+        //     head["Authorization"] = localStorage.getItem(LOGIN_TOKEN);
+        // }
         const headers = new HttpHeaders(head);
         if (!method) {
             return;
@@ -40,6 +33,7 @@ export class HttpService {
                     }
                 });
                 const params = new HttpParams({ fromObject: _body, encoder: new CustomHttpParamEncoder() });
+                console.log(headers,params,api)
                 request = this.http.get(api, {
                     headers: headers,
                     params: params,
@@ -224,7 +218,9 @@ export class HttpService {
         //   return;
         // }
         // const deActivated = error.headers.get('AURORA-Token-Deactivated');
-        const errorCode = error.headers.get(HTTP_ERROR_CODE_HEADER) || error.status;
+        // const errorCode = error.headers.get(HTTP_ERROR_CODE_HEADER) || error.status;
+        let errorCode = 0;
+        
         if (errorCode == 401) {
             // TODO Implement more logic, may be ret
         }

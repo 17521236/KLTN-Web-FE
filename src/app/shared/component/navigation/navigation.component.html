@@ -1,0 +1,22 @@
+<ul nz-menu nzTheme="dark" nzMode="inline">
+    <li nz-menu-item [routerLink]="[ROUTER_CONST.DASHBOARD]">
+        <i nz-icon nzType="area-chart"></i>
+        <span>Dashboard</span>
+    </li>
+    <li nz-submenu nzTitle="Chung cư" nzIcon="insert-row-left">
+        <ul>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.BLOCK]">Block</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.APARTMENT]">Căn hộ</li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Cư dân" nzIcon="insert-row-left">
+        <ul>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.RESIDENT]">Cư dân</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.VEHICLE]">Xe</li>
+        </ul>
+    </li>
+    <li nz-menu-item [routerLink]="[ROUTER_CONST.PROFILE]">
+        <i nz-icon nzType="profile"></i>
+        <span>Profile</span>
+    </li>
+</ul>

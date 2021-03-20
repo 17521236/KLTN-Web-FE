@@ -1,0 +1,656 @@
+.sprite-lg {
+    width: 112px;
+    height: 112px;
+    // background: url("~src/assets/images/sprite.png");
+    &.sprite-direction-board {
+        background-position: -1075px 0px;
+    }
+    &.sprite-shark-hand {
+        background-position: -718px -227px;
+    }
+    &.sprite-party {
+        background-position: -845px -341px;
+    }
+    &.sprite-inbox {
+        background-position: -728px -3px;
+    }
+    &.sprite-checked-list {
+        background-position: -1075px -341px;
+    }
+    &.sprite-car {
+        background-position: -1075px -112px;
+    }
+    &.sprite-search {
+        background-position: -836px -119px;
+    }
+    &.sprite-locker {
+        background-position: -718px -119px;
+    }
+    &.sprite-edit {
+        background-position: -948px -227px;
+    }
+    &.sprite-file {
+        background-position: -1075px -227px;
+    }
+    &.sprite-red-warning{
+        background-position: -836px -3px;
+    }
+    &.sprite-like-start{
+        background-position: -950px -0px;
+    }
+    &.sprite-finger-index{
+        background-position: -948px -117px;
+    }
+    &.sprite-bell{
+        background-position: -836px -227px;
+    }
+    &.sprite-card-appear{
+        background-position: -716px -341px;
+    }
+    &.sprite-finger-print{
+        background-position: -963px -341px;
+    }
+}
+
+// 16X16
+.sprite-16 {
+    width: 16px;
+    height: 16px;
+    // background: url("~src/assets/images/sprite.png");
+    &.sprite-check {
+        background-position: 0px -16px;
+    }
+    &.sprite-plus {
+        background-position: -33px -16px;
+    }
+    &.sprite-times {
+        background-position: -66px -16px;
+    }
+    &.sprite-minus {
+        background-position: -99px -16px;
+    }
+    &.sprite-up {
+        background-position: -172px -16px;
+    }
+
+    &.sprite-check-1 {
+        background-position: 0px -41px;
+    }
+    &.sprite-right {
+        background-position: -33px -41px;
+    }
+    &.sprite-eye-close {
+        background-position: -66px -41px;
+    }
+    &.sprite-eye {
+        background-position: -99px -41px;
+    }
+    &.sprite-refresh {
+        background-position: -172px -41px;
+    }
+
+    &.sprite-home {
+        background-position: 0px -66px;
+    }
+    &.sprite-activity {
+        background-position: -33px -66px;
+    }
+    &.sprite-pocket {
+        background-position: -66px -66px;
+    }
+    &.sprite-notification {
+        background-position: -99px -66px;
+    }
+    &.sprite-account {
+        background-position: -172px -66px;
+    }
+    &.sprite-home.active {
+        background-position: 0px -91px;
+    }
+    &.sprite-activity.active {
+        background-position: -33px -91px;
+    }
+    &.sprite-pocket.active {
+        background-position: -66px -91px;
+    }
+    &.sprite-notification.active {
+        background-position: -99px -91px;
+    }
+    &.sprite-account.active {
+        background-position: -172px -91px;
+    }
+
+    &.sprite-camera {
+        background-position: 0px -118px;
+    }
+    &.sprite-lock {
+        background-position: -33px -116px;
+    }
+    &.sprite-posision {
+        background-position: -66px -116px;
+    }
+    &.sprite-thunder {
+        background-position: -99px -116px;
+    }
+    &.sprite-calender {
+        background-position: -172px -116px;
+    }
+
+    &.sprite-card {
+        background-position: 0px -141px;
+    }
+    &.sprite-upload {
+        background-position: -33px -141px;
+    }
+    &.sprite-tag {
+        background-position: -66px -141px;
+    }
+    &.sprite-tag.active {
+        background-position: -99px -141px;
+    }
+    &.sprite-file {
+        background-position: -172px -141px;
+    }
+
+    &.sprite-car {
+        background-position: 0px -166px;
+    }
+    &.sprite-info-circle {
+        background-position: -33px -166px;
+    }
+    &.sprite-times-circle {
+        background-position: -66px -166px;
+    }
+    &.sprite-clock {
+        background-position: -99px -166px;
+    }
+    &.sprite-clock.active {
+        background-position: -172px -166px;
+    }
+
+    &.sprite-plus-square {
+        background-position: 0px -191px;
+    }
+    &.sprite-look {
+        background-position: -33px -191px;
+    }
+    &.sprite-card.active {
+        background-position: -66px -191px;
+    }
+    &.sprite-three-line {
+        background-position: -99px -191px;
+    }
+    &.sprite-check {
+        background-position: 0px -16px;
+    }
+    &.sprite-plus {
+        background-position: -33px -16px;
+    }
+    &.sprite-times {
+        background-position: -66px -16px;
+    }
+    &.sprite-minus {
+        background-position: -99px -16px;
+    }
+    &.sprite-up {
+        background-position: -172px -16px;
+    }
+
+    &.sprite-check-1 {
+        background-position: 0px -41px;
+    }
+    &.sprite-right {
+        background-position: -33px -41px;
+    }
+    &.sprite-eye-close {
+        background-position: -66px -41px;
+    }
+    &.sprite-eye {
+        background-position: -99px -41px;
+    }
+    &.sprite-refresh {
+        background-position: -172px -41px;
+    }
+
+    &.sprite-home {
+        background-position: 0px -66px;
+    }
+    &.sprite-activity {
+        background-position: -33px -66px;
+    }
+    &.sprite-pocket {
+        background-position: -66px -66px;
+    }
+    &.sprite-notification {
+        background-position: -99px -66px;
+    }
+    &.sprite-account {
+        background-position: -172px -66px;
+    }
+    &.sprite-home.active {
+        background-position: 0px -91px;
+    }
+    &.sprite-activity.active {
+        background-position: -33px -91px;
+    }
+    &.sprite-pocket.active {
+        background-position: -66px -91px;
+    }
+    &.sprite-notification.active {
+        background-position: -99px -91px;
+    }
+    &.sprite-account.active {
+        background-position: -172px -91px;
+    }
+
+    &.sprite-camera {
+        background-position: 0px -118px;
+    }
+    &.sprite-lock {
+        background-position: -33px -116px;
+    }
+    &.sprite-posision {
+        background-position: -66px -116px;
+    }
+    &.sprite-thunder {
+        background-position: -99px -116px;
+    }
+    &.sprite-calender {
+        background-position: -172px -116px;
+    }
+
+    &.sprite-card {
+        background-position: 0px -141px;
+    }
+    &.sprite-upload {
+        background-position: -33px -141px;
+    }
+    &.sprite-tag {
+        background-position: -66px -141px;
+    }
+    &.sprite-tag.active {
+        background-position: -99px -141px;
+    }
+    &.sprite-file {
+        background-position: -172px -141px;
+    }
+
+    &.sprite-car {
+        background-position: 0px -166px;
+    }
+    &.sprite-info-circle {
+        background-position: -33px -166px;
+    }
+    &.sprite-times-circle {
+        background-position: -66px -166px;
+    }
+    &.sprite-clock {
+        background-position: -99px -166px;
+    }
+    &.sprite-clock.active {
+        background-position: -172px -166px;
+    }
+
+    &.sprite-plus-square {
+        background-position: 0px -191px;
+    }
+    &.sprite-look {
+        background-position: -33px -191px;
+    }
+    &.sprite-card.active {
+        background-position: -66px -191px;
+    }
+    &.sprite-three-line {
+        background-position: -99px -191px;
+    }
+    &.sprite-download {
+        background-position: -172px -191px;
+    }
+    &.sprite-download {
+        background-position: -172px -191px;
+    }
+    &.sprite-master{
+        background-position: -86px -308px;
+    }
+    &.sprite-visa{
+        background-position: -114px -308px;
+    }
+    &.sprite-amex{
+        background-position: -140px -308px;
+    }
+    &.verified{
+        background-position: -99px -219px;
+    }
+}
+// 20x20
+.sprite-20 {
+    width: 20px;
+    height: 20px;
+    // background: url("~src/assets/images/sprite.png");
+    &.sprite-view-link{
+        background-position: -0px -216px;
+    }
+    &.sprite-time-cirle{
+        background-position: -33px -216px;
+    }
+    &.sprite-i-cirle{
+        background-position: -66px -216px;
+    }
+}
+
+//24x24
+.sprite-24 {
+    width: 24px;
+    height: 24px;
+    // background: url("~src/assets/images/sprite.png");
+    &.sprite-home{
+        background-position: -267px -370px;
+    }
+    &.sprite-activity{
+        background-position: -294px -370px;
+    }
+
+    &.sprite-wallet{
+        background-position: -321px -370px;
+    }
+    &.sprite-notification{
+        background-position: -348px -370px;
+    }
+    &.sprite-account{
+        background-position: -375px -370px;
+    }
+    &.sprite-times{
+        background-position: -404px -370px;
+    }
+    &.sprite-tag.disabled{
+        background-position: -433px -370px;
+    }
+    &.sprite-tag.blue{
+        background-position: -462.3px -370px;
+    }
+
+    &.sprite-home.active{
+        background-position: -267px -407px;
+    }
+    &.sprite-activity.active{
+        background-position: -294px -407px;
+    }
+
+    &.sprite-wallet.active{
+        background-position: -321px -407px;
+    }
+    &.sprite-notification.active{
+        background-position: -348px -407px;
+    }
+    &.sprite-account.active{
+        background-position: -375px -407px;
+    }
+   
+    &.sprite-tag{
+        background-position: -433px -407px;
+    }
+    &.sprite-tag:hover{
+        background-position: -462.3px -407px;
+    }
+}
+
+//32X32
+.sprite-32 {
+    width: 32px;
+    height: 32px;
+    // background: url("~src/assets/images/sprite.png");
+    &.sprite-p:hover{
+        background-position: -167px -14px;
+    }
+    &.sprite-checkout:hover{
+        background-position: -206px -14px;
+    }
+    &.sprite-car-station:hover{
+        background-position: -245px -14px;
+    }
+    &.sprite-dola:hover{
+        background-position: -284px -14px;
+    }
+    &.sprite-train:hover{
+        background-position: -318px -14px;
+    }
+    &.sprite-bus:hover{
+        background-position: -357px -14px;
+    }
+    &.sprite-marker:hover{
+        background-position: -396px -14px;
+    }
+
+    &.sprite-p{
+        background-position: -167px -49px;
+    }
+    &.sprite-checkout{
+        background-position: -206px -49px;
+    }
+    &.sprite-car-station{
+        background-position: -245px -49px;
+    }
+    &.sprite-dola{
+        background-position: -284px -49px;
+    }
+    &.sprite-train{
+        background-position: -318px -49px;
+    }
+    &.sprite-bus{
+        background-position: -357px -49px;
+    }
+    &.sprite-marker{
+        background-position: -396px -49px;
+    }
+
+    &.sprite-notification{
+        background-position: -167px -85px;
+    }
+    &.sprite-setup{
+        background-position: -206px -85px;
+    }
+    &.sprite-mony-exchange{
+        background-position: -245px -85px;
+    }
+    &.sprite-notification:hover{
+        background-position: -284px -85px;
+    }
+    &.sprite-setup:hover{
+        background-position: -318px -85px;
+    }
+    &.sprite-money-exchange:hover{
+        background-position: -357px -85px;
+    }
+    
+
+
+    &.sprite-link{
+        background-position: -167px -124px;
+    }
+    &.sprite-setup-pocket{
+        background-position: -206px -124px;
+    }
+    &.sprite-hand-card{
+        background-position: -245px -124px;
+    }
+    &.sprite-break-link{
+        background-position: -284px -124px;
+    }
+    &.sprite-weight{
+        background-position: -318px -124px;
+    }
+    &.sprite-lock{
+        background-position: -357px -124px;
+    }
+    &.sprite-card-times{
+        background-position: -396px -124px;
+    }
+
+
+    &.sprite-unknown{
+        background-position: -167px -166px;
+    }
+    &.sprite-break{
+        background-position: -206px -166px;
+    }
+    &.sprite-toogle-times{
+        background-position: -245px -166px;
+    }
+    &.sprite-dola-S{
+        background-position: -284px -166px;
+    }
+    &.sprite-pocket-topup{
+        background-position: -318px -166px;
+    }
+    &.sprite-pocket-warning{
+        background-position: -357px -166px;
+    }
+    &.sprite-pocket-checked{
+        background-position: -396px -166px;
+    }
+
+
+    &.sprite-car-4{
+        background-position: -167px -208px;
+    }
+    &.sprite-car-16{
+        background-position: -206px -208px;
+    }
+    &.sprite-bus{
+        background-position: -245px -208px;
+    }
+    &.sprite-truck{
+        background-position: -284px -208px;
+    }
+    &.sprite-truck-half{
+        background-position: -318px -208px;
+    }
+    &.sprite-moto{
+        background-position: -357px -208px;
+    }
+
+    &.sprite-location-question{
+        background-position: -167px -245px;
+    }
+    &.sprite-car-front{
+        background-position: -206px -245px;
+    }
+    &.sprite-lock{
+        background-position: -245px -245px;
+    }
+    &.sprite-gift{
+        background-position: -284px -245px;
+    }
+    &.sprite-hand-card-l{
+        background-position: -318px -245px;
+    }
+    &.sprite-message{
+        background-position: -357px -245px;
+    }
+    &.sprite-message-dot{
+        background-position: -392px -245px;
+    }
+
+    &.sprite-wallet-l{
+        background-position: -167px -285px;
+    }
+    &.sprite-wallet-dolar{
+        background-position: -206px -285px;
+    }
+    &.sprite-activity-list{
+        background-position: -245px -285px;
+    }
+    &.sprite-topup-dolar{
+        background-position: -284px -285px;
+    }
+    &.sprite-three-dot{
+        background-position: -318px -285px;
+    }
+    &.sprite-mobile{
+        background-position: -357px -285px;
+    }
+
+    &.sprite-user{
+        background-position: -167px -329px;
+    }
+    &.sprite-monitor{
+        background-position: -206px -329px;
+    }
+    &.sprite-activity-topup{
+        background-position: -245px -329px;
+    }
+    &.sprite-topup-card-locked{
+        background-position: -284px -329px;
+    }
+    &.sprite-zero-dolar{
+        background-position: -318px -329px;
+    }
+    &.sprite-e-check{
+        background-position: -357px -329px;
+    }
+    &.sprite-card-nets{
+        background-position: -0px -243px;
+    }
+    &.sprite-card-debit{
+        background-position: -49px -243px;
+    }
+    &.sprite-card-giro{
+        background-position: -98px -243px;
+    }
+
+}
+
+//CARDTYPE 32x24
+.sprite-card-type-mini{
+    width: 32px;
+    height: 24px;
+    // background: url("~src/assets/images/sprite.png");
+    &.american-express{
+        background-position: 0 -279px;
+    }
+    &.master{
+        background-position: -42px -279px;
+    }
+    &.nets{
+        background-position: -84px -279px;
+    }
+    &.visa{
+        background-position: -127px -279px;
+    }
+}
+
+.sprite-card-type-lg{    
+    // background: url("~src/assets/images/sprite.png");
+    &.american-express{
+        background-position: -13px -384px;
+        width: 88.2px;
+        height: 24px;
+    }
+    &.master{
+        background-position: -13px -314px;
+        width: 50.8px;
+        height: 32px;
+    }
+    &.nets{
+        background-position: -13px -417px;
+        width: 77.4px;
+        height: 20px;
+    }
+    &.visa{
+        background-position: -13px -355px;
+        width: 70px;
+        height: 20px;
+    }
+}
+.sprite-card-activate{
+    width: 112px;
+    height: 112px;
+    // background: url("~src/assets/images/sprite.png");
+    background-position: -716px -341px;
+}
+.sprite-singpass-mini{
+    width: 97.2px;
+    height: 17.3px;
+    // background: url("~src/assets/images/sprite.png");
+    background-position: -158px -421px;
+}

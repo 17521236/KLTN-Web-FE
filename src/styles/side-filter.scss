@@ -1,0 +1,71 @@
+@import "variable.scss";
+.right-menu-container {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    background: transparent;
+    z-index: 11;
+    .right-menu {
+        position: fixed;
+        top: 0px;
+        right: 0;
+        bottom: 0;
+        width: 407px;
+        background-color: white;
+        box-shadow: -6px 0 6px -4px $color-bluish-grey-10;
+        z-index: 12;
+        padding: 40px;
+        overflow-y: auto;
+        font-size: 16px;
+        // label {
+        //     font-weight: bold;
+        //     color: $color-black;
+        // }
+        .anticon-close {
+            margin-bottom: 24px;
+        }
+        .filter-header {
+            margin-bottom: 34px;
+        }
+        .row-item {
+            padding: 24px 0;
+        }
+        .row-item.top-16 {
+            padding-top: 16px;
+        }
+        .btn-update {
+            font-size: 14px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.21;
+            letter-spacing: normal;
+            color: $color-nets-blue;
+        }
+
+        .border {
+            border-bottom: 1px solid $color-grey;
+        }
+        .right-side-max-height-1-button{
+            min-height: calc(100vh - 210px);
+        }
+        .right-side-max-height-2-button{
+            min-height: calc(100vh - 280px);
+        }
+    }
+}
+
+.action-bar-bottom {
+    background-color: $color-nets-blue;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 65px;
+    padding: 16px 166px;
+    text-align: right;
+    max-width: 1280px;
+    margin: auto;
+}

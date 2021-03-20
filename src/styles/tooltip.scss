@@ -1,0 +1,7 @@
+@import 'variable.scss';
+.ant-tooltip-inner{
+    background-color: $color-deep-blue;
+    color: $color-white;
+    border-radius: 16px;
+    padding: 16px;
+}

@@ -1,0 +1,88 @@
+@import "variable.scss";
+.ant-modal-confirm.ant-modal-confirm-confirm.confirm-dialog {
+    border-radius: 8px;
+    .ant-modal-content {
+        border-radius: 8px;
+    }
+    .ant-modal-close {
+        display: none;
+    }
+    i.anticon {
+        display: none;
+    }
+    .ant-modal-confirm-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $color-black;
+        i {
+            font-style: normal;
+        }
+    }
+    .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+        margin-left: 0;
+        font-size: 16px;
+        color: $color-dark-grey;
+        b {
+            font-weight: normal;
+        }
+    }
+    .ant-modal-confirm-btns {
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+        button + button {
+            margin-bottom: 10px;
+            margin-left: 0px;
+        }
+    }
+}
+.modal-hide-close-btn {
+    .ant-modal-close {
+        display: none;
+    }
+    .ant-modal-content {
+        border-radius: 16px;
+    }
+}
+.modal-close-btn-left {
+    .ant-modal-close {
+        position: absolute;
+        left: 0;
+    }
+    .ant-modal-content {
+        border-radius: 16px;
+        padding-top: 40px;
+    }
+}
+
+.auto-top-up-alert {
+    padding: 0 20px;
+    .ant-modal-content {
+        max-width: 462px;
+        margin: auto;
+    }
+
+    .ant-modal-body {
+        padding: 30px;
+
+        & img {
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: $screen-type-tablet) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .auto-top-up-alert .ant-modal-body {
+        padding: 40px;
+    }
+}
+.modal-content-text{
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.19;
+  letter-spacing: normal;
+  color: $color-dark-grey;
+}
