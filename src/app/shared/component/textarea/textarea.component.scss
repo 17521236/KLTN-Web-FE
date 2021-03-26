@@ -1,0 +1,18 @@
+@import 'variable.scss';
+.area-feedback {
+    border: $border-bluish-grey-10;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.19;
+    color: $color-dark-grey;
+    resize: none;
+    padding: 16px;
+    width: 100%;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        border: $border-dark-grey;
+    }
+}

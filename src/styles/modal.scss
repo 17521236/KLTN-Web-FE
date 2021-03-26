@@ -55,7 +55,7 @@
     }
 }
 
-.auto-top-up-alert {
+.alert {
     padding: 0 20px;
     .ant-modal-content {
         max-width: 462px;
@@ -73,7 +73,7 @@
 
 @media screen and (min-width: $screen-type-tablet) {
     /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-    .auto-top-up-alert .ant-modal-body {
+    .alert .ant-modal-body {
         padding: 40px;
     }
 }

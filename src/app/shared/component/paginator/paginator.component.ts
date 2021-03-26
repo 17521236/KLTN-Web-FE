@@ -13,8 +13,8 @@ export class PaginatorComponent implements OnInit {
   @Output() onPageChange = new EventEmitter<PaginatorEvent>();
 
   @Input() currentPage = 1;
-  @Input() pageSize = 10;
-  @Input() pageSizeOptions = [10, 20, 50];
+  @Input() pageSizeOptions = [5, 10, 15];
+  @Input() pageSize = 5;
 
   constructor() {
   }

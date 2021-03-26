@@ -1,0 +1,13 @@
+<div class="p-8">
+    <app-header [pageName]="'Add block'" (close)="modal.closeAll()"></app-header>
+    <form [formGroup]="form" (submit)="add()">
+        <div class="input-group">
+            <app-input label="Tên block" formControlName="name"></app-input>
+        </div>
+        <div class="input-group">
+            <app-textarea label="Mô tả" formControlName="description"></app-textarea>
+        </div>
+        <button type="submit" class="vcc-btn-fill blue"
+            [disabled]="form.invalid || form.pristine || pending">Save</button>
+    </form>
+</div>

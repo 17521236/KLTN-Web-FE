@@ -1,0 +1,50 @@
+<div class="d-flex ai-center jc-space-between mb-48">
+    <h6 class="mb-0">Block</h6> 
+    <form [formGroup]="form" (submit)="search()">
+        <app-input formControlName="searchText" [placeholder]="'Seach by Name'" [clearfix]="true"
+            [suffixTpl]="searchTpl" (onClear)="search()"></app-input>
+        <ng-template #searchTpl>
+            <i class="pointer font20" nz-icon nzType="search" nzTheme="outline" (click)="search()"></i>
+        </ng-template>
+        <button type="submit" hidden></button>
+    </form>
+</div>
+<div *ngIf="(result$|async) as blocks, else loading">
+    <table class="vcc-table">
+        <thead>
+            <tr>
+                <th scope="col" width="15%">#</th>
+                <th scope="col" width="35%">Tên Block</th>
+                <th scope="col" width="50%">Mô tả</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="table-body mb-32">
+        <table class="vcc-table">
+            <tbody>
+                <tr class="table-row" *ngFor="let block of blocks.items, index as id" (click)="viewDetail(block)">
+                    <td width="15%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td width="35%">{{block.name}} </td>
+                    <td width="50%">{{block.description}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <nz-empty class="mt-48" *ngIf="blocks.total == 0" nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+        </nz-empty>
+    </div>
+    <div class="text-center">
+        <app-paginator [total]="blocks.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
+    <app-add-block (success)="success()"></app-add-block>
+</ng-template>

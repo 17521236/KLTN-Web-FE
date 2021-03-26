@@ -1,19 +1,19 @@
-import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component,  EventEmitter,  forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputMask } from './input-mask.model';
 
 @Component({
-  selector: 'app-vcc-input',
-  templateUrl: './vcc-input.component.html',
-  styleUrls: ['./vcc-input.component.scss'],
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => VccInputComponent),
+    useExisting: forwardRef(() => InputComponent),
     multi: true
   }],
 })
 
-export class VccInputComponent implements OnInit, ControlValueAccessor {
+export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() label;
   @Input() placeholder: string = "";
   value;
@@ -32,6 +32,7 @@ export class VccInputComponent implements OnInit, ControlValueAccessor {
   @Input() clearfix: boolean = false;
   @Input() mask: InputMask = new InputMask(false);
   @Input() class: string = '';
+  @Output() onClear = new EventEmitter();
 
   private onChange = (_: any) => { };
   private onTouched = (_: any) => { };
@@ -42,8 +43,9 @@ export class VccInputComponent implements OnInit, ControlValueAccessor {
   }
 
   clear() {
-    this.value = null;
+    this.value = '';
     this.emitChange();
+    this.onClear.emit();
   }
   emitChange() {
     this.onChange(this.value);

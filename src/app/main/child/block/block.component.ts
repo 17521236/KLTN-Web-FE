@@ -7,17 +7,10 @@ import { BlockService } from './service/block.service';
   styleUrls: ['./block.component.scss']
 })
 export class BlockComponent implements OnInit {
-
-  showRightMenu = false;
-  blocks$ = this.blockService.getBlocks('blockName',0,5);
-
-  constructor(private blockService: BlockService) { }
+  
+  constructor() { }
 
   ngOnInit(): void {
     
-  }
-
-  onPageChange($event) {
-
   }
 }

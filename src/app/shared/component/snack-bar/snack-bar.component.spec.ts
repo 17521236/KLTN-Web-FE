@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VccInputComponent } from './vcc-input.component';
+import { SnackBarComponent } from './snack-bar.component';
 
-describe('VccInputComponent', () => {
-  let component: VccInputComponent;
-  let fixture: ComponentFixture<VccInputComponent>;
+describe('SnackBarComponent', () => {
+  let component: SnackBarComponent;
+  let fixture: ComponentFixture<SnackBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VccInputComponent ]
+      declarations: [ SnackBarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VccInputComponent);
+    fixture = TestBed.createComponent(SnackBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

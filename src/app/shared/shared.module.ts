@@ -5,26 +5,38 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
-import { VccInputComponent } from './component/vcc-input/vcc-input.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconsProviderModule } from '../icons-provider.module';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { HeaderComponent } from './component/header/header.component';
 import { DropdownComponent } from './component/dropdown/dropdown.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { PaginatorComponent } from './component/paginator/paginator.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { InputComponent } from './component/input/input.component';
+import { TextareaComponent } from './component/textarea/textarea.component';
+import { LoadingComponent } from './component/loading/loading.component';
+import { SnackBarComponent } from './component/snack-bar/snack-bar.component';
+import { SnackbarModule, SnackbarService } from 'ngx-snackbar';
+import { HeaderComponent } from './component/header/header.component';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { ActionModalComponent } from './component/action-modal/action-modal.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 @NgModule({
   declarations: [
-    VccInputComponent,
+    InputComponent,
     NavigationComponent,
-    HeaderComponent,
     DropdownComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    TextareaComponent,
+    LoadingComponent,
+    SnackBarComponent,
+    HeaderComponent,
+    ActionModalComponent
   ],
   imports: [
+    NzEmptyModule,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -37,17 +49,25 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzMenuModule,
     NzBreadCrumbModule,
     NzSelectModule,
-    NzPaginationModule
+    NzPaginationModule,
+    SnackbarModule.forRoot(),
+    NzModalModule
   ],
   exports: [
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    VccInputComponent,
+    InputComponent,
     NavigationComponent,
     IconsProviderModule,
-    HeaderComponent,
     DropdownComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    TextareaComponent,
+    LoadingComponent,
+    SnackBarComponent,
+    HeaderComponent,
+    NzEmptyModule,
+    ActionModalComponent
   ]
 })
 export class SharedModule { }

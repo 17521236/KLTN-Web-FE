@@ -1,0 +1,31 @@
+<app-header [pageName]="'Block details'" (close)="close()"></app-header>
+<div *ngIf=" (block$|async) as block, else loading">
+    <form [formGroup]="form" (submit)="update()">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input label="Tên block" formControlName="name"></app-input>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input label="Số căn hộ" formControlName="apartmentTotal" [disabled]="true"></app-input>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input label="Số dân" formControlName="residentTotal" [disabled]="true"></app-input>
+                </div>
+            </div>
+        </div>
+    
+        <div class="input-group">
+            <app-textarea label="Mô tả" formControlName="description"></app-textarea>
+        </div>
+        <button type="submit" class="vcc-btn-fill blue" [disabled]="form.invalid || form.pristine">Save</button>
+    </form>
+</div>
+
+<ng-template #loading>
+<app-loading></app-loading>
+</ng-template>

@@ -1,5 +1,5 @@
 @import "variable.scss";
-.vcc-input {
+.app-input {
     height: 50px;
     font-size: 16px;
     border-radius: 16px;
@@ -8,7 +8,7 @@
     border: 1px solid $color-bluish-grey-10;
     box-shadow: none;
 }
-.vcc-input.small {
+.app-input.small {
     height: 33px;
     font-size: 14px;
     border-radius: 8px;
@@ -16,20 +16,20 @@
         font-size: 14px;
     }
 }
-.vcc-input:hover,
-.vcc-input:focus,
-.vcc-input-group:hover,
-.vcc-input-group:focus {
+.app-input:hover,
+.app-input:focus,
+.app-input-group:hover,
+.app-input-group:focus {
     border-color: $color-dark-grey;
     box-shadow: none;
 }
-.vcc-input:disabled,
-.vcc-input-group:disabled {
+.app-input:disabled,
+.app-input-group:disabled {
     border-color: $color-light-grey;
     background-color: $color-light-grey;
     box-shadow: none;
 }
-.vcc-input-group {
+.app-input-group {
     border-radius: 16px;
     padding: 0 14px;
     height: 50px;
@@ -49,21 +49,21 @@
 }
 
 .rise {
-    .ant-input[disabled] {
+    input {
         color: $color-black !important;
-        background: transparent;
-        background-color: $color-light-grey !important;
-        border: none;
     }
+    background: transparent;
+    background-color: $color-light-grey !important;
+    border: none;
 }
 .ip-black {
-    .ant-input {
+    .app-input {
         color: $color-black;
     }
 }
 .border-blue {
-    .vcc-input,
-    .vcc-input:hover {
+    .app-input,
+    .app-input:hover {
         border: solid 1px $color-nets-blue;
     }
 }

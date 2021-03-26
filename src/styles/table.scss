@@ -1,8 +1,8 @@
-@import 'variable.scss';
-.vcc-table{
+@import "variable.scss";
+.vcc-table {
     width: 100%;
-    thead{
-        th{
+    thead {
+        th {
             font-size: 16px;
             font-weight: bold;
             color: $color-black;
@@ -11,23 +11,26 @@
             padding: 24px;
         }
     }
-    tbody{
-        tr{
-            td{
+    tbody {
+        tr {
+            td {
                 padding: 24px;
                 border-bottom: 1px solid $color-bluish-grey-10;
             }
-
         }
-        tr:last-child{
-            td{
+        tr:last-child {
+            td {
                 border-bottom: none;
             }
         }
     }
 }
+.table-body {
+    height: 352px;
+    overflow-y: auto;
+}
 
-.table-row{
+.table-row {
     &:hover {
         background-color: $color-light-grey;
         cursor: pointer;

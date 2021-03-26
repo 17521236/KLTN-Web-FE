@@ -1,12 +1,12 @@
 <div>
     <div class="medium-body-text text-dark-grey lh-19 mb-16" *ngIf="label">{{label}}</div>
-    <nz-input-group class="vcc-input" [nzPrefix]="prefixTpl ? prefix : null" [nzSuffix]="suffix" >
+    <nz-input-group class="app-input" [class.rise]="disabled" [nzPrefix]="prefixTpl ? prefix : null" [nzSuffix]="suffix" >
         <input 
         #inputEl
         class="medium-body-text" 
         [name]="name"
         nz-input 
-        [placeholder]="placeholder"
+        [placeholder]="placeholder"S
         [type]="type" 
         [(ngModel)]="value"
         (ngModelChange)="emitChange()"
@@ -20,10 +20,11 @@
         <ng-template *ngIf="true then prefixTpl"></ng-template>
     </ng-template>
     <ng-template #suffix>
-        <ng-template *ngIf="suffixTpl then suffixTpl"></ng-template>
         <span *ngIf="value && clearfix" >
-            <i nz-icon class="clear-icon size20 d-flex ai-center"
+            <i nz-icon class="clear-icon size20 d-flex ai-center mr-8"
                     nzTheme="fill" nzType="close-circle" (click)="clear()"></i>
         </span>
+        <ng-template *ngIf="suffixTpl then suffixTpl"></ng-template>
+
     </ng-template>
 </div>
