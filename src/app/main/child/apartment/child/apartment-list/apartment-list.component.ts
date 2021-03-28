@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
+import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
 import { PaginatorEvent } from 'src/app/shared/component/paginator/paginator-event.model';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { BlockService } from '../../../block/service/block.service';
@@ -19,20 +20,21 @@ export class ApartmentListComponent implements OnInit {
 
   @ViewChild('modal') modal: ActionModalComponent;
 
-  form: FormGroup = this.fb.group({
-    blockId: null,
-    name: ''
-  });
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
-    switchMap((x: any) => {
-      return this.aptService.getApartment(x.paginator.getStart(), x.paginator.pageSize, x.searchText)
+    switchMap((x: TableHelper) => {
+      return this.aptService.getApartment(x.paginator.getStart(), x.paginator.pageSize, x.filterForm.value['name'], x.filterForm.value['blockId']);
     })
   )
-  blocks$ = this.blockService.getBlocks().pipe(map((x: any) => x.items));
+  blocks$ = this.blockService.getBlocks('', 0, 99).pipe(map((x: any) => x.total > 0 ? x.items.map(item => new DropdownItem(item._id, item.name)) : []));
   showRightMenu = false;
 
-  constructor(private router:Router, private aptService: ApartmentService, private blockService: BlockService, private fb: FormBuilder) { }
+  constructor(private router: Router, private aptService: ApartmentService, private blockService: BlockService, private fb: FormBuilder) {
+    this.tableHelper.filterForm = this.fb.group({
+      blockId: '',
+      name: ''
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -45,13 +47,13 @@ export class ApartmentListComponent implements OnInit {
     this.router.navigate([ROUTER_CONST.BLOCK.DETAIL, block._id]);
   }
   search() {
-    this.tableHelper.searchText = this.form.value['searchText'];
+    // later
     this.tableHelper.next();
   }
-  showModal(tpl){
-    this.modal.createComponentModal(tpl,{},false,'')
+  showModal(tpl) {
+    this.modal.createComponentModal(tpl, {}, false, '')
   }
-  success(){
+  success() {
     this.tableHelper.next();
   }
 }

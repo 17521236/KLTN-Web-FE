@@ -1,11 +1,12 @@
+import { FormGroup } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
 import { PaginatorEvent } from "../component/paginator/paginator-event.model";
 
 export class TableHelper {
     paginator: PaginatorEvent = new PaginatorEvent();
     searchText = '';
-    filter;
     query$;
+    filterForm:FormGroup;
     constructor() {
         this.query$ = new BehaviorSubject(this);
     }

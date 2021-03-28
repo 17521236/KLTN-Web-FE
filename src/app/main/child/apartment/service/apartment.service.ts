@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { API } from 'src/app/core/api.config';
 import { HttpService } from 'src/app/shared/service/http.service';
@@ -12,6 +13,8 @@ export class ApartmentService {
 
   constructor(private http: HttpService) { }
   getApartment(start?, limit?, name?, blockId?) {
+    console.log(API.APARTMENT.GET_ALL, null, null, { name, start, limit, blockId })
+    // return of([])
     return this.http.sendToServer("GET", API.APARTMENT.GET_ALL, null, null, { name, start, limit, blockId }).pipe(shareReplay());
   }
   getApartmentById(id) {

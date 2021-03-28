@@ -1,10 +1,15 @@
 <div class="d-flex ai-center jc-space-between mb-48">
     <h6 class="mb-0">Apartment</h6>
-    <form [formGroup]="form" (submit)="search()">
+    <form [formGroup]="tableHelper.filterForm" (submit)="search()">
         <div class="d-flex">
-
-            <div>
-                <app-dropdown [options]="(blocks$|async)" formControlName="blockId"></app-dropdown>
+            <div  class="mr-16" >
+                <app-dropdown 
+                    [placeholder]="'Search by Block'" 
+                    [options]="(blocks$|async)" 
+                    formControlName="blockId"
+                    (ngModelChange)="search()"
+                >
+                </app-dropdown>
             </div>
             <div>
                 <app-input formControlName="name" [placeholder]="'Seach by Name'" [clearfix]="true"
@@ -17,32 +22,38 @@
         </div>
     </form>
 </div>
-<div *ngIf="(result$|async) as items, else loading">
+<div *ngIf="(result$|async) as result, else loading">
     <table class="vcc-table">
         <thead>
             <tr>
-                <th scope="col" width="15%">#</th>
-                <th scope="col" width="35%">Tên Apartment</th>
-                <th scope="col" width="50%">Mô tả</th>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="20%">Block</th>
+                <th scope="col" width="20%">Tên Apartment</th>
+                <th scope="col" width="15%">Diện tích</th>
+                <th scope="col" width="15%">Trạng thái</th>
+                <th scope="col" width="25%">Mô tả</th>
             </tr>
         </thead>
     </table>
     <div class="table-body mb-32">
         <table class="vcc-table">
             <tbody>
-                <tr class="table-row" *ngFor="let item of items.items, index as id" (click)="viewDetail(item)">
-                    <td width="15%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
-                    <td width="35%">{{item.name}} </td>
-                    <td width="50%">{{item.description}} </td>
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td width="20%">{{item.blockName}} </td>
+                    <td width="20%">{{item.name}} </td>
+                    <td width="15%">{{item.area}} </td>
+                    <td width="15%">{{item.type === '0'?'Chưa đăng ký':'Đã đăng ký'}} </td>
+                    <td width="25%">{{item.description}} </td>
                 </tr>
             </tbody>
         </table>
-        <nz-empty class="mt-48" *ngIf="items.total == 0"
+        <nz-empty class="mt-48" *ngIf="result.total == 0"
             nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
         </nz-empty>
     </div>
     <div class="text-center">
-        <app-paginator [total]="items.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+        <app-paginator [total]="result.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
     </div>
 </div>
 <ng-template #loading>
