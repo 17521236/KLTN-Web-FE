@@ -33,6 +33,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() mask: InputMask = new InputMask(false);
   @Input() class: string = '';
   @Output() onClear = new EventEmitter();
+  @Input() isRequired = false;
 
   private onChange = (_: any) => { };
   private onTouched = (_: any) => { };

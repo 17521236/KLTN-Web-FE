@@ -1,0 +1,71 @@
+<app-header [pageName]="'Vehicle details'" (close)="close()"></app-header>
+<div *ngIf=" (vehicle$|async) as vehicle, else loading">
+    <form [formGroup]="form" (submit)="update()">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <app-dropdown 
+                    [label]="'Chủ xe'"
+                    [placeholder]="'Select Resident'" 
+                    [options]="(resident$|async)" 
+                    formControlName="residentId"
+                    [showSearch]="true"
+                    ></app-dropdown>
+                    <app-error-message-validator [formGroup]="form" controlName="residentId"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
+                    ></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-dropdown 
+                    [label]="'Loại xe'"
+                    [placeholder]="'Select Type'" 
+                    [options]="typeList" 
+                    formControlName="type"
+                    [showSearch]="true"
+                    ></app-dropdown>
+                    <app-error-message-validator [formGroup]="form" controlName="type"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
+                    ></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input label="Biển số" formControlName="licensePlate"></app-input>
+                    <app-error-message-validator [formGroup]="form" controlName="licensePlate"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
+                    ></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input label="Giá xe" formControlName="price"></app-input>
+                    <app-error-message-validator [formGroup]="form" controlName="price"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
+                    ></app-error-message-validator>
+                </div>
+            </div>
+      
+            <div class="col-4">
+                <div class="input-group">
+                    <app-dropdown 
+                    [label]="'Trạng thái'"
+                    [placeholder]="'Select Apartment'" 
+                    [options]="statusList" 
+                    formControlName="status"
+                    [showSearch]="true"
+                    ></app-dropdown>
+                    <app-error-message-validator [formGroup]="form" controlName="status"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
+                    ></app-error-message-validator>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="vcc-btn-fill blue" [disabled]="form.invalid || form.pristine">Save</button>
+    </form>
+</div>
+
+<ng-template #loading>
+<app-loading></app-loading>
+</ng-template>

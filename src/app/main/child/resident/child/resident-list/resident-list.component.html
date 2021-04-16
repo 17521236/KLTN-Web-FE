@@ -1,0 +1,80 @@
+<div class="mb-32">
+    <h6 class="mb-16">Dân cư</h6>
+    <form [formGroup]="tableHelper.filterForm" (submit)="search()">
+        <div class="d-flex">
+            <div class="mr-16" style="width: 252px;">
+                <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blocks$|async)"
+                    formControlName="blockId" [showSearch]="true" (ngModelChange)="blockSelected($event)">
+                </app-dropdown>
+            </div>
+            <div class="mr-16" style="width: 252px;">
+                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'All'" [options]="(apt$|async)"
+                    formControlName="aptId" (ngModelChange)="search()">
+                </app-dropdown>
+            </div>
+            <div class="mr-16" style="width: 252px;">
+                <app-dropdown label="Loại" [showSearch]="true" [placeholder]="'Search by Type'"
+                    [options]="RESIDENT_TYPE" formControlName="type" (ngModelChange)="search()">
+                </app-dropdown>
+            </div>
+            <div>
+                <app-input label="Name" formControlName="name" [placeholder]="'Seach by Name'" [clearfix]="true" (onClear)="search()"></app-input>
+            </div>
+        </div>
+        <button type="submit" hidden></button>
+    </form>
+</div>
+<div *ngIf="(result$|async) as result, else loading">
+    <table class="vcc-table">
+        <thead>
+            <tr>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="15%">Tên</th>
+                <th scope="col" width="15%">Block</th>
+                <th scope="col" width="10%">Căn hộ</th>
+                <th scope="col" width="10%">Loại</th>
+                <th scope="col" width="12%">Ngày sinh</th>
+                <th scope="col" width="20%">Email</th>
+                <th scope="col" width="13%">Số điện thoại</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="table-body mb-32">
+        <table class="vcc-table">
+            <tbody>
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}}</td>
+                    <td width="15%">{{item.name}} </td>
+                    <td width="15%">{{item.blockName}} </td>
+                    <td width="10%">{{item.aptName}} </td>
+                    <td width="10%">
+                        {{item.type === RESIDENT_TYPE_LIST[0].id
+                        ?RESIDENT_TYPE_LIST[0].text:RESIDENT_TYPE_LIST[1].text}}
+                    </td>
+                    <td width="12%">{{item.dateOfBirth|date:"dd-mm-yyyy"}} </td>
+                    <td width="20%">{{item.email}} </td>
+                    <td width="13%">{{item.phoneNumber}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <nz-empty class="mt-48" *ngIf="result.total == 0"
+            nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+        </nz-empty>
+    </div>
+    <div class="text-center">
+        <app-paginator [total]="result.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
+    <!-- <app-add-apartment [tableHelper]="tableHelper" (success)="success()"></app-add-apartment> -->
+    <app-add-resident [tableHelper]="tableHelper"></app-add-resident>
+</ng-template>

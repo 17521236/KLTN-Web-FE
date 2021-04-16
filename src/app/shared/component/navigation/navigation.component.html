@@ -3,16 +3,22 @@
         <i nz-icon nzType="area-chart"></i>
         <span>Dashboard</span>
     </li>
-    <li nz-submenu nzTitle="Chung cư" nzIcon="insert-row-left">
+    <li nz-submenu nzTitle="Hạ tầng" nzIcon="insert-row-left">
         <ul>
             <li nz-menu-item [routerLink]="[ROUTER_CONST.BLOCK.LIST]">Block</li>
-            <li nz-menu-item [routerLink]="[ROUTER_CONST.APARTMENT]">Căn hộ</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.APARTMENT.LIST]">Căn hộ</li>
         </ul>
     </li>
-    <li nz-submenu nzTitle="Cư dân" nzIcon="insert-row-left">
+    <li nz-submenu nzTitle="Cư dân" nzIcon="usergroup-add">
         <ul>
-            <li nz-menu-item [routerLink]="[ROUTER_CONST.RESIDENT]">Cư dân</li>
-            <li nz-menu-item [routerLink]="[ROUTER_CONST.VEHICLE]">Xe</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.RESIDENT.LIST]">Cư dân</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.VEHICLE.LIST]">Xe</li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Chi phí" nzIcon="transaction">
+        <ul>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.SERVICE.LIST]">Dịch vụ</li>
+            <li nz-menu-item [routerLink]="[ROUTER_CONST.BILL.LIST]">Thanh toán</li>
         </ul>
     </li>
     <li nz-menu-item [routerLink]="[ROUTER_CONST.PROFILE]">

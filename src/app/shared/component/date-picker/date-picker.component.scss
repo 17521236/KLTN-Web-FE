@@ -1,0 +1,23 @@
+@import "variable.scss";
+.picker-footer-extra {
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 4px;
+    &__additional {
+        cursor: pointer;
+
+        // will change after
+        color: $color-nets-blue;
+        margin-right: 13px;
+    }
+
+    &__ok {
+        cursor: pointer;
+        color: white;
+        font-size: 12px;
+        // will change after
+        background-color: $color-nets-blue;
+        padding: 8px;
+        border-radius: 2px;
+    }
+}

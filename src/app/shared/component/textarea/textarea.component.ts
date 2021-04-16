@@ -15,6 +15,7 @@ export class TextareaComponent implements OnInit, ControlValueAccessor {
   @Input() disabled: boolean;
   @Input() placeholder: string = "";
   @Input() label;
+  @Input() isRequired = false;
   value;
 
   constructor() { }

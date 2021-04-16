@@ -7,7 +7,7 @@
   </div>
 </ng-template>
 
-<div class="medium-body-text text-dark-grey lh-19 mb-16" *ngIf="label">{{label}}</div>
+<div class="medium-body-text text-dark-grey lh-19 mb-16"  *ngIf="label">{{label}}  <span *ngIf="isRequired" class="text-error"> (*)</span></div>
 <nz-select 
   [nzSuffixIcon]="suffixDown" 
   [nzNotFoundContent]="notFoundData"

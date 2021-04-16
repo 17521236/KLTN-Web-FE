@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { shareReplay } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { JSUtils } from '../utils/main-utils';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { SnackbarService } from 'ngx-snackbar';
 @Injectable({
     providedIn: 'root'
 })
 
 export class HttpService {
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private msg: SnackbarService) { }
 
-    public sendToServer(method: string, api: string, body?: any, header?: any, params?: any) {
+    public sendToServer(method: string, api: string, bd?: any, hd?: any, pr?: any) {
         let url = environment.endPoint + api;
+        let ret: Observable<any>;
+        let body = bd || {};
+        let header = hd || { 'Content-Type': 'application/json' };
+
+        if (pr) Object.keys(pr).forEach(element => {
+            if (pr[element] === '' || typeof (pr[element]) == 'undefined' || pr[element] == null) {
+                delete pr[element];
+            }
+        });
+        const params = new HttpParams({ fromObject: pr });
         console.log(url)
-        let ret;
         switch (method) {
             case 'GET':
                 ret = this.http.get(url, {
@@ -53,6 +66,14 @@ export class HttpService {
             default:
                 break;
         }
-        return ret;
+        return new Observable(obs => {
+            ret.subscribe(res => {
+                obs.next(res);
+                obs.complete();
+            }, (err) => {
+                JSUtils.commonHandleError(err, this.msg);
+                obs.error(err);
+            });
+        })
     }
 }

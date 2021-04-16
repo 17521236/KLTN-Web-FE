@@ -1,0 +1,6 @@
+<ng-container   *ngIf="formGroup && formGroup.controls[controlName].invalid && (formGroup.controls[controlName].dirty ||formGroup.controls[controlName].touched)&& validationMessages">
+    <ng-container *ngFor="let ms of getKeys(validationMessages)">
+        <div class="text-error body-text  mt-8"
+        *ngIf="formGroup.controls[controlName].errors[ms]">{{validationMessages[ms]}}</div>
+    </ng-container>    
+</ng-container>

@@ -2,12 +2,15 @@
     <app-header [pageName]="'Add block'" (close)="modal.closeAll()"></app-header>
     <form [formGroup]="form" (submit)="add()">
         <div class="input-group">
-            <app-input label="Tên block" formControlName="name"></app-input>
+            <app-input [isRequired]="true" label="Tên block" formControlName="name"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
         </div>
         <div class="input-group">
             <app-textarea label="Mô tả" formControlName="description"></app-textarea>
         </div>
-        <button type="submit" class="vcc-btn-fill blue"
+        <button type="submit" class="vcc-btn-fill blue w-100"
             [disabled]="form.invalid || form.pristine || pending">Save</button>
     </form>
 </div>

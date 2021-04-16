@@ -12,9 +12,10 @@ import { ApartmentReq } from '../model/apartment.model';
 export class ApartmentService {
 
   constructor(private http: HttpService) { }
-  getApartment(start?, limit?, name?, blockId?) {
-    console.log(API.APARTMENT.GET_ALL, null, null, { name, start, limit, blockId })
+  getApartment(start = 0, limit = 5, name = '', blockId = undefined) {
+    // console.log(API.APARTMENT.GET_ALL, null, null, { name, start, limit, blockId })
     // return of([])
+    console.log({ name, start, limit, blockId });
     return this.http.sendToServer("GET", API.APARTMENT.GET_ALL, null, null, { name, start, limit, blockId }).pipe(shareReplay());
   }
   getApartmentById(id) {

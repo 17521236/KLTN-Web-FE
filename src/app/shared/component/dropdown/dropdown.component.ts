@@ -22,6 +22,8 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   mode: string = "default";
   @Input() showSearch: boolean = false;
   error: boolean;
+  @Input() isRequired = false;
+
   private onChange = (_: any) => { };
   private onTouched = (_: any) => { };
   writeValue(value: any) {

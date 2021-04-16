@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap, take } from 'rxjs/operators';
+import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
 import { BlockService } from '../../service/block.service';
@@ -14,7 +15,7 @@ import { BlockService } from '../../service/block.service';
 
 export class BlockDetailComponent implements OnInit {
 
-  state$ = this.route.data.pipe(map(data => data.state));
+  ERROR_MSG = ERROR_MSG;
   id$ = this.route.params.pipe(map(params => params.id));
   block$ = this.id$.pipe(
     switchMap(id => this.blockService.getBlockById(id)),

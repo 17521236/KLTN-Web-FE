@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
 import { BlockService } from '../../service/block.service';
@@ -12,6 +13,7 @@ import { BlockService } from '../../service/block.service';
 })
 export class AddBlockComponent implements OnInit {
 
+  ERROR_MSG = ERROR_MSG;
   form: FormGroup = this.fb.group({
     name: ["", Validators.required],
     description: "",

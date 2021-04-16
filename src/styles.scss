@@ -728,3 +728,28 @@ li:focus {
         transform: scale(1.02);
     }
 }
+
+.required{
+    ::after{
+        content: ' (*)';
+        color: $color-nets-red;
+    }
+}
+
+.detail-section{
+    // mb-48 bd-16 bd-grey p-32
+    padding: 48px 32px 32px 32px;
+    border: $border-grey;
+    border-radius: 16px;
+    position: relative;
+    &__title{
+        font-size: 22px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 100%;
+        transform: translateY(50%);
+        padding: 0 16px;
+        margin: 0 -16px;
+        background: white;
+    }
+}

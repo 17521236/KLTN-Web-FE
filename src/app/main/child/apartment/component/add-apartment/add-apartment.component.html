@@ -1,1 +1,46 @@
-<p>add-apartment works!</p>
+<div class="p-8">
+    <app-header [pageName]="'Thêm căn hộ'" (close)="modal.closeAll()"></app-header>
+    <form [formGroup]="form" (submit)="add()">
+        <div class="input-group">
+            <app-input [isRequired]="true" label="Tên căn hộ" formControlName="name"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-dropdown
+            [showSearch]="true"
+            [isRequired]="true"
+            [label]="'Block'"
+            [placeholder]="'Select block'" 
+            [options]="(blocks$|async)" 
+            formControlName="blockId"
+            ></app-dropdown>
+            <app-error-message-validator [formGroup]="form" [controlName]="'blockId'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-dropdown  [isRequired]="true"
+            [label]="'Type'"
+            [placeholder]="'Select type'" 
+            [options]="options" 
+            formControlName="type"
+            ></app-dropdown>
+            <app-error-message-validator [formGroup]="form" [controlName]="'type'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group"> 
+            <app-input [isRequired]="true" label="Diện tích" formControlName="area"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'area'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-textarea label="Mô tả" formControlName="description"></app-textarea>
+        </div>
+        <button type="submit" class="vcc-btn-fill blue w-100"
+            [disabled]="form.invalid || form.pristine || pending">Save</button>
+    </form>
+</div>

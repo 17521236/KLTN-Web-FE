@@ -1,0 +1,79 @@
+<div class="mb-16">
+    <h6 class="mb-16">Quản lý Xe</h6>
+    <form [formGroup]="tableHelper.filterForm" (submit)="tableHelper.next()">
+        <div class="d-flex jc-end">
+            <div class="mr-16">
+                <app-dropdown [label]="'Cư dân'" [placeholder]="'Select Resident'" [options]="(resident$|async)"
+                    formControlName="residentId" [showSearch]="true" (ngModelChange)="tableHelper.next()">
+                </app-dropdown>
+            </div>
+            <div class="mr-16">
+                <app-dropdown label="Trạng thái" [showSearch]="true" [placeholder]="'Search by Status'"
+                    [options]="VEHICLE_STATUS" formControlName="status" (ngModelChange)="tableHelper.next()">
+                </app-dropdown>
+            </div>
+            <!-- <div class="mr-16">
+                <app-input label="Loại" formControlName="type" [placeholder]="'Seach by Type'" [clearfix]="true"
+                    (onClear)="tableHelper.next()"></app-input>
+            </div> -->
+            <div class="mr-16">
+                <app-dropdown label="Loại" [showSearch]="true" [placeholder]="'Search by Type'"
+                    [options]="typeList" formControlName="type" (ngModelChange)="tableHelper.next()">
+                </app-dropdown>
+            </div>
+            <div>
+                <app-input label="Biển số xe" formControlName="licensePlate" [placeholder]="'Seach by LicensePlate'"
+                    [clearfix]="true" (onClear)="tableHelper.next()"></app-input>
+            </div>
+        </div>
+        <button type="submit" hidden></button>
+    </form>
+</div>
+<div *ngIf="(result$|async) as result, else loading">
+    <table class="vcc-table">
+        <thead>
+            <tr>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="15%">Chủ xe</th>
+                <th scope="col" width="15%">Biển số</th>
+                <th scope="col" width="15%">Giá</th>
+                <th scope="col" width="15%">Loại xe</th>
+                <th scope="col" width="15%">Trạng thái</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="table-body">
+        <table class="vcc-table">
+            <tbody>
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td width="15%">{{item.residentName}} </td>
+                    <td width="15%">{{item.licensePlate}} </td>
+                    <td width="15%">{{item.price|vnd}} </td>
+                    <td width="15%">{{item.type}} </td>
+                    <td width="15%">{{item.status === '0'?'Chưa duyệt':'Đã duyệt'}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <nz-empty class="mt-48" *ngIf="result.total == 0"
+            nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+        </nz-empty>
+    </div>
+    <div class="text-center">
+        <app-paginator [total]="result.total" (onPageChange)="tableHelper.onPageChange($event)" [pageSize]="5">
+        </app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
+    <!-- <app-add-apartment [tableHelper]="tableHelper" (success)="success()"></app-add-apartment> -->
+    <app-add-vehicle [tableHelper]="tableHelper"></app-add-vehicle>
+</ng-template>

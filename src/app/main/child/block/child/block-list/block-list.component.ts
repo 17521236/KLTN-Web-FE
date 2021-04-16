@@ -17,12 +17,14 @@ import { BlockService } from '../../service/block.service';
 export class BlockListComponent implements OnInit {
 
   @ViewChild('modal') modal:ActionModalComponent
-  form: FormGroup = this.fb.group({ searchText: '' });
-
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((x: any) => {
-      return this.blockService.getBlocks(x.searchText, x.paginator.getStart(), x.paginator.pageSize)
+      return this.blockService.getBlocks(
+        x.filterForm.value['searchText'], 
+        x.paginator.getStart(), 
+        x.paginator.pageSize
+        )
     })
   )
 
@@ -32,20 +34,13 @@ export class BlockListComponent implements OnInit {
     private blockService: BlockService,
     private router: Router,
     private fb: FormBuilder
-  ) { }
-  ngOnInit(): void {
+  ) { 
+    this.tableHelper.filterForm = this.fb.group({ searchText: '' });
   }
-
-  onPageChange(e: PaginatorEvent) {
-    this.tableHelper.paginator = e;
-    this.tableHelper.next();
+  ngOnInit(): void {
   }
   viewDetail(block) {
     this.router.navigate([ROUTER_CONST.BLOCK.DETAIL, block._id]);
-  }
-  search() {
-    this.tableHelper.searchText = this.form.value['searchText'];
-    this.tableHelper.next();
   }
   showModal(tpl){
     this.modal.createComponentModal(tpl,{},false,'')

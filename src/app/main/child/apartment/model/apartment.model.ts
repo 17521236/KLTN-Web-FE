@@ -5,6 +5,10 @@ export class ApartmentReq {
     area: string;
     description: string;
     constructor(obj) {
-        Object.assign(this, obj)
+        this.blockId = obj.blockId,
+            this.name = obj.name,
+            this.type = obj.type,
+            this.area = obj.area,
+            this.description = obj.description
     }
 }

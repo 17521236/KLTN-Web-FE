@@ -1,11 +1,8 @@
 <div class="d-flex ai-center jc-space-between mb-48">
     <h6 class="mb-0">Block</h6> 
-    <form [formGroup]="form" (submit)="search()">
+    <form [formGroup]="tableHelper.filterForm" (submit)="tableHelper.next()">
         <app-input formControlName="searchText" [placeholder]="'Seach by Name'" [clearfix]="true"
-            [suffixTpl]="searchTpl" (onClear)="search()"></app-input>
-        <ng-template #searchTpl>
-            <i class="pointer font20" nz-icon nzType="search" nzTheme="outline" (click)="search()"></i>
-        </ng-template>
+            (onClear)="tableHelper.next()"></app-input>
         <button type="submit" hidden></button>
     </form>
 </div>
@@ -33,7 +30,7 @@
         </nz-empty>
     </div>
     <div class="text-center">
-        <app-paginator [total]="blocks.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+        <app-paginator [total]="blocks.total" (onPageChange)="tableHelper.onPageChange($event)" [pageSize]="5"></app-paginator>
     </div>
 </div>
 <ng-template #loading>

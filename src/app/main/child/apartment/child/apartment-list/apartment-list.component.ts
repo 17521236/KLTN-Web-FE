@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -26,7 +26,11 @@ export class ApartmentListComponent implements OnInit {
       return this.aptService.getApartment(x.paginator.getStart(), x.paginator.pageSize, x.filterForm.value['name'], x.filterForm.value['blockId']);
     })
   )
-  blocks$ = this.blockService.getBlocks('', 0, 99).pipe(map((x: any) => x.total > 0 ? x.items.map(item => new DropdownItem(item._id, item.name)) : []));
+  blocks$ = this.blockService.getBlocks('',0,999).pipe(map((x: any) => {
+    let tmp = x.items.map(item => new DropdownItem(item._id, item.name));
+    tmp.unshift(new DropdownItem('', 'All'));
+    return tmp;
+  }));
   showRightMenu = false;
 
   constructor(private router: Router, private aptService: ApartmentService, private blockService: BlockService, private fb: FormBuilder) {
@@ -43,8 +47,8 @@ export class ApartmentListComponent implements OnInit {
     this.tableHelper.paginator = e;
     this.tableHelper.next();
   }
-  viewDetail(block) {
-    this.router.navigate([ROUTER_CONST.BLOCK.DETAIL, block._id]);
+  viewDetail(apartment) {
+    this.router.navigate([ROUTER_CONST.APARTMENT.DETAIL(apartment._id)]);
   }
   search() {
     // later

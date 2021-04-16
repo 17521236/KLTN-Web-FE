@@ -1,0 +1,186 @@
+<app-header [pageName]="'Resident details'" (close)="close()"></app-header>
+<div *ngIf=" (resident$|async) as resident, else loading">
+    <div class="note mb-48" *ngIf="!resident.accountId; else formAccount"> Bạn chưa có tài khoản -
+        <span class="vcc-text-btn" (click)="openModal(resident)">Tạo ngay</span>
+    </div>
+    <!-- háEMail -->
+    <ng-template #hasEmail>
+        <div>
+            <i class="font20 pointer mb-32" nz-icon nzType="close" nzTheme="outline"></i>
+            <div class="title-2 mb-32">
+                Bạn có đồng ý tạo tài khoản với email <b>"{{resident.email}}"</b>
+            </div>
+            <div class="medium-body-text mb-32">
+                Sau khi tạo tài khoản mật khẩu sẽ được gửi vào Email.
+                <br>Vui lòng kiểm tra Email để lấy thông tin đăng nhập.
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="createAccount(resident)">Ok</button>
+                </div>
+                <div class="col-6">
+                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100" (click)="modal.close()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+    <ng-template #formAccount>
+        <div class="mb-48 detail-section">
+            <div class="detail-section__title">Thông tin Tài khoản</div>
+            <div class="row mb-32">
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input [disabled]="true" label="Username" [(ngModel)]="account.username"></app-input>
+                    </div>
+                    <app-input [disabled]="true" type="password" label="Password" [(ngModel)]="account.password">
+                    </app-input>
+                </div>
+                <div class="col-8 text-center">
+                    <div class="avatar"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="resetPassword()">Reset Password</button>
+                        </div>
+                        <div class="col-6">
+                            <button [disabled]="pending" class="vcc-btn-unfill red w-100" (click)="openModalConfirm()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <!-- confirm delete -->
+    <ng-template #deleteConfirm>
+        <div>
+            <i class="font20 pointer mb-32" nz-icon nzType="close" nzTheme="outline" (click)="modal.close()"></i>
+            <div class="title-2 mb-32">
+                Bạn có chắc chắn muốn xóa tài khoản <b>"{{resident.email}}"</b>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="deleteAccount()">Ok</button>
+                </div>
+                <div class="col-6">
+                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100" (click)="modal.close()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="mb-48 detail-section">
+        <div class="detail-section__title">Thông tin cư dân</div>
+        <form [formGroup]="form" (submit)="update()">
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input [isRequired]="true" label="Tên cư dân" formControlName="name"></app-input>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+                            [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-dropdown [isRequired]="true" [label]="'Block'" [placeholder]="'Select Block'"
+                            [options]="(blocks$|async)" formControlName="blockId" [showSearch]="true"
+                            (ngModelChange)="blockSelected($event)"></app-dropdown>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'blockId'"
+                            [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-dropdown [isRequired]="true" [label]="'Căn hộ'" [placeholder]="'Select Apartment'"
+                            [options]="(apt$|async)" formControlName="aptId" [showSearch]="true"></app-dropdown>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'aptId'"
+                            [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-dropdown [isRequired]="true" [label]="'Loại'" [placeholder]="'Select type'"
+                            [options]="options" formControlName="type"></app-dropdown>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-date-picker [isRequired]="true" label="Ngày sinh" formControlName="dateOfBirth"
+                            [dateFormat]="'dd-MM-yyyy'"></app-date-picker>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'dateOfBirth'"
+                            [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input label="Thẻ căn cước / CMND" formControlName="identityCard"></app-input>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'identityCard'"
+                            [validationMessages]="{'required':ERROR_MSG.INVALID,'pattern':ERROR_MSG.ONLY_NUMBER}">
+                        </app-error-message-validator>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input label="Email" formControlName="email" [disabled]="!!resident.accountId"></app-input>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'email'"
+                            [validationMessages]="{'pattern':ERROR_MSG.EMAIL}"></app-error-message-validator>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input label="Số điện thoại" formControlName="phoneNumber"></app-input>
+                        <app-error-message-validator [formGroup]="form" [controlName]="'phoneNumber'"
+                            [validationMessages]="{'pattern':ERROR_MSG.ONLY_NUMBER}"></app-error-message-validator>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <app-input label="Số lượng xe" formControlName="totalVehicle" [disabled]="true"></app-input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <app-textarea label="Mô tả" formControlName="note"></app-textarea>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <button type="submit" class="vcc-btn-fill blue w-100"
+                        [disabled]="form.invalid || form.pristine || pending">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<app-modal #modal></app-modal>
+
+<!-- <ng-template #noEmail>
+    <div>
+        <div class="title-2 mb-32">
+            Vui lòng cập nhật email.
+        </div>
+        <div class="medium-body-text">
+            Bạn cần cập nhật chính xác Email trước khi tạo tài khoản. 
+            Sau khi tạo tài khoản. Mật khẩu sẽ được gửi vào Email. Vui lòng kiểm tra Email để lấy thông tin đăng nhập.
+        </div>
+    </div>
+</ng-template> -->

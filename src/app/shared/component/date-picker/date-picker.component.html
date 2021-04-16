@@ -1,0 +1,34 @@
+<div class="medium-body-text text-dark-grey lh-19 mb-16" *ngIf="label">{{label}}  <span *ngIf="isRequired" class="text-error"> (*)</span></div>
+<nz-date-picker
+    class="w-100"
+    #datePicker
+    nzInputReadOnly
+    [nzAllowClear]="isShowClear"
+    nzShowToday = "false"
+    [nzRenderExtraFooter]="footerTpl"
+    [nzDefaultPickerValue]="today"
+    [nzDisabled]="isDisabled" 
+    [nzFormat]="dateFormat" 
+    [nzRenderExtraFooter]="footerTpl"   
+    [(ngModel)]="value"
+    (ngModelChange)="onChangeValue($event)" 
+    (nzOnOpenChange)="onOpenChange($event)"
+    (nzOnCalendarChange)="onCalendarChange($event)"
+    [nzDisabledDate]="disabledDate"
+></nz-date-picker>
+
+
+<ng-template #footerTpl>
+    <div class="picker-footer-extra d-flex jc-space-between w-100">
+        <div>
+            <span class="picker-footer-extra__additional" (click)="selectedToday()">
+                Today
+            </span>
+        </div>
+        <div>
+            <span class="picker-footer-extra__ok" (click)="selectedOk()">
+                Ok
+            </span>
+        </div>
+    </div>
+</ng-template>

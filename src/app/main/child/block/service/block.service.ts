@@ -13,7 +13,7 @@ import { CreateBlockReq, UpdateBlockReq } from '../model/block.model';
 export class BlockService {
 
   constructor(private http: HttpService, private httpC: HttpClient) { }
-  getBlocks(name?, start?, limit?) {
+  getBlocks(name = '', start = 0, limit = 5) {
     return this.http.sendToServer("GET", API.BLOCK.GET_ALL, null, null, { name, start, limit }).pipe(shareReplay());
   }
   getBlockById(id) {

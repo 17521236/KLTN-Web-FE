@@ -2,8 +2,9 @@
     <h6 class="mb-0">Apartment</h6>
     <form [formGroup]="tableHelper.filterForm" (submit)="search()">
         <div class="d-flex">
-            <div  class="mr-16" >
+            <div class="mr-16" style="width: 252px;">
                 <app-dropdown 
+                    [showSearch] = "true"
                     [placeholder]="'Search by Block'" 
                     [options]="(blocks$|async)" 
                     formControlName="blockId"
@@ -26,9 +27,9 @@
     <table class="vcc-table">
         <thead>
             <tr>
-                <th scope="col" width="5%">#</th>
+                <th scope="col" width="10%">#</th>
+                <th scope="col" width="15%">Tên</th>
                 <th scope="col" width="20%">Block</th>
-                <th scope="col" width="20%">Tên Apartment</th>
                 <th scope="col" width="15%">Diện tích</th>
                 <th scope="col" width="15%">Trạng thái</th>
                 <th scope="col" width="25%">Mô tả</th>
@@ -39,9 +40,9 @@
         <table class="vcc-table">
             <tbody>
                 <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td width="10%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td width="15%">{{item.name}} </td>
                     <td width="20%">{{item.blockName}} </td>
-                    <td width="20%">{{item.name}} </td>
                     <td width="15%">{{item.area}} </td>
                     <td width="15%">{{item.type === '0'?'Chưa đăng ký':'Đã đăng ký'}} </td>
                     <td width="25%">{{item.description}} </td>
@@ -66,5 +67,5 @@
 <app-modal #modal></app-modal>
 <ng-template #addTpl>
     <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
-    <app-add-apartment (success)="success()"></app-add-apartment>
+    <app-add-apartment [tableHelper]="tableHelper" (success)="success()"></app-add-apartment>
 </ng-template>

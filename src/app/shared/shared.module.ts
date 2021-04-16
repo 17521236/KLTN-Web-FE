@@ -18,11 +18,16 @@ import { InputComponent } from './component/input/input.component';
 import { TextareaComponent } from './component/textarea/textarea.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { SnackBarComponent } from './component/snack-bar/snack-bar.component';
-import { SnackbarModule, SnackbarService } from 'ngx-snackbar';
+import { SnackbarModule } from 'ngx-snackbar';
 import { HeaderComponent } from './component/header/header.component';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { ActionModalComponent } from './component/action-modal/action-modal.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { ErrorMessageValidatorComponent } from './component/error-message-validator/error-message-validator.component';
+import { VndPipe } from './pipe/vnd.pipe';
+import { DatePickerComponent } from './component/date-picker/date-picker.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 @NgModule({
   declarations: [
     InputComponent,
@@ -33,7 +38,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     LoadingComponent,
     SnackBarComponent,
     HeaderComponent,
-    ActionModalComponent
+    ActionModalComponent,
+    ErrorMessageValidatorComponent,
+    VndPipe,
+    DatePickerComponent
   ],
   imports: [
     NzEmptyModule,
@@ -51,7 +59,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzSelectModule,
     NzPaginationModule,
     SnackbarModule.forRoot(),
-    NzModalModule
+    NzModalModule,
+    NzDatePickerModule
   ],
   exports: [
     FormsModule,
@@ -67,7 +76,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     SnackBarComponent,
     HeaderComponent,
     NzEmptyModule,
-    ActionModalComponent
+    ActionModalComponent,
+    ErrorMessageValidatorComponent,
+    VndPipe,
+    DatePickerComponent
   ]
 })
 export class SharedModule { }

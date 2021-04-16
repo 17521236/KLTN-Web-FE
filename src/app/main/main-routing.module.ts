@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RedirectComponent } from './component/redirect/redirect.component';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [
@@ -19,6 +20,15 @@ const routes: Routes = [
       },
       {
         path: "vehicle", loadChildren: () => import('./child/vehicle/vehicle.module').then(x => x.VehicleModule)
+      },
+      {
+        path: "service", loadChildren: () => import('./child/service/service.module').then(x => x.ServiceModule)
+      },
+      {
+        path: "bill", loadChildren: () => import('./child/bill/bill.module').then(x => x.BillModule)
+      },
+      {
+        path: "redirect", component: RedirectComponent
       },
       {
         path: "", redirectTo: "dashboard", pathMatch: "full"

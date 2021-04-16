@@ -1,0 +1,57 @@
+<div class="p-8">
+    <app-header [pageName]="'Thêm căn hộ'" (close)="modal.closeAll()"></app-header>
+    <form [formGroup]="form" (submit)="add()">
+        <!-- <div class="input-group">
+            <app-input label="Tên cư dân" formControlName="name"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div> -->
+        <div class="input-group">
+            <app-dropdown 
+            [label]="'Cư dân'"
+            [placeholder]="'Select Resident'" 
+            [options]="(resident$|async)" 
+            formControlName="residentId"
+            [showSearch]="true"
+            ></app-dropdown>
+            <app-error-message-validator [formGroup]="form" [controlName]="'residentId'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-dropdown 
+            [label]="'Loại xe'"
+            [placeholder]="'Select type'" 
+            [options]="typeList" 
+            formControlName="type"
+            ></app-dropdown>
+        </div>
+        <div class="input-group">
+            <app-input label="Biển số xe" formControlName="licensePlate"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'licensePlate'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-input label="Giá" formControlName="price"></app-input>
+            <app-error-message-validator [formGroup]="form" [controlName]="'price'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-dropdown 
+            [label]="'Trạng thái'"
+            [placeholder]="'Select Status'" 
+            [options]="statusList" 
+            formControlName="status"
+            [showSearch]="true"
+            ></app-dropdown>
+            <app-error-message-validator [formGroup]="form" [controlName]="'status'"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>   
+        <button type="submit" class="vcc-btn-fill blue"
+            [disabled]="form.invalid || form.pristine || pending">Save</button>
+    </form>
+</div>
