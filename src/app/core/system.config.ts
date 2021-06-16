@@ -35,3 +35,32 @@ export const VEHICLE_STATUS_LIST = [
         text: 'Đã duyệt'
     }
 ]
+
+export const VEHICLE_MOTORBIKE = 'MOTORBIKE';
+export const VEHICLE_CAR = 'CAR';
+export const VEHICLE_BYCIRCLE = 'BYCIRCLE';
+export const VEHICLE_TYPE = [{ id: VEHICLE_BYCIRCLE, name: 'Xe đạp' }, { id: VEHICLE_MOTORBIKE, name: 'Xe máy' }, { id: VEHICLE_CAR, name: 'Ô tô' }];
+
+
+export const STATUS_BILL_NOT_APPROVE = 'NOT_APPROVE';
+export const STATUS_BILL_PENDING = 'PENDING';
+export const STATUS_BILL_APPROVE = 'APPROVE';
+export const STATUS_BILL_DENY = 'DENY';
+export const STATUS_BILL_LIST = [
+    {
+        id: STATUS_BILL_NOT_APPROVE,
+        name: 'Chưa thanh toán'
+    },
+    {
+        id: STATUS_BILL_PENDING,
+        name: 'Chờ duyệt'
+    },
+    {
+        id: STATUS_BILL_APPROVE,
+        name: 'Đã duyệt'
+    },
+    {
+        id: STATUS_BILL_DENY,
+        name: 'Từ chối'
+    }
+];

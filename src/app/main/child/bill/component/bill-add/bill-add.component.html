@@ -1,0 +1,94 @@
+<app-header [pageName]="'Tạo bill'" (close)="modal.closeAll()"></app-header>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <ng-container *ngIf="(block$| async) as blocks; else loading">
+        <div class="input-group">
+            <app-dropdown formControlName="blockId" (ngModelChange)="selectBlock($event)" label="Block"
+                [showSearch]="true" [options]="blocks"></app-dropdown>
+        </div>
+        <ng-container *ngIf="(apt$| async) as apts; else loading">
+            <div class="input-group">
+                <app-dropdown formControlName="aptId" (ngModelChange)="selectApt($event)" label="Căn hộ"
+                    [showSearch]="true" [options]="apts"></app-dropdown>
+            </div>
+            <ng-container *ngIf="(aptSelected$|async); else select">
+                <ng-container *ngIf="(cost$|async) as cost; else loading">
+                    <ng-container *ngIf="cost.INTERNET.quantity > 0 else noBody">
+                        <div class="input-group">
+                            <app-input [label]="'Phí Điện (' + cost.ELECTRONIC.cost + '₫ / ' + cost.ELECTRONIC.unit + ')'"
+                                [formControlName]="'electronic'" [placeholder]="0"></app-input>
+                            <app-error-message-validator [formGroup]="form" [controlName]="'electronic'"
+                                [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}">
+                            </app-error-message-validator>
+                        </div>
+                        <div class="input-group">
+                            <app-input [label]="'Phí Nước (' + cost.WATER.cost + '₫ / ' + cost.WATER.unit + ')'"
+                                [formControlName]="'water'"  [placeholder]="0"></app-input>
+                            <app-error-message-validator [formGroup]="form" [controlName]="'water'"
+                                [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}">
+                            </app-error-message-validator>
+                        </div>
+                        <div class="input-group">
+                            <app-input [disabled]="true" [label]="'Phí Internet (' + cost.INTERNET.cost + '₫ / ' + cost.INTERNET.unit + ')'"
+                                [formControlName]="'internet'" [suffixTpl]="people"></app-input>
+                        </div>
+                        <div class="input-group">
+                            <app-input [disabled]="true" [label]="'Phí Dịch vụ (' + cost.SERVICE.cost + '₫ / ' + cost.SERVICE.unit + ')'"
+                                [formControlName]="'service'" [suffixTpl]="area"></app-input>
+                        </div>
+                        <div class="input-group">
+                            <app-input [disabled]="true" [label]="'Phí Gửi xe đạp (' + cost.PARKING_BYCIRCLE.cost + '₫ / ' + cost.PARKING_BYCIRCLE.unit + ')'"
+                                [formControlName]="'parking_bycircle'" [suffixTpl]="pcs"></app-input>
+                        </div>
+                        <div class="input-group">
+                            <app-input [disabled]="true" [label]="'Phí Gửi xe máy (' + cost.PARKING_MOTORBIKE.cost + '₫ / ' + cost.PARKING_MOTORBIKE.unit + ')'"
+                                [formControlName]="'parking_motobike'" [suffixTpl]="pcs"></app-input>
+                        </div>
+                        <div class="input-group">
+                            <app-input [disabled]="true" [label]="'Phí Gửi ô tô (' + cost.PARKING_CAR.cost + '₫ / ' + cost.PARKING_CAR.unit + ')'"
+                                [formControlName]="'parking_car'" [suffixTpl]="pcs"></app-input>
+                        </div>
+                        <div class="input-group">
+                            <app-input [label]="'Phí khác (' + cost.ORTHER.cost + '₫ / ' + cost.ORTHER.unit + ')'"
+                                [formControlName]="'orther'"  [placeholder]="0"></app-input>
+                            <app-error-message-validator [formGroup]="form" [controlName]="'orther'"
+                                [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}">
+                            </app-error-message-validator>
+                        </div>
+                        <div class="input-group">
+                            <div class="extra-large-body">
+                                Tổng chi phí kỳ này: <span class="text-error fw-bold">{{totalPrice | vnd}} </span> 
+                            </div>
+                        </div>
+                        <button type="submit" class="vcc-btn-fill blue w-100"
+                        [disabled]="form.invalid || pending" (click)="save()">Tạo</button>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</form>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+<ng-template #area>
+    <span class="text-black">m2</span>
+</ng-template>
+<ng-template #people>
+    <span class="text-black">người</span>
+</ng-template>
+<ng-template #pcs>
+    <span class="text-black">chiếc</span>
+</ng-template>
+<ng-template #number>
+    <span class="text-black">số</span>
+</ng-template>
+<ng-template #select>
+    <div *ngIf="!selecting else loading" class="medium-body-text">
+        Please select Block & Apartment
+    </div>
+</ng-template>
+<ng-template #noBody>
+    <div class="text-error">
+        Căn hộ hiện không có người ở. Không thể tạo bill
+    </div>
+</ng-template>

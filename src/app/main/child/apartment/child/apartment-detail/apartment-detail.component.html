@@ -21,7 +21,7 @@
                     ></app-dropdown>
                 </div>
             </div>
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <div class="input-group">
                     <app-dropdown 
                     [label]="'Loại'"
@@ -30,9 +30,7 @@
                     formControlName="type"
                     ></app-dropdown>
                 </div>
-            </div>
-        </div>
-        <div class="row">
+            </div> -->
             <div class="col-4">
                 <div class="input-group">
                     <app-input label="Diện tích" formControlName="area"></app-input>
@@ -41,6 +39,9 @@
                     ></app-error-message-validator>
                 </div>
             </div>
+        </div>
+        <div class="row">
+           
             <div class="col-4">
                 <div class="input-group">
                     <app-input label="Số dân" formControlName="totalResident" [disabled]="true"></app-input>

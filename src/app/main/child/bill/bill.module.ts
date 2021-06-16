@@ -4,15 +4,20 @@ import { BillComponent } from './bill.component';
 import { BillListComponent } from './child/bill-list/bill-list.component';
 import { BillDetailComponent } from './child/bill-detail/bill-detail.component';
 import { BillRoutingModule } from './bill-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { BillAddComponent } from './component/bill-add/bill-add.component';
+import { BillService } from './service/bill.service';
 // import { ServiceComponent } from './service/service.component';
 
 
 
 @NgModule({
-  declarations: [BillComponent, BillListComponent, BillDetailComponent],
+  declarations: [BillComponent, BillListComponent, BillDetailComponent, BillAddComponent],
   imports: [
     CommonModule,
-    BillRoutingModule
-  ]
+    BillRoutingModule,
+    SharedModule
+  ],
+  providers: [BillService]
 })
 export class BillModule { }

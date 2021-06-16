@@ -1,1 +1,43 @@
-<p>service-list works!</p>
+<div class="mb-16">
+    <h6 class="mb-48">Quản lý Dịch vụ</h6>
+</div>
+<div *ngIf="(result$|async) as result, else loading">
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">Tên dịch vụ</th>
+                <th scope="col">Giá tiền</th>
+                <th scope="col">Đơn vị</th>
+                <th scope="col">Mô tả</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngFor="let item of result, index as id" (click)="viewDetail(item)">
+                <!-- <td>{{id + 1}}</td> -->
+                <td>{{item.name}}</td>
+                <td>{{item.cost|vnd}}</td>
+                <td>{{item.unit}}</td>
+                <td class="desc">{{item.desc}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <nz-empty class="mt-48" *ngIf="total == 0"
+        nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+    </nz-empty>
+    <div class="text-center">
+        <app-paginator [total]="total" (onPageChange)="tableHelper.onPageChange($event)" [pageSize]="5">
+        </app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<!-- <div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div> -->
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <app-service-add [tableHelper]="tableHelper"></app-service-add>
+</ng-template>

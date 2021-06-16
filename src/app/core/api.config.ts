@@ -30,5 +30,20 @@ export const API = {
         UPDATE: (id)=>`/api/resident-account/${id}`,
         RESET_PASS:(residentId)=>`/api/resident-account/resetPass/${residentId}`,
         DELETE:(id)=>`/api/resident-account/${id}`,
+    },
+    SERVICE:{
+        GET_ALL: "/api/service",
+        ADD: "/api/service",
+        GET_ONE: (id)=>`/api/service/${id}`,
+        UPDATE: (id)=>`/api/service/${id}`,
+        DELETE: (id)=>`/api/service/${id}`
+    },
+    BILL:{
+        GET_ALL: "/api/bill",
+        ADD: "/api/bill",
+        GET_ONE: (id)=>`/api/bill/${id}`,
+        UPDATE: (id)=>`/api/bill/${id}`,
+        DELETE: (id)=>`/api/bill/${id}`,
+        COST:"/api/bill/cost"
     }
 }

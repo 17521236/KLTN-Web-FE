@@ -45,5 +45,9 @@ export class PaginatorComponent implements OnInit {
     return this.pageSize;
   }
 
+  getCurrentEvent(){
+    return  new PaginatorEvent(this.currentPage, this.pageSize);
+  }
+
 }
 

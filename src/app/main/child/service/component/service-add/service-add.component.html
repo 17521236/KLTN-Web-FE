@@ -1,0 +1,27 @@
+ 
+    <app-header [pageName]="'Thêm Dịch vụ'" (close)="modal.closeAll()"></app-header>
+    <form [formGroup]="form">
+        <div class="input-group">
+            <app-input [isRequired]="true" label="Tên dịch vụ" formControlName="name"></app-input>
+            <app-error-message-validator [formGroup]="form" controlName="name"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div> 
+        <div class="input-group">
+            <app-input [isRequired]="true" label="Giá" formControlName="cost"></app-input>
+            <app-error-message-validator [formGroup]="form" controlName="cost"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div> 
+        <div class="input-group">
+            <app-input [isRequired]="true" label="Đơn vị tính" formControlName="unit"></app-input>
+            <app-error-message-validator [formGroup]="form" controlName="unit"
+            [validationMessages]="{'required':ERROR_MSG.INVALID}"
+            ></app-error-message-validator>
+        </div>
+        <div class="input-group">
+            <app-textarea label="Mô tả" formControlName="desc"></app-textarea>
+        </div>          
+        <button type="submit" class="vcc-btn-fill blue w-100"
+            [disabled]="form.invalid || form.pristine || pending" (click)="submit()">Save</button>
+    </form>

@@ -28,6 +28,10 @@ import { VndPipe } from './pipe/vnd.pipe';
 import { DatePickerComponent } from './component/date-picker/date-picker.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { VehiclePipe } from './pipe/vehicle.pipe';
+import { BillStatusPipe } from './pipe/bill-status.pipe';
+import { BlockPipe } from './pipe/block.pipe';
+import { ResidentPipe } from './pipe/resident.pipe';
 @NgModule({
   declarations: [
     InputComponent,
@@ -41,7 +45,11 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     ActionModalComponent,
     ErrorMessageValidatorComponent,
     VndPipe,
-    DatePickerComponent
+    DatePickerComponent,
+    VehiclePipe,
+    BillStatusPipe,
+    BlockPipe,
+    ResidentPipe
   ],
   imports: [
     NzEmptyModule,
@@ -79,7 +87,11 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     ActionModalComponent,
     ErrorMessageValidatorComponent,
     VndPipe,
-    DatePickerComponent
+    DatePickerComponent,
+    VehiclePipe,
+    BillStatusPipe,
+    BlockPipe,
+    ResidentPipe
   ]
 })
 export class SharedModule { }

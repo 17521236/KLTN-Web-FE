@@ -1,4 +1,4 @@
-<div class="p-8">
+ 
     <app-header [pageName]="'Thêm căn hộ'" (close)="modal.closeAll()"></app-header>
     <form [formGroup]="form" (submit)="add()">
         <div class="input-group">
@@ -20,7 +20,7 @@
             [validationMessages]="{'required':ERROR_MSG.INVALID}"
             ></app-error-message-validator>
         </div>
-        <div class="input-group">
+        <!-- <div class="input-group">
             <app-dropdown  [isRequired]="true"
             [label]="'Type'"
             [placeholder]="'Select type'" 
@@ -30,7 +30,7 @@
             <app-error-message-validator [formGroup]="form" [controlName]="'type'"
             [validationMessages]="{'required':ERROR_MSG.INVALID}"
             ></app-error-message-validator>
-        </div>
+        </div> -->
         <div class="input-group"> 
             <app-input [isRequired]="true" label="Diện tích" formControlName="area"></app-input>
             <app-error-message-validator [formGroup]="form" [controlName]="'area'"
@@ -43,4 +43,3 @@
         <button type="submit" class="vcc-btn-fill blue w-100"
             [disabled]="form.invalid || form.pristine || pending">Save</button>
     </form>
-</div>

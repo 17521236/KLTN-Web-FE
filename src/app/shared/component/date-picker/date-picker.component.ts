@@ -26,6 +26,7 @@ export class DatePickerComponent implements OnInit {
   @ViewChild('datePicker') datePicker: any;
   today = new Date();
   canClose = false;
+  @Input() type = 'date';
 
   constructor() { }
 

@@ -5,6 +5,7 @@
             <div class="col-4">
                 <div class="input-group">
                     <app-dropdown 
+                    [disabled]="true"
                     [label]="'Chủ xe'"
                     [placeholder]="'Select Resident'" 
                     [options]="(resident$|async)" 
@@ -47,7 +48,7 @@
                 </div>
             </div>
       
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <div class="input-group">
                     <app-dropdown 
                     [label]="'Trạng thái'"
@@ -60,7 +61,7 @@
                     [validationMessages]="{'required':ERROR_MSG.INVALID}"
                     ></app-error-message-validator>
                 </div>
-            </div>
+            </div> -->
         </div>
         <button type="submit" class="vcc-btn-fill blue" [disabled]="form.invalid || form.pristine">Save</button>
     </form>

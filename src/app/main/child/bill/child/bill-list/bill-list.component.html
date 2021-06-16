@@ -1,1 +1,83 @@
-bill list
+<div class="mb-32">
+    <h6 class="mb-16">Chi phí</h6>
+    <form [formGroup]="filterForm">
+        <div class="d-flex">
+            <div class="mr-16" style="width: 252px;">
+                <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blocksDD$|async)"
+                    formControlName="blockId" [showSearch]="true" (ngModelChange)="blockSelected($event)">
+                </app-dropdown>
+            </div>
+            <div class="mr-16" style="width: 252px;">
+                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'All'" [options]="(apts$|async)"
+                    formControlName="apartmentId" (ngModelChange)="search()">
+                </app-dropdown>
+            </div>
+            <div class="mr-16" style="width: 252px;">
+               <app-date-picker label="Tháng" type="month" formControlName="month" (ngModelChange)="search()"></app-date-picker>
+            </div>
+            <!-- <div>
+                <app-input label="Name" formControlName="name" [placeholder]="'Seach by Name'" [clearfix]="true"
+                    (onClear)="search()"></app-input>
+            </div> -->
+        </div>
+        <button type="submit" hidden></button>
+    </form>
+</div>
+<div *ngIf="(records$|async) as result, else loading">
+
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Block</th>
+                <th scope="col">Căn hộ</th>
+                <th scope="col">Tháng thu phí</th>
+                <th scope="col">Chi phí trong kỳ</th>
+                <th scope="col">Trạng thái thanh toán</th>
+                <th scope="col">Khách hàng</th>
+                <th scope="col">Hình thức</th>
+            </tr>
+        </thead>
+        <ng-container *ngIf="!(loading$ | async) else loading">
+            <tbody *ngIf="blocksP$ |async as blocks">
+                <tr class="table-row" *ngFor="let item of result, index as id" (click)="viewDetail(item)">
+                    <td>{{item.blockId | block: blocks}} </td>
+                    <td>{{item.aptName}} </td>
+                    <td>{{item.date | date:"MM / yyyy"}}</td>
+                    <td>{{item.amount | vnd}}</td>
+                    <td>{{item.status | billStatus}}</td>
+                    <td>...</td>
+                    <td>{{item.pmId || ' '}}</td>
+                </tr>
+            </tbody>
+        </ng-container>
+    </table>
+    <nz-empty class="mt-48" *ngIf="result.length == 0 && !(loading$ | async)"
+        nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+    </nz-empty>
+    <div *ngIf="(total$|async) as total" class="text-center">
+        <app-paginator #paginator [total]="total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
+    <!-- <app-add-apartment [tableHelper]="tableHelper" (success)="success()"></app-add-apartment> -->
+    <app-add-resident [tableHelper]="tableHelper"></app-add-resident>
+</ng-template>
+
+
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <app-bill-add></app-bill-add>
+</ng-template>

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
-import { VEHICLE_STATUS_LIST } from 'src/app/core/system.config';
+import { VEHICLE_STATUS_LIST, VEHICLE_TYPE } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
 import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
@@ -23,16 +23,13 @@ export class AddVehicleComponent implements OnInit {
   ERROR_MSG = ERROR_MSG;
   resident$ = this.residentService.getResident(0, 999).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
   statusList = VEHICLE_STATUS_LIST.map(x => new DropdownItem(x.id, x.text));
-  typeList = [{ id: 'Sirius', name: 'Sirius' },
-  { id: 'Wave', name: 'Wave' },
-  { id: 'Car', name: 'Car' }
-  ].map(x => new DropdownItem(x.id, x.name));
+  typeList = VEHICLE_TYPE.map(x => new DropdownItem(x.id, x.name));
   pending = false;
 
   form: FormGroup = this.fb.group({
     residentId: ["", Validators.required],
-    licensePlate: ["", Validators.required],
-    price: ["", Validators.required],
+    licensePlate: "",
+    price: [ null, [Validators.required, Validators.pattern(PATTERN.ONLY_NUMBER)]],
     status: ["", Validators.required],
     type: ["", [Validators.required]],
   });

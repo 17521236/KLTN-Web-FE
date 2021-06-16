@@ -27,7 +27,7 @@ export class AddApartmentComponent implements OnInit {
   form: FormGroup = this.fb.group({
     blockId: ["", Validators.required],
     name: ["", Validators.required],
-    type: ["0", Validators.required],
+    type: ["1", Validators.required],
     area: ["", [Validators.required, Validators.pattern(PATTERN.ONLY_NUMBER)]],
     description: "",
   });

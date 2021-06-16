@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
-import { RESIDENT_TYPE_LIST, VEHICLE_STATUS_LIST } from 'src/app/core/system.config';
+import { RESIDENT_TYPE_LIST, VEHICLE_STATUS_LIST, VEHICLE_TYPE } from 'src/app/core/system.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
@@ -38,13 +38,15 @@ export class VehicleListComponent implements OnInit {
   )
 
   // filter
-  resident$ = this.residentService.getResident(0, 999).pipe(map((x: any) => {
+  resident$ = this.residentService.getResident(0, 999);
+  residentDD$ = this.resident$.pipe(map((x: any) => {
     let tmp = x.items.map(item => new DropdownItem(item._id, item.name));
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
+  residentP$ = this.resident$.pipe(map((x:any)=>x.items));
   VEHICLE_STATUS = [new DropdownItem('', 'All'), ...VEHICLE_STATUS_LIST].map(x => new DropdownItem(x.id, x.text));
-  typeList = [{ id: '', name: 'All' }, { id: 'Sirius', name: 'Sirius' }, { id: 'Wave', name: 'Wave' }, { id: 'Car', name: 'Car' }].map(x => new DropdownItem(x.id, x.name));
+  typeList = [{ id: '', name: 'All' }, ...VEHICLE_TYPE].map(x => new DropdownItem(x.id, x.name));
 
   constructor(
     private router: Router,

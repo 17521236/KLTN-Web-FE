@@ -26,11 +26,13 @@ export class ApartmentListComponent implements OnInit {
       return this.aptService.getApartment(x.paginator.getStart(), x.paginator.pageSize, x.filterForm.value['name'], x.filterForm.value['blockId']);
     })
   )
-  blocks$ = this.blockService.getBlocks('',0,999).pipe(map((x: any) => {
+  blocks$ = this.blockService.getBlocks('', 0, 999);
+  blocksDD$ = this.blocks$.pipe(map((x: any) => {
     let tmp = x.items.map(item => new DropdownItem(item._id, item.name));
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
+  blocksP$ = this.blocks$.pipe(map((x: any) => x.items))
   showRightMenu = false;
 
   constructor(private router: Router, private aptService: ApartmentService, private blockService: BlockService, private fb: FormBuilder) {
