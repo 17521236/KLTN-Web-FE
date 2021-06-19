@@ -11,8 +11,7 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    //ok
-    // this is oninit
+    // login
   }
 
 
