@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     //them btn logout
+    //l
   }
 
 
