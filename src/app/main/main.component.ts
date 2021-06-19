@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
 
     // login
-    //them btn logout
+    //cu dan
 
   }
 
