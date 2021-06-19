@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
 
     // login
     //them btn logout
+    //add blcok
 
   }
 
