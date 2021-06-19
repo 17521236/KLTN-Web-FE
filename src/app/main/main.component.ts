@@ -13,8 +13,9 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
 
     // login
-    //them btn logout
-    //add blcok
+
+    //cu dan
+
 
   }
 
