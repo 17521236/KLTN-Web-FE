@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { shareReplay } from 'rxjs/operators';
-import { SnackbarService } from 'ngx-snackbar';
 @Injectable({
     providedIn: 'root'
 })
 
-export class AppSnackbarService {
-    constructor(private snackbarService: SnackbarService) { }
+export class ToastrService {
+    constructor(private snackbarService: ToastrService) { }
     success(msg: string, time = 3000) {
         this.snackbarService.add({
             msg,

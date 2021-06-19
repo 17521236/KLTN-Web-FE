@@ -7,7 +7,7 @@ import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { APARTMENT_TYPE_LIST } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { BlockService } from '../../../block/service/block.service';
 import { ApartmentService } from '../../service/apartment.service';
@@ -36,7 +36,7 @@ export class AddApartmentComponent implements OnInit {
     private fb: FormBuilder,
     private apartmentService: ApartmentService,
     private blockService: BlockService,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     public modal: NzModalService
   ) { }
 

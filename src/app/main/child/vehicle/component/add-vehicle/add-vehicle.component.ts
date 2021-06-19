@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { VEHICLE_STATUS_LIST, VEHICLE_TYPE } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { ResidentService } from '../../../resident/service/resident.service';
 import { VehicleService } from '../../service/vehicle.service';
@@ -30,12 +30,12 @@ export class AddVehicleComponent implements OnInit {
     residentId: ["", Validators.required],
     licensePlate: "",
     price: [ null, [Validators.required, Validators.pattern(PATTERN.ONLY_NUMBER)]],
-    status: ["", Validators.required],
+    status: "",
     type: ["", [Validators.required]],
   });
   constructor(
     private fb: FormBuilder,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private residentService: ResidentService,
     private vehicleService: VehicleService,
     public modal: NzModalService

@@ -18,6 +18,8 @@
 @import "pill.scss";
 @import "snackbar.scss";
 @import "side-filter.scss";
+@import '~ngx-toastr/toastr';
+@import 'boxicons';
 html,
 body {
     font-family: "Nunito";
@@ -669,12 +671,14 @@ hr {
     padding: 15px;
 }
 .toast-success {
-    background-color: $color-nets-blue !important;
+    background-color: $color-deep-blue !important;
     background-image: none !important;
+    margin-bottom: 60px !important;
 }
 .toast-error {
     background-color: $color-nets-red;
     background-image: none !important;
+    margin-bottom: 60px !important;
 }
 
 li:focus {
@@ -778,4 +782,9 @@ li:focus {
 }
 .ant-modal-body{
     padding: 40px;
+}
+
+.apexcharts-legend-text{
+    font-family: "Nunito";
+    color: $color-dark-grey;
 }

@@ -42,9 +42,9 @@ export class BillService {
   create(data: IAddBillReq) {
     return this.http.sendToServer('POST', API.BILL.ADD, data, null).pipe(shareReplay());
   }
-  // getOne(id) {
-  //   return this.http.sendToServer("GET", API.BILL.GET_ONE(id), null, null).pipe(shareReplay());
-  // }
+  getOne(id) {
+    return this.http.sendToServer("GET", API.BILL.GET_ONE(id), null, null).pipe(shareReplay());
+  }
   // update(data, id) {
   //   return this.http.sendToServer('PATCH', API.BILL.UPDATE(id), data, null).pipe(shareReplay());
   // }

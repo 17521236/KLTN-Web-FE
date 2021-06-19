@@ -27,4 +27,7 @@ export class BlockService {
     const tmp: UpdateBlockReq = new UpdateBlockReq(data);
     return this.http.sendToServer("PATCH", API.BLOCK.UPDATE(id), tmp).pipe(shareReplay());
   }
+  delete(id){
+    return this.http.sendToServer("DELETE", API.BLOCK.DELETE(id)).pipe(shareReplay());
+  }
 }

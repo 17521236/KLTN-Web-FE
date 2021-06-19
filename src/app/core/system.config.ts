@@ -57,10 +57,6 @@ export const STATUS_BILL_LIST = [
     },
     {
         id: STATUS_BILL_APPROVE,
-        name: 'Đã duyệt'
-    },
-    {
-        id: STATUS_BILL_DENY,
-        name: 'Từ chối'
+        name: 'Đã thanh toán'
     }
 ];

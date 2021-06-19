@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { pipe } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Store } from 'src/app/shared/abstracts/store';
+import { PaginatorEvent } from 'src/app/shared/component/paginator/paginator-event.model';
 import { ApartmentService } from '../../../apartment/service/apartment.service';
 import { BlockService } from '../../../block/service/block.service';
 import { BillService, IFilterBill } from '../../service/bill.service';
@@ -44,7 +45,15 @@ export class BillListStoreService extends Store<IBillListState> {
     })
   }
 
-  onPageChange(filter: IFilterBill) {
+  onPageChange(start = 0, limit = 5, status = null, apartmentId = null, month = null) {
+    let filter: IFilterBill = {
+      start,
+      limit,
+      status,
+      apartmentId,
+      month: month != '01-1970' ? month : null
+    }
+    console.log(filter, 'filter')
     this.state = { ...this.state, loading: true }
     this.billService.getList(filter).subscribe((res: any) => {
       this.state = { ...this.state, records: res.result, total: res.total, loading: false }
@@ -54,5 +63,8 @@ export class BillListStoreService extends Store<IBillListState> {
     this.aptService.getApartment(0, 999, '', evt).subscribe((res: any) => {
       this.state = { ...this.state, apts: res.items }
     });
+  }
+  refresh(){
+    this.onPageChange();
   }
 }

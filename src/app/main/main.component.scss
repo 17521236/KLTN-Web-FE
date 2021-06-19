@@ -1,7 +1,11 @@
 .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
+    height: 80px;
+    background: white;
     margin: 16px;
+    text-align: center;
+    img{
+        max-height: 100%;
+    }
 }
 
 nz-header {
@@ -27,4 +31,20 @@ nz-breadcrumb {
 
 nz-footer {
     text-align: center;
+}
+:host ::ng-deep .ant-layout-sider-trigger1{
+    pointer-events: none;
+    display: none;
+}
+:host ::ng-deep .ant-layout-sider-trigger1 {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    height: 48px;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+    background: #002140;
+    cursor: pointer;
+    transition: all .2s;
 }

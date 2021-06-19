@@ -29,4 +29,7 @@ export class ApartmentService {
     const tmp: ApartmentReq = new ApartmentReq(data);
     return this.http.sendToServer("PATCH", API.APARTMENT.UPDATE(id), tmp).pipe(shareReplay());
   }
+  delete(id){
+    return this.http.sendToServer("DELETE", API.APARTMENT.DELETE(id)).pipe(shareReplay());
+  }
 }

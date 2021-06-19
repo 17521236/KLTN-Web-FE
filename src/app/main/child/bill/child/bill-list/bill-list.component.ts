@@ -8,11 +8,13 @@ import { PaginatorComponent } from 'src/app/shared/component/paginator/paginator
 import { BillService, IFilterBill } from '../../service/bill.service';
 import { BillListStoreService } from './bill-list-store.service';
 import * as moment from 'moment';
+import { STATUS_BILL_LIST } from 'src/app/core/system.config';
+import { Router } from '@angular/router';
+import { ROUTER_CONST } from 'src/app/core/router.config';
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
-  styleUrls: ['./bill-list.component.scss'],
-  providers: [BillListStoreService]
+  styleUrls: ['./bill-list.component.scss']
 })
 export class BillListComponent implements OnInit {
 
@@ -33,29 +35,27 @@ export class BillListComponent implements OnInit {
       ...res.map((x: any) => new DropdownItem(x._id, x.name))
     ]
   }));
-
+  status = [new DropdownItem(null, 'All'), ...STATUS_BILL_LIST.map(x => new DropdownItem(x.id, x.name))];
   filterForm: FormGroup;
 
-  constructor(private billStore: BillListStoreService, private fb: FormBuilder) {
+  constructor(
+    private billStore: BillListStoreService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
-    let filter: IFilterBill = {
-      start: 0,
-      limit: 5,
-      status: '',
-      apartmentId: '',
-      month: null
-    }
     this.buildForm();
-    this.billStore.onPageChange(filter);
+    this.billStore.refresh();
   }
 
   buildForm() {
     this.filterForm = this.fb.group({
       blockId: null,
       apartmentId: null,
-      month: null
+      month: null,
+      status: null
     })
   }
 
@@ -64,15 +64,7 @@ export class BillListComponent implements OnInit {
   }
 
   onPageChange(evt: PaginatorEvent, status = null, apartmentId = null, month = null) {
-    let filter: IFilterBill = {
-      start: evt.genStartLimit().start,
-      limit: evt.genStartLimit().limit,
-      status,
-      apartmentId,
-      month: month != '01-1970' ? month : null
-    }
-    console.log(filter, 'filter')
-    this.billStore.onPageChange(filter);
+    this.billStore.onPageChange(evt.genStartLimit().start, evt.genStartLimit().limit, status, apartmentId, month);
   }
 
   blockSelected(evt) {
@@ -82,10 +74,17 @@ export class BillListComponent implements OnInit {
   @ViewChild('paginator') paginator: PaginatorComponent;
   search() {
     this.onPageChange(
-      this.paginator.getCurrentEvent() || new PaginatorEvent(0, 5),
-      '',
+      this.paginator ? this.paginator.getCurrentEvent() : new PaginatorEvent(1, 5),
+      this.filterForm.controls['status'].value,
       this.filterForm.controls['apartmentId'].value,
       moment(new Date(this.filterForm.controls['month'].value).getTime()).format('MM-YYYY')
     )
+  }
+  selectApt(evt) {
+    this.search();
+  }
+  viewDetail(item) {
+    console.log(item);
+    this.router.navigate([ROUTER_CONST.BILL.DETAIL(item._id)])
   }
 }

@@ -64,3 +64,23 @@
 <ng-template #loading>
 <app-loading></app-loading>
 </ng-template>
+
+
+<!-- delete -->
+
+<div class="delete-btn" (click)="showModal(deleteTpl)">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #deleteTpl>
+    <div class="title-1 mb-24">
+        Are you sure?
+    </div>
+    <div class="medium-body-text mb-24">
+        Are you sure want to delete this item?
+    </div>
+    <button class="vcc-btn-fill w-100 blue mb-16" (click)="deleteItem()">Ok</button>
+    <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>
+</ng-template>
+
+<!-- end delete -->

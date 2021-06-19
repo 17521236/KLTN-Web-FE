@@ -1,0 +1,47 @@
+<div class="mb-32">
+    <h6 class="mb-16">Danh sách Ban quản lý</h6>
+</div>
+<div *ngIf="(result$|async) as employees, else loading">
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên quản lý</th>
+                <th scope="col">Email</th>
+                <th scope="col">CMND</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Sđt</th>
+                <th scope="col">Địa chỉ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngFor="let employee of employees, index as id" (click)="viewDetail(employee)">
+                <td>{{id + 1}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.identityCard}}</td>
+                <td>{{employee.dateOfBirth | date:'dd-MM-yyyy'}}</td>
+                <td>{{employee.phoneNumber}}</td>
+                <td>{{employee.addr}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <nz-empty class="mt-48" *ngIf="total == 0"
+        nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
+    </nz-empty>
+    <div class="text-center">
+        <app-paginator [total]="total" (onPageChange)="tableHelper.onPageChange($event)" [pageSize]="5">
+        </app-paginator>
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<div class="add-btn" (click)="showModal(addTpl)">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #addTpl>
+    <app-employee-add (success)="getLists()"></app-employee-add>
+</ng-template>

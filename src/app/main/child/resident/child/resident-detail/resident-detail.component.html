@@ -173,14 +173,21 @@
 
 <app-modal #modal></app-modal>
 
-<!-- <ng-template #noEmail>
-    <div>
-        <div class="title-2 mb-32">
-            Vui lòng cập nhật email.
-        </div>
-        <div class="medium-body-text">
-            Bạn cần cập nhật chính xác Email trước khi tạo tài khoản. 
-            Sau khi tạo tài khoản. Mật khẩu sẽ được gửi vào Email. Vui lòng kiểm tra Email để lấy thông tin đăng nhập.
-        </div>
+<!-- delete -->
+
+<div class="delete-btn" (click)="showModal(deleteTpl)">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #deleteTpl>
+    <div class="title-1 mb-24">
+        Are you sure?
     </div>
-</ng-template> -->
+    <div class="medium-body-text mb-24">
+        Are you sure want to delete this item?
+    </div>
+    <button class="vcc-btn-fill w-100 blue mb-16" (click)="deleteItem()">Ok</button>
+    <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>
+</ng-template>
+
+<!-- end delete -->

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { BlockService } from '../../service/block.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class AddBlockComponent implements OnInit {
   pending = false;
   @Output() success = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private blockService: BlockService, private snackbarService: AppSnackbarService,public modal:NzModalService) { }
+  constructor(private fb: FormBuilder, private blockService: BlockService, private snackbarService: ToastrService,public modal:NzModalService) { }
 
   ngOnInit(): void {
   }

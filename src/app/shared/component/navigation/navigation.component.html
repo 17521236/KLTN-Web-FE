@@ -1,7 +1,7 @@
 <ul nz-menu nzTheme="dark" nzMode="inline">
     <li nz-menu-item [routerLink]="[ROUTER_CONST.DASHBOARD]">
         <i nz-icon nzType="area-chart"></i>
-        <span>Dashboard</span>
+        <span>Trang chủ</span>
     </li>
     <li nz-submenu nzTitle="Hạ tầng" nzIcon="insert-row-left">
         <ul>
@@ -21,8 +21,12 @@
             <li nz-menu-item [routerLink]="[ROUTER_CONST.BILL.LIST]">Thanh toán</li>
         </ul>
     </li>
-    <li nz-menu-item [routerLink]="[ROUTER_CONST.PROFILE]">
+    <li *ngIf="(role$ | async) == '0'" nz-menu-item [routerLink]="[ROUTER_CONST.EMPLOYEE.LIST]">
+        <i nz-icon nzType="user"></i>
+        <span>Ban quản lý</span>
+    </li>
+    <li nz-menu-item (click)="navProfile()">
         <i nz-icon nzType="profile"></i>
-        <span>Profile</span>
+        <span>Tài khoản</span>
     </li>
 </ul>

@@ -1,14 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { SnackbarService } from 'ngx-snackbar';
 import { merge, Observable, Subject } from 'rxjs';
 import { debounceTime, map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { PATTERN } from 'src/app/core/pattern';
 import { STATUS_BILL_NOT_APPROVE } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
+import { ToastrService } from 'ngx-toastr';
 import { IAddBillReq } from '../../service/bill.service';
 import { BillAddStoreService, IApartment, IBlock, ICost } from './bill-add-store.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bill-add',
@@ -28,7 +31,9 @@ export class BillAddComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private billAddStore: BillAddStoreService,
-    public modal: NzModalService) {
+    public modal: NzModalService,
+    private toast: ToastrService
+  ) {
   }
 
   block$ = this.billAddStore.block$.pipe(tap(_ => this.selecting = false), map((res: IBlock[]) => res.map(x => new DropdownItem(x._id, x.name))));
@@ -102,9 +107,14 @@ export class BillAddComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.pending = true;
       const dataReq = this.formatData(this.form.value);
-      this.billAddStore.add(dataReq).subscribe(res => {
+      this.billAddStore.add(dataReq).subscribe(_ => {
+        this.toast.success('Added successfully');
+        setTimeout(() => this.modal.closeAll(), 0)
         this.pending = false;
-      }, _ => this.pending = false)
+      }, _ => {
+        this.pending = false;
+        setTimeout(() => this.modal.closeAll(), 0);
+      })
     }
   }
 
@@ -115,7 +125,7 @@ export class BillAddComponent implements OnInit, OnDestroy {
       pmId: null,
       date: new Date().getTime(),
       status: STATUS_BILL_NOT_APPROVE,
-      amount: this.totalPrice,
+      amount: this.totalPrice * 1.1,
       details: rest
     }
     return dataReq;
@@ -139,4 +149,5 @@ export class BillAddComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._sub$.next();
   }
+  moment = moment;
 }

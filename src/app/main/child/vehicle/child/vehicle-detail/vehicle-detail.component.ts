@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -9,10 +9,11 @@ import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { RESIDENT_TYPE_LIST, VEHICLE_STATUS_LIST, VEHICLE_TYPE } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { ResidentService } from '../../../resident/service/resident.service';
 import { VehicleReq } from '../../model/vehicle.model';
 import { VehicleService } from '../../service/vehicle.service';
+import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -28,9 +29,10 @@ export class VehicleDetailComponent implements OnInit {
 
   // form
   form: FormGroup;
+  id = '';
   id$ = this.route.params.pipe(map(params => params.id));
   vehicle$ = this.id$.pipe(
-    switchMap(id => this.vehicleService.getVehicleById(id)),
+    switchMap(id => {this.id = id; return this.vehicleService.getVehicleById(id)}),
     switchMap((vehicle: any) => {
       this.buildForm(vehicle);
       return of(vehicle);
@@ -40,7 +42,7 @@ export class VehicleDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private residentService: ResidentService,
     private vehicleService: VehicleService
   ) {
@@ -70,4 +72,20 @@ export class VehicleDetailComponent implements OnInit {
   close() {
     window.history.back();
   }
+
+
+    // delete
+  
+    @ViewChild('modal') modal: ActionModalComponent;
+    showModal(tpl){
+      this.modal.createComponentModal(tpl)
+    }
+    deleteItem(){
+      this.vehicleService.delete(this.id).subscribe(_ => {
+        this.snackbarService.success(SUCCESS_MSG.delete);
+        this.close();
+      }, _ => {
+        this.modal.close();
+      });
+    }
 }

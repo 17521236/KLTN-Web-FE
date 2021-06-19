@@ -26,6 +26,11 @@ export const ROUTER_CONST = {
         LIST: "/main/bill/list",
         DETAIL: (id)=>`/main/bill/detail/${id}`
     },
+    EMPLOYEE: {
+        LIST: "/main/employee/list",
+        DETAIL: (id)=>`/main/employee/detail/${id}`
+    },
     PAYMENT_METHOD: "/main/apartment",
-    PROFILE: "/main/profile"
+    PROFILE: "/main/profile",
+    NOT_AUTH: "/not-auth/login"
 } 

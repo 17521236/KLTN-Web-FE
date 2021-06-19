@@ -1,4 +1,4 @@
-<app-header [pageName]="'Tạo bill'" (close)="modal.closeAll()"></app-header>
+<app-header [pageName]="'Chi phí tháng ' + moment().format('MM-yyyy')" (close)="modal.closeAll()"></app-header>
 <form [formGroup]="form" (ngSubmit)="submit()">
     <ng-container *ngIf="(block$| async) as blocks; else loading">
         <div class="input-group">
@@ -14,7 +14,7 @@
                 <ng-container *ngIf="(cost$|async) as cost; else loading">
                     <ng-container *ngIf="cost.INTERNET.quantity > 0 else noBody">
                         <div class="input-group">
-                            <app-input [label]="'Phí Điện (' + cost.ELECTRONIC.cost + '₫ / ' + cost.ELECTRONIC.unit + ')'"
+                            <app-input [label]="'Phí Điện (' + cost.ELECTRONIC.cost + '₫ / ' + cost.ELECTRONIC.unit + ')' "
                                 [formControlName]="'electronic'" [placeholder]="0"></app-input>
                             <app-error-message-validator [formGroup]="form" [controlName]="'electronic'"
                                 [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}">
@@ -55,8 +55,14 @@
                             </app-error-message-validator>
                         </div>
                         <div class="input-group">
+                            <div class="medium-body-text mb-16">
+                                Chi phí kỳ này: <span class="fw-bold">{{totalPrice | vnd}}</span> 
+                            </div>
+                            <div class="medium-body-text mb-16">
+                                Thuế VAT: <span class="fw-bold">10%</span> 
+                            </div>
                             <div class="extra-large-body">
-                                Tổng chi phí kỳ này: <span class="text-error fw-bold">{{totalPrice | vnd}} </span> 
+                                Tổng chi phí kỳ này: <span class="text-error fw-bold">{{totalPrice * 1.1 | vnd}} </span> 
                             </div>
                         </div>
                         <button type="submit" class="vcc-btn-fill blue w-100"

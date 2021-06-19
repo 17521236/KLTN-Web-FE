@@ -39,4 +39,7 @@ export class ResidentService {
     const tmp: ResidentReq = new ResidentReq(data);
     return this.http.sendToServer("PATCH", API.RESIDENT.UPDATE(id), tmp).pipe(shareReplay());
   }
+  delete(id){
+    return this.http.sendToServer("DELETE", API.RESIDENT.DELETE(id)).pipe(shareReplay());
+  }
 }

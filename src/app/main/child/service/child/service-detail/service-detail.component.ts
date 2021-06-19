@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../../sevice/sevice.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class ServiceDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sService: ServiceService,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) { }

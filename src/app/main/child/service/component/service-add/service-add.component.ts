@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { ServiceService } from '../../sevice/sevice.service';
 
@@ -23,7 +23,7 @@ export class ServiceAddComponent implements OnInit {
     public modal: NzModalService,
     private fb: FormBuilder,
     private sService: ServiceService,
-    private snackbarService: AppSnackbarService
+    private snackbarService: ToastrService
   ) { }
 
   ngOnInit(): void {

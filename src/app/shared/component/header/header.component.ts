@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() pageName = '';
+  @Input() isShowClose = true;
   @Output() close = new EventEmitter();
 
   constructor( ) { }

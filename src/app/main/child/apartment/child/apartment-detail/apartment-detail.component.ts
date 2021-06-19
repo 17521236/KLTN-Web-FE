@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
@@ -7,9 +7,10 @@ import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { APARTMENT_TYPE_LIST } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { BlockService } from '../../../block/service/block.service';
 import { ApartmentService } from '../../service/apartment.service';
+import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 
 @Component({
   selector: 'app-apartment-detail',
@@ -18,16 +19,20 @@ import { ApartmentService } from '../../service/apartment.service';
 })
 export class ApartmentDetailComponent implements OnInit {
 
+  id = '';
   ERROR_MSG = ERROR_MSG;
   id$ = this.route.params.pipe(map(params => params.id));
   apartment$ = this.id$.pipe(
-    switchMap(id => this.apartmentService.getApartmentById(id)),
+    switchMap(id => {
+      this.id = id;
+      return this.apartmentService.getApartmentById(id);
+    }),
     map((res: any) => {
       this.buildFormDetail(res);
       return res;
     })
   );
-  blocks$ = this.blockService.getBlocks('',0,999).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
+  blocks$ = this.blockService.getBlocks('', 0, 999).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
   options = APARTMENT_TYPE_LIST.map(x => new DropdownItem(x.id, x.text));
   form: FormGroup;
 
@@ -35,7 +40,7 @@ export class ApartmentDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private apartmentService: ApartmentService,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private blockService: BlockService
   ) { }
 
@@ -64,5 +69,18 @@ export class ApartmentDetailComponent implements OnInit {
   }
   close() {
     window.history.back();
+  }
+
+  @ViewChild('modal') modal: ActionModalComponent;
+  showModal(tpl) {
+    this.modal.createComponentModal(tpl)
+  }
+  deleteItem() {
+    this.apartmentService.delete(this.id).subscribe(_=>{
+      this.snackbarService.success(SUCCESS_MSG.delete);
+      this.close();
+    }, _ => {
+      this.modal.close();
+    });
   }
 }

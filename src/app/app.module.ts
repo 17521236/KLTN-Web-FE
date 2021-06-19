@@ -16,6 +16,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { SnackbarModule } from 'ngx-snackbar';
 import { SharedModule } from './shared/shared.module';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -33,9 +34,14 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NzIconModule.forRoot(icons),
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    })// ToastrModule added
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ToastrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,13 +6,13 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { JSUtils } from '../utils/main-utils';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { SnackbarService } from 'ngx-snackbar';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
     providedIn: 'root'
 })
 
 export class HttpService {
-    constructor(private http: HttpClient, private msg: SnackbarService) { }
+    constructor(private http: HttpClient, private msg: ToastrService) { }
 
     public sendToServer(method: string, api: string, bd?: any, hd?: any, pr?: any) {
         let url = environment.endPoint + api;

@@ -32,6 +32,10 @@ import { VehiclePipe } from './pipe/vehicle.pipe';
 import { BillStatusPipe } from './pipe/bill-status.pipe';
 import { BlockPipe } from './pipe/block.pipe';
 import { ResidentPipe } from './pipe/resident.pipe';
+import { ToastrService } from 'ngx-toastr';
+import { ResidentTypePipe } from './pipe/resident-type.pipe';
+import { NumberPipe } from './pipe/number.pipe';
+import { UserService } from './service/user.service';
 @NgModule({
   declarations: [
     InputComponent,
@@ -49,7 +53,9 @@ import { ResidentPipe } from './pipe/resident.pipe';
     VehiclePipe,
     BillStatusPipe,
     BlockPipe,
-    ResidentPipe
+    ResidentPipe,
+    ResidentTypePipe,
+    NumberPipe
   ],
   imports: [
     NzEmptyModule,
@@ -91,7 +97,10 @@ import { ResidentPipe } from './pipe/resident.pipe';
     VehiclePipe,
     BillStatusPipe,
     BlockPipe,
-    ResidentPipe
-  ]
+    ResidentPipe,
+    ResidentTypePipe,
+    NumberPipe
+  ],
+  providers: [ToastrService, UserService]
 })
 export class SharedModule { }

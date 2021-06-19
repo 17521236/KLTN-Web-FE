@@ -1,19 +1,22 @@
 
 export class JSUtils {
   public static commonHandleError(error, msgService) {
+    console.log(error)
     switch (error.status) {
       case 400:
-        alert(error.error.msg);
+        msgService.error(error.error.msg);
+
         // msgService.add({
         //   msg: error.error.msg,
         //   timeout: 3000,
         //   background: '#000000',
         //   color: '#ffffff',
         // });
-        
+
         break;
       default:
-        alert('unknow error');
+        // msgService.error('unknow error')
+    msgService.error('unknow error');
         break;
     }
   }

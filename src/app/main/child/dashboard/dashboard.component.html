@@ -1,15 +1,103 @@
-<div class="row mb-32">
-    <div class="col-6">
-        <app-input label="Username"></app-input>
+<div class="mb-32">
+    <h6 class="mb-16">Tổng quan</h6>
+</div>
+<div *ngIf="(detail$|async) as detail; else loading">
+    <div class="row mb-48">
+        <div class="col-3">
+            <div class="detail-section" (click)="navBlock()">
+                <h4 class="mb-16">{{detail?.block | number}}</h4>
+                <div class="d-flex ai-center jc-space-between  mb-16">
+                    <div class="title-2 fw-bold" style="color: #173f5f;">
+                        <i class='bx bxs-buildings'></i> Block
+                    </div>
+                    <i nz-icon nzType="right" nzTheme="outline"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="detail-section" (click)="navApt()">
+                <h4 class="mb-16">{{detail?.apt | number}}</h4>
+                <div class="d-flex ai-center jc-space-between  mb-16">
+                    <div class="title-2 fw-bold" style="color: #20639b;">
+                        <i class='bx bxs-home-circle'></i> Căn hộ
+                    </div>
+                    <i nz-icon nzType="right" nzTheme="outline"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="detail-section" (click)="navResident()">
+                <h4 class="mb-16">{{detail?.resident | number}}</h4>
+                <div class="d-flex ai-center jc-space-between  mb-16">
+                    <div class="title-2 fw-bold" style="color: #3caea3">
+                        <i class='bx bx-male'></i> Cư dân
+                    </div>
+                    <i nz-icon nzType="right" nzTheme="outline"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="detail-section" (click)="navVeh()">
+                <h4 class="mb-16">{{detail?.vehicle | number}}</h4>
+                <div class="d-flex ai-center jc-space-between  mb-16">
+                    <div class="title-2 fw-bold" style="color: #f6d55c;">
+                        <i class='bx bxs-car'></i> Xe
+                    </div>
+                    <i nz-icon nzType="right" nzTheme="outline"></i>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-6">
-        <app-dropdown label="Select" [options]="options" mode="multiple" [showSearch]="true"></app-dropdown>
+
+
+    <!--  chart -->
+    <div class="title-2 mb-32">
+        Chi phí tháng {{moment().format('MM-yyyy')}}
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels">
+                [fill]="chartOptions.fill" [responsive]="chartOptions.responsive"
+            </apx-chart>
+        </div>
+        <div class="col-8">
+            <div class="row h-100  text-center">
+                <div class="col-4 d-flex ai-center ">
+                    <div class="right-line h-50 w-100 d-flex ai-center jc-center">
+                        <div>
+                            <h4>{{this.chartOptions.series[0]|number}} </h4>
+                            <div class="medium-body-text" style=" color: rgb(0, 143, 251) ">
+                                Đã thanh toán
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-flex ai-center">
+                    <div class="right-line h-50 w-100 d-flex ai-center jc-center">
+                        <div>
+                            <h4>{{this.chartOptions.series[1]|number}} </h4>
+                            <div class="medium-body-text" style=" color: rgb(0, 227, 150)">
+                                Chờ duyệt
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-flex ai-center">
+                    <div class="h-50 w-100 d-flex ai-center jc-center">
+                        <div>
+                            <h4>{{this.chartOptions.series[2]|number}} </h4>
+                            <div class="medium-body-text" style=" color: rgb(254, 176, 25)">
+                                Chưa thanh toán
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-6">
-        <app-paginator [total]="20"></app-paginator>
-    </div>
-    <div class="col-6">
-    </div>
-</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

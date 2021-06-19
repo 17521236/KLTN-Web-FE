@@ -48,20 +48,6 @@
                 </div>
             </div>
       
-            <!-- <div class="col-4">
-                <div class="input-group">
-                    <app-dropdown 
-                    [label]="'Trạng thái'"
-                    [placeholder]="'Select Apartment'" 
-                    [options]="statusList" 
-                    formControlName="status"
-                    [showSearch]="true"
-                    ></app-dropdown>
-                    <app-error-message-validator [formGroup]="form" controlName="status"
-                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
-                    ></app-error-message-validator>
-                </div>
-            </div> -->
         </div>
         <button type="submit" class="vcc-btn-fill blue" [disabled]="form.invalid || form.pristine">Save</button>
     </form>
@@ -70,3 +56,23 @@
 <ng-template #loading>
 <app-loading></app-loading>
 </ng-template>
+
+
+<!-- delete -->
+
+<div class="delete-btn" (click)="showModal(deleteTpl)">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #deleteTpl>
+    <div class="title-1 mb-24">
+        Are you sure?
+    </div>
+    <div class="medium-body-text mb-24">
+        Are you sure want to delete this item?
+    </div>
+    <button class="vcc-btn-fill w-100 blue mb-16" (click)="deleteItem()">Ok</button>
+    <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>
+</ng-template>
+
+<!-- end delete -->

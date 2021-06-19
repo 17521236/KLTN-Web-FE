@@ -1,0 +1,18 @@
+@import 'variable.scss';
+.detail-section{
+    padding: 32px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: none;
+    &:hover{
+        // background-color: $color-light-grey;
+        transform: scale(1.01);
+        cursor: pointer;
+    }
+}
+:host ::ng-deep .apexcharts-legend{
+    display: none;
+}
+
+.right-line{
+    border-right: 2px solid black;
+}

@@ -26,4 +26,7 @@ export class VehicleService {
     const tmp: VehicleReq = new VehicleReq(data);
     return this.http.sendToServer("PATCH", API.VEHICLE.UPDATE(id), tmp).pipe(shareReplay());
   }
+  delete(id){
+    return this.http.sendToServer("DELETE", API.VEHICLE.DELETE(id)).pipe(shareReplay());
+  }
 }

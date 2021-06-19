@@ -16,3 +16,9 @@
         border: $border-dark-grey;
     }
 }
+.required{
+    &::after{
+        content: ' (*)';
+        color: $color-nets-red;
+    }
+}

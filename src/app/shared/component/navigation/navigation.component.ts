@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTER_CONST } from 'src/app/core/router.config';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,13 +10,18 @@ import { ROUTER_CONST } from 'src/app/core/router.config';
 })
 export class NavigationComponent implements OnInit {
   ROUTER_CONST = ROUTER_CONST;
+  role$ = this.authService.role$;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
-  nav() {
-    this.router.navigate([this.ROUTER_CONST.APARTMENT])
+  navProfile() {
+    this.authService._id$.subscribe(id => {
+      this.router.navigate([this.ROUTER_CONST.EMPLOYEE.DETAIL(id)])
+    })
   }
 }

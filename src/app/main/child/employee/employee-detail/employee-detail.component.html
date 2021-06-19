@@ -1,0 +1,116 @@
+<app-header [isShowClose]="(role$ | async) == '0'" [pageName]="'Thông tin ban quản lý'" (close)="close()"></app-header> 
+
+<form *ngIf="(details$|async)  as detail; else loading" [formGroup]="form" (submit)="update()">
+    <div *ngIf="(role$ | async) == '0'" class="mb-48 detail-section">
+        <div class="detail-section__title">Thông tin tài khoản</div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input [disabled]="pending" [isRequired]="true" label="Tên ban quản lý" formControlName="name">
+                    </app-input>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+                        [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input [disabled]="pending" [isRequired]="true" label="Email" formControlName="email">
+                    </app-input>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'email'"
+                        [validationMessages]="{'pattern':ERROR_MSG.EMAIL}"></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input [disabled]="pending" [isRequired]="true" label="Mật khẩu" formControlName="password"
+                        type="password"></app-input>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'password'"
+                        [validationMessages]="{'pattern':ERROR_MSG.PASSWORD}"></app-error-message-validator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mb-32 detail-section">
+        <div class="detail-section__title">Thông tin cá nhân</div>
+        <div class="col-4">
+            <div *ngIf="(role$ | async) == '1'" class="input-group">
+                <app-input [disabled]="pending" [isRequired]="true" label="Tên ban quản lý" formControlName="name">
+                </app-input>
+                <app-error-message-validator [formGroup]="form" [controlName]="'name'"
+                    [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <app-input [disabled]="pending" [isRequired]="true" label="Số điện thoại"
+                        formControlName="phoneNumber">
+                    </app-input>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'phoneNumber'"
+                        [validationMessages]="{'pattern':ERROR_MSG.ONLY_NUMBER}"></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <app-date-picker [disabled]="pending" [isRequired]="true" label="Ngày sinh"
+                        formControlName="dateOfBirth"></app-date-picker>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'dateOfBirth'"
+                        [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
+                </div>
+            </div>
+            <div class="col-4">
+
+
+                <div class="input-group">
+                    <app-input [disabled]="pending" [isRequired]="true" label="Thẻ căn cước / CMND"
+                        formControlName="identityCard"></app-input>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'identityCard'"
+                        [validationMessages]="{'pattern':ERROR_MSG.ONLY_NUMBER}"></app-error-message-validator>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="input-group">
+                    <app-textarea [disabled]="pending" [isRequired]="true" label="Địa chỉ" formControlName="addr">
+                    </app-textarea>
+                    <app-error-message-validator [formGroup]="form" [controlName]="'addr'"
+                        [validationMessages]="{'pattern':ERROR_MSG.INVALID}"></app-error-message-validator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-32">
+        <div class="col-4">
+            <button type="submit" class="vcc-btn-fill blue w-100"
+                [disabled]="form.invalid || form.pristine || pending">Save</button>
+        </div>
+    </div>
+</form>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+
+<!-- delete -->
+
+<div *ngIf="(role$ | async) == '0'" class="delete-btn" (click)="showModal(deleteTpl)">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+</div>
+<app-modal #modal></app-modal>
+<ng-template #deleteTpl>
+    <div class="title-1 mb-24">
+        Are you sure?
+    </div>
+    <div class="medium-body-text mb-24">
+        Are you sure want to delete this item?
+    </div>
+    <button class="vcc-btn-fill w-100 blue mb-16" (click)="deleteItem()">Ok</button>
+    <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>
+</ng-template>
+
+<!-- end delete -->

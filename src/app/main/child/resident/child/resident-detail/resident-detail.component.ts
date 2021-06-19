@@ -10,7 +10,7 @@ import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { RESIDENT_TYPE_LIST } from 'src/app/core/system.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { ApartmentService } from '../../../apartment/service/apartment.service';
 import { BlockService } from '../../../block/service/block.service';
 import { SingleResidentRes } from '../../model/resident.model';
@@ -25,7 +25,6 @@ import { ResidentService } from '../../service/resident.service';
 export class ResidentDetailComponent implements OnInit {
   form: FormGroup;
   ERROR_MSG = ERROR_MSG;
-  @ViewChild('modal') modal: ActionModalComponent;
   @ViewChild('hasEmail') hasEmail;
   @ViewChild('deleteConfirm') deleteConfirm;
 
@@ -53,7 +52,7 @@ export class ResidentDetailComponent implements OnInit {
     private fb: FormBuilder,
     private aptService: ApartmentService,
     private blockService: BlockService,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private residentService: ResidentService,
     private residentAccountService: ResidentAccountService,
 
@@ -96,7 +95,10 @@ export class ResidentDetailComponent implements OnInit {
     }
   }
   close() {
-    this.router.navigate([ROUTER_CONST.RESIDENT.LIST])
+    this.modal.close();
+    setTimeout(() => {
+      this.router.navigate([ROUTER_CONST.RESIDENT.LIST])
+    }, 0);
   }
 
   blockSelected(e) {
@@ -113,7 +115,7 @@ export class ResidentDetailComponent implements OnInit {
     if (new RegExp(PATTERN.EMAIL).test(resident.email))
       this.modal.createComponentModal(this.hasEmail, {}, false, 'alert')
     else {
-      this.snackbarService.warning('Bạn cần cập nhật Email trước khi tạo tài khoản', 3000)
+      this.snackbarService.warning('Bạn cần cập nhật Email trước khi tạo tài khoản')
     }
   }
   createAccount(resident: SingleResidentRes) {
@@ -121,9 +123,12 @@ export class ResidentDetailComponent implements OnInit {
     let account = { username: resident.email }
     this.residentAccountService.createAccount(account, this.id).subscribe((x: any) => {
       this.modal.close();
-      this.snackbarService.success(SUCCESS_MSG.create_resident_account, 5000);
+      this.snackbarService.success(SUCCESS_MSG.create_resident_account);
       setTimeout(() => this.refresh());
       this.pending = false;
+    }, _ => {
+      this.modal.close();
+      this.pending = false
     })
   }
   resetPassword() {
@@ -152,4 +157,19 @@ export class ResidentDetailComponent implements OnInit {
     });
   }
 
+
+  // delete
+
+  @ViewChild('modal') modal: ActionModalComponent;
+  showModal(tpl) {
+    this.modal.createComponentModal(tpl)
+  }
+  deleteItem() {
+    this.residentService.delete(this.id).subscribe(_ => {
+      this.snackbarService.success(SUCCESS_MSG.delete);
+      this.close();
+    }, _ => {
+      this.modal.close();
+    });
+  }
 }

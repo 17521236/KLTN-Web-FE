@@ -1,1 +1,274 @@
-<p>bill-detail works!</p>
+<ng-container *ngIf="(details$|async) as details; else loading">
+    <app-header [pageName]="'Thông tin thu phí tháng ' + moment(details?.bill.date).format('MM-yyyy') | uppercase"
+        (close)="close()"></app-header>
+    <div class="row mb-48">
+        <div class="col-4">
+            <div class="medium-body-text">
+                Block: <b class="pl-16">{{details?.block.name | uppercase}}</b>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <div class="medium-body-text">
+                Căn hộ: <b class="pl-16">{{details?.apartment.name | uppercase}}</b>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <div class="medium-body-text">
+                Ngày phát hành: <b class="pl-16">{{details?.bill.date | date:'dd-MM-yyyy' | uppercase}}</b>
+            </div>
+
+        </div>
+    </div>
+    <!-- Residents  -->
+    <div class="title-1 mb-24">I. Danh sách nhân khẩu</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Họ & tên</th>
+                <th scope="col">Năm sinh</th>
+                <th scope="col">CMND</th>
+                <th scope="col">Email</th>
+                <th scope="col">Sđt</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="details?.resident as residents; else loading">
+            <tr class="table-row" *ngFor="let el of residents; index as index">
+                <td>{{index}}</td>
+                <td>{{el.type | residentType}}</td>
+                <td>{{el.name}}</td>
+                <td>{{moment(el.dateOfBirth).format('yyyy')}}</td>
+                <td>{{el.identityCard}}</td>
+                <td>{{el.email}}</td>
+                <td>{{el.phoneNumber}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Thông tin chi phí -->
+    <div class="title-1 mb-24">II. Thông tin chi phí</div>
+    <ng-container *ngIf="details?.bill as el; else loading">
+        <form [formGroup]="form">
+            <table class="vcc-table mb-24">
+                <thead>
+                    <tr>
+                        <th scope="col">Nợ đầu kỳ</th>
+                        <th scope="col">Phát sinh trong kỳ</th>
+                        <th scope="col">Tổng phải thu trong kỳ</th>
+                        <th scope="col">Đã thanh toán</th>
+                        <th scope="col">Nợ cuối kỳ</th>
+                        <th scope="col">Thanh toán</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td>{{el.balanceFowards | vnd}}</td>
+                        <td>{{el.amount | vnd}}</td>
+                        <td>{{el.balanceFowards + el.amount | vnd}}</td>
+                        <td style="width: 20%">
+                            <app-input formControlName="paidAmount" [suffixTpl]="vnd"></app-input>
+                        </td>
+                        <td>{{el.lastBalance | vnd}}</td>
+                        <td>
+                            <app-dropdown [options]="types" formControlName="status"></app-dropdown>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </ng-container>
+
+
+
+    <!-- cost -->
+    <div class="title-1 mb-24">III. Thông tin chi tiết chi phí</div>
+    <div class="title-2 mb-8">1. Điện</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Số tiêu thụ (kwH)</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.electronic as el; else loading">
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- water -->
+    <div class="title-2 mb-8">2. Nước</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Số tiêu thụ (m3)</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.water as el; else loading">
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- internet -->
+    <div class="title-2 mb-8">3. Internet</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Số người</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.internet as el; else loading">
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Dich -->
+    <div class="title-2 mb-8">4. Dịch vụ</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Diện tích (m2)</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.service as el; else loading">
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Dich vụ -->
+    <div class="title-2 mb-8">5. Gửi xe</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Loại xe</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.parking_bycircle as el; else loading">
+                <td>Xe đạp</td>
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+            <tr class="table-row" *ngIf="details?.serviceRegister.parking_motobike as el; else loading">
+                <td>Xe máy</td>
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+            <tr class="table-row" *ngIf="details?.serviceRegister.parking_car as el; else loading">
+                <td>Ô tô</td>
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+
+            <tr class="table-row" *ngIf="details?.serviceRegister as el; else loading">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <b>
+                        {{
+                        el.parking_bycircle.quantity * el.parking_bycircle.cost * 1.1 +
+                        el.parking_motobike.quantity * el.parking_motobike.cost * 1.1 +
+                        el.parking_car.quantity * el.parking_car.cost * 1.1
+                        | vnd
+                        }}
+                    </b>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <!-- internet -->
+    <div class="title-2 mb-8">6. Phí khác</div>
+    <table class="vcc-table mb-24">
+        <thead>
+            <tr>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thuế VAT 10%</th>
+                <th scope="col">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" *ngIf="details?.serviceRegister.orther as el; else loading">
+                <td>{{el.quantity}}</td>
+                <td>{{el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost | vnd}}</td>
+                <td>{{el.quantity * el.cost * 0.1 | vnd}}</td>
+                <td>{{el.quantity * el.cost * 1.1 | vnd}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <span class="title-2 text-error">Tổng chi phí: </span>
+        <span class="title-2">{{details?.bill.amount | vnd}}</span>
+    </div>
+    <!-- <pre>
+        {{details|json}}
+    </pre> -->
+</ng-container>
+<ng-template #vnd>
+    ₫
+</ng-template>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

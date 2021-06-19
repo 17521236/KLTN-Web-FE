@@ -21,7 +21,7 @@ export class DatePickerComponent implements OnInit {
   @Input() dateFormat = 'yyyy/MM/dd';
   @Input() disabledDate;
   @Output() onClose = new EventEmitter();
-
+  @Input() classList='';
   @Input() isRequired = false;
   @ViewChild('datePicker') datePicker: any;
   today = new Date();

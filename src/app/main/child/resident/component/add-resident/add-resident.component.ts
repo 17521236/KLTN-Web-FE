@@ -7,7 +7,7 @@ import { PATTERN } from 'src/app/core/pattern';
 import { SUCCESS_MSG } from 'src/app/core/success-msg';
 import { RESIDENT_TYPE_LIST } from 'src/app/core/system.config';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { AppSnackbarService } from 'src/app/shared/service/snackbar.service';
+import { ToastrService } from 'ngx-toastr';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { ApartmentService } from '../../../apartment/service/apartment.service';
 import { BlockService } from '../../../block/service/block.service';
@@ -43,7 +43,7 @@ export class AddResidentComponent implements OnInit {
     private fb: FormBuilder,
     private aptService: ApartmentService,
     private blockService: BlockService,
-    private snackbarService: AppSnackbarService,
+    private snackbarService: ToastrService,
     private residentService:ResidentService,
     public modal: NzModalService
   ) { }
@@ -59,6 +59,9 @@ export class AddResidentComponent implements OnInit {
         this.modal.closeAll();
         this.tableHelper.next();
         this.snackbarService.success(SUCCESS_MSG.add);
+      }, _=> {
+        this.pending=false;
+        this.modal.closeAll()
       })
     }
   }
