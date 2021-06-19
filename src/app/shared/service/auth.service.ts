@@ -38,7 +38,7 @@ export class AuthService extends Store<AuthState> {
       currentUser: null
     });
   }
-
+  // login
   login(data) {
     return this.userService.login(data).pipe(
       tap(res => {
@@ -55,4 +55,5 @@ export class AuthService extends Store<AuthState> {
     this.state = { ...this.state, currentUser: null };
     this.router.navigate(['/not-auth']);
   }
+
 }

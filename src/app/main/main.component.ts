@@ -11,8 +11,10 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    // login
     //them btn logout
-    //l
+
   }
 
 
