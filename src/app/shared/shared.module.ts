@@ -36,6 +36,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ResidentTypePipe } from './pipe/resident-type.pipe';
 import { NumberPipe } from './pipe/number.pipe';
 import { UserService } from './service/user.service';
+import { PaymentMethodPipe } from './pipe/payment-method.pipe';
 @NgModule({
   declarations: [
     InputComponent,
@@ -55,7 +56,8 @@ import { UserService } from './service/user.service';
     BlockPipe,
     ResidentPipe,
     ResidentTypePipe,
-    NumberPipe
+    NumberPipe,
+    PaymentMethodPipe
   ],
   imports: [
     NzEmptyModule,
@@ -99,7 +101,8 @@ import { UserService } from './service/user.service';
     BlockPipe,
     ResidentPipe,
     ResidentTypePipe,
-    NumberPipe
+    NumberPipe,
+    PaymentMethodPipe
   ],
   providers: [ToastrService, UserService]
 })

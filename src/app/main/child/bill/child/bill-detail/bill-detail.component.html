@@ -52,7 +52,7 @@
     <div class="title-1 mb-24">II. Thông tin chi phí</div>
     <ng-container *ngIf="details?.bill as el; else loading">
         <form [formGroup]="form">
-            <table class="vcc-table mb-24">
+            <table class="vcc-table">
                 <thead>
                     <tr>
                         <th scope="col">Nợ đầu kỳ</th>
@@ -60,7 +60,7 @@
                         <th scope="col">Tổng phải thu trong kỳ</th>
                         <th scope="col">Đã thanh toán</th>
                         <th scope="col">Nợ cuối kỳ</th>
-                        <th scope="col">Thanh toán</th>
+                        <th scope="col">Thanh toán ({{details?.bill.pmId | paymentMethod}})</th>
 
                     </tr>
                 </thead>
@@ -70,15 +70,19 @@
                         <td>{{el.amount | vnd}}</td>
                         <td>{{el.balanceFowards + el.amount | vnd}}</td>
                         <td style="width: 20%">
-                            <app-input formControlName="paidAmount" [suffixTpl]="vnd"></app-input>
+                            <app-input [disabled]="el.status == 'APPROVE'"  formControlName="paidAmount" [suffixTpl]="vnd"></app-input>
                         </td>
                         <td>{{el.lastBalance | vnd}}</td>
                         <td>
-                            <app-dropdown [options]="types" formControlName="status"></app-dropdown>
+                            {{el.status == 'APPROVE' ? 'Đã thanh toán':(el.status == 'PENDING' ? 'Chờ duyệt':'Chưa thanh toán' )}}
+                            <!-- <app-dropdown [disabled]="el.status == 'APPROVE'" [options]="types" formControlName="status"></app-dropdown> -->
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="w-100">
+                <button class="vcc-btn-fill blue  mb-32 ml-auto" [disabled]="el.status == 'APPROVE'||pending" (click)="showModal(confirmTpl)">Duyệt</button>
+            </div>
         </form>
     </ng-container>
 
@@ -272,3 +276,20 @@
 <ng-template #loading>
     <app-loading></app-loading>
 </ng-template>
+
+
+<!-- delete -->
+
+<app-modal #modal></app-modal>
+<ng-template #confirmTpl>
+    <div class="title-1 mb-24">
+        Are you sure?
+    </div>
+    <div class="medium-body-text mb-24">
+        Duyệt hóa đơn đã thanh toán {{form.controls['paidAmount'].value | vnd}} ?
+    </div>
+    <button class="vcc-btn-fill w-100 blue mb-16" (click)="update()">Ok</button>
+    <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>
+</ng-template>
+
+<!-- end delete -->

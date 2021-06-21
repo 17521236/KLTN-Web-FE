@@ -98,7 +98,7 @@
 
 <!-- delete -->
 
-<div *ngIf="(role$ | async) == '0'" class="delete-btn" (click)="showModal(deleteTpl)">
+<div *ngIf="(role$ | async) == '0' && (details$|async)?.role != '0'" class="delete-btn" (click)="showModal(deleteTpl)">
     <i nz-icon nzType="delete" nzTheme="outline"></i>
 </div>
 <app-modal #modal></app-modal>

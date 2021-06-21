@@ -5,7 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class VndPipe implements PipeTransform {
 
-  transform(value: number): string {
+  transform(value: number|string): string {
+    value = Number(value);
     return value.toLocaleString('vi-VN', {style : 'currency', currency : 'VND'});
   }
 

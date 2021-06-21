@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/service/auth.service';
 import { NavItem } from './model/navigation-item.model';
 
 @Component({
@@ -6,18 +7,17 @@ import { NavItem } from './model/navigation-item.model';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
-
+  constructor(private authService: AuthService) { }
   ngOnInit(): void {
-
-    // login
-
-    //cu dan
-
-
   }
-
-
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      document.querySelector('.ant-layout-sider-trigger').innerHTML = `<span>Logout</span>`;
+      document.querySelector('.ant-layout-sider-trigger').addEventListener('click', () => {
+        this.authService.logout();
+      })
+    }, 0);
+  }
 }
