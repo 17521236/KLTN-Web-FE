@@ -1,4 +1,4 @@
-<app-header [pageName]="'Block details'" (close)="close()"></app-header>
+<app-header [pageName]="'Thông tin block'" (close)="close()"></app-header>
 <div *ngIf=" (block$|async) as block, else loading">
     <form [formGroup]="form" (submit)="update()">
         <div class="row">

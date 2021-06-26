@@ -14,6 +14,7 @@ import { ResidentService } from '../../../resident/service/resident.service';
 import { VehicleReq } from '../../model/vehicle.model';
 import { VehicleService } from '../../service/vehicle.service';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
+import { FormHelper } from 'src/app/core/helper';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -32,7 +33,7 @@ export class VehicleDetailComponent implements OnInit {
   id = '';
   id$ = this.route.params.pipe(map(params => params.id));
   vehicle$ = this.id$.pipe(
-    switchMap(id => {this.id = id; return this.vehicleService.getVehicleById(id)}),
+    switchMap(id => { this.id = id; return this.vehicleService.getVehicleById(id) }),
     switchMap((vehicle: any) => {
       this.buildForm(vehicle);
       return of(vehicle);
@@ -52,12 +53,10 @@ export class VehicleDetailComponent implements OnInit {
   }
 
   buildForm(obj) {
-    console.log(obj)
     this.form = this.fb.group({
       residentId: [obj.residentId, Validators.required],
-      licensePlate: [obj.licensePlate, Validators.required],
+      licensePlate: [obj.licensePlate],
       price: [obj.price, Validators.required],
-      status: [obj.status, Validators.required],
       type: [obj.type, Validators.required],
     });
   }
@@ -74,18 +73,18 @@ export class VehicleDetailComponent implements OnInit {
   }
 
 
-    // delete
-  
-    @ViewChild('modal') modal: ActionModalComponent;
-    showModal(tpl){
-      this.modal.createComponentModal(tpl)
-    }
-    deleteItem(){
-      this.vehicleService.delete(this.id).subscribe(_ => {
-        this.snackbarService.success(SUCCESS_MSG.delete);
-        this.close();
-      }, _ => {
-        this.modal.close();
-      });
-    }
+  // delete
+
+  @ViewChild('modal') modal: ActionModalComponent;
+  showModal(tpl) {
+    this.modal.createComponentModal(tpl)
+  }
+  deleteItem() {
+    this.vehicleService.delete(this.id).subscribe(_ => {
+      this.snackbarService.success(SUCCESS_MSG.delete);
+      this.close();
+    }, _ => {
+      this.modal.close();
+    });
+  }
 }

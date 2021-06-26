@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
-import { PaginatorEvent } from 'src/app/shared/component/paginator/paginator-event.model';
-import { PaginatorComponent } from 'src/app/shared/component/paginator/paginator.component';
 import { BillService, IFilterBill } from '../../service/bill.service';
-import { BillListStoreService } from './bill-list-store.service';
 import * as moment from 'moment';
 import { STATUS_BILL_LIST } from 'src/app/core/system.config';
 import { Router } from '@angular/router';
 import { ROUTER_CONST } from 'src/app/core/router.config';
+import { TableHelper } from 'src/app/shared/utils/table-helper';
+import { Observable } from 'rxjs';
+import { BlockService } from '../../../block/service/block.service';
+import { ApartmentService } from '../../../apartment/service/apartment.service';
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
@@ -19,39 +20,41 @@ import { ROUTER_CONST } from 'src/app/core/router.config';
 export class BillListComponent implements OnInit {
 
   @ViewChild('modal') modal: ActionModalComponent;
-  records$ = this.billStore.records$;
-  total$ = this.billStore.total$;
-  loading$ = this.billStore.loading$;
-  blocksDD$ = this.billStore.blocks$.pipe(map((res: any) => {
-    return [
-      new DropdownItem(null, 'All'),
-      ...res.items.map((x: any) => new DropdownItem(x._id, x.name))
-    ]
-  }));
-  blocksP$ = this.billStore.blocks$.pipe(map((res: any) => res.items))
-  apts$ = this.billStore.apts$.pipe(map((res: any) => {
-    return [
-      new DropdownItem(null, 'All'),
-      ...res.map((x: any) => new DropdownItem(x._id, x.name))
-    ]
-  }));
+  tableHelper: TableHelper = new TableHelper();
+  result$: Observable<any> = this.tableHelper.query$.pipe(
+    switchMap((tb: TableHelper) => {
+      let filter: IFilterBill = {
+        start: tb.paginator.getStart(),
+        limit: tb.paginator.getLimit(),
+        status: tb.filterForm.value['status'],
+        apartmentId: tb.filterForm.value['apartmentId'],
+        month: moment(new Date(tb.filterForm.controls['month'].value).getTime()).format('MM-YYYY')
+      }
+      return this.billService.getList(filter);
+    })
+  )
   status = [new DropdownItem(null, 'All'), ...STATUS_BILL_LIST.map(x => new DropdownItem(x.id, x.name))];
-  filterForm: FormGroup;
+  blocks$ = this.blockService.getBlocks('', 0, 999).pipe(map((x: any) => x.items));
+  blocksDD$ = this.blocks$.pipe(map(x => [new DropdownItem(null, 'All'), ...x.map(i => new DropdownItem(i._id, i.name))]));
+
+  apts$ = this.aptService.getApartment(0, 999).pipe(map((res: any) => res.items));
+  aptsDD$;
 
   constructor(
-    private billStore: BillListStoreService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private billService: BillService,
+    private blockService: BlockService,
+    private aptService: ApartmentService
   ) {
   }
 
   ngOnInit(): void {
     this.buildForm();
-    this.billStore.refresh();
   }
 
   buildForm() {
-    this.filterForm = this.fb.group({
+    this.tableHelper.filterForm = this.fb.group({
       blockId: null,
       apartmentId: null,
       month: null,
@@ -63,28 +66,29 @@ export class BillListComponent implements OnInit {
     this.modal.createComponentModal(addTpl, {}, false, '')
   }
 
-  onPageChange(evt: PaginatorEvent, status = null, apartmentId = null, month = null) {
-    this.billStore.onPageChange(evt.genStartLimit().start, evt.genStartLimit().limit, status, apartmentId, month);
-  }
-
-  blockSelected(evt) {
-    this.billStore.blockSelected(evt);
-  }
-
-  @ViewChild('paginator') paginator: PaginatorComponent;
   search() {
-    this.onPageChange(
-      this.paginator ? this.paginator.getCurrentEvent() : new PaginatorEvent(1, 5),
-      this.filterForm.controls['status'].value,
-      this.filterForm.controls['apartmentId'].value,
-      moment(new Date(this.filterForm.controls['month'].value).getTime()).format('MM-YYYY')
-    )
+    // later
+    this.tableHelper.next();
   }
-  selectApt(evt) {
+
+  blockSelected(e) {
+    console.log(e)
+    this.tableHelper.filterForm.controls['apartmentId'].setValue(null);
+    this.aptsDD$ = this.apts$.pipe(
+      tap(console.log),
+      map(res => res.filter(x => x.blockId == e)),
+      map(res => res.map((x: any) => new DropdownItem(x._id, x.name))),
+      map(res => [new DropdownItem(null, 'All'), ...res])
+    )
     this.search();
   }
+
   viewDetail(item) {
-    console.log(item);
     this.router.navigate([ROUTER_CONST.BILL.DETAIL(item._id)])
+  }
+
+  refreshFilter() {
+    this.tableHelper.filterForm.reset();
+    this.search();
   }
 }

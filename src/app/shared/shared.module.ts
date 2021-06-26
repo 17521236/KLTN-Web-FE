@@ -37,6 +37,7 @@ import { ResidentTypePipe } from './pipe/resident-type.pipe';
 import { NumberPipe } from './pipe/number.pipe';
 import { UserService } from './service/user.service';
 import { PaymentMethodPipe } from './pipe/payment-method.pipe';
+import { AptPipe } from './pipe/apt.pipe';
 @NgModule({
   declarations: [
     InputComponent,
@@ -57,7 +58,8 @@ import { PaymentMethodPipe } from './pipe/payment-method.pipe';
     ResidentPipe,
     ResidentTypePipe,
     NumberPipe,
-    PaymentMethodPipe
+    PaymentMethodPipe,
+    AptPipe
   ],
   imports: [
     NzEmptyModule,
@@ -102,7 +104,8 @@ import { PaymentMethodPipe } from './pipe/payment-method.pipe';
     ResidentPipe,
     ResidentTypePipe,
     NumberPipe,
-    PaymentMethodPipe
+    PaymentMethodPipe,
+    AptPipe
   ],
   providers: [ToastrService, UserService]
 })

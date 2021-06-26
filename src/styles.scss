@@ -18,8 +18,8 @@
 @import "pill.scss";
 @import "snackbar.scss";
 @import "side-filter.scss";
-@import '~ngx-toastr/toastr';
-@import 'boxicons';
+@import "~ngx-toastr/toastr";
+@import "boxicons";
 html,
 body {
     font-family: "Nunito";
@@ -320,6 +320,9 @@ hr {
 // margin
 .m-auto {
     margin: auto;
+}
+.ml-auto {
+    margin-left: auto;
 }
 .mx-auto {
     margin-left: auto;
@@ -723,7 +726,11 @@ li:focus {
         transform: scale(1.02);
     }
 }
-
+.refresh {
+    &:hover {
+        transform: scale(1.02);
+    }
+}
 .delete-btn {
     display: flex;
     align-items: center;
@@ -756,20 +763,20 @@ li:focus {
     }
 }
 
-.required{
-    ::after{
-        content: ' (*)';
+.required {
+    ::after {
+        content: " (*)";
         color: $color-nets-red;
     }
 }
 
-.detail-section{
+.detail-section {
     // mb-48 bd-16 bd-grey p-32
     padding: 48px 32px 32px 32px;
     border: $border-grey;
     border-radius: 16px;
     position: relative;
-    &__title{
+    &__title {
         font-size: 22px;
         font-weight: bold;
         position: absolute;
@@ -780,11 +787,11 @@ li:focus {
         background: white;
     }
 }
-.ant-modal-body{
+.ant-modal-body {
     padding: 40px;
 }
 
-.apexcharts-legend-text{
+.apexcharts-legend-text {
     font-family: "Nunito";
     color: $color-dark-grey;
 }

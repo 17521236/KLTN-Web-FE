@@ -22,6 +22,7 @@
     "angular2-text-mask": "^9.0.0",
     "apexcharts": "^3.27.1",
     "boxicons": "^2.0.7",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "ng-apexcharts": "^1.5.12",
     "ng-zorro-antd": "^11.2.0",

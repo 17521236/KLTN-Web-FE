@@ -1,4 +1,4 @@
-<app-header [pageName]="'Apartment details'" (close)="close()"></app-header>
+<app-header [pageName]="'Thông tin căn hộ'" (close)="close()"></app-header>
 <div *ngIf=" (apartment$|async) as apartment, else loading">
     <form [formGroup]="form" (submit)="update()">
         <div class="row">
@@ -6,19 +6,13 @@
                 <div class="input-group">
                     <app-input label="Tên căn hộ" formControlName="name"></app-input>
                     <app-error-message-validator [formGroup]="form" [controlName]="'name'"
-                    [validationMessages]="{'required':ERROR_MSG.INVALID}"
-                    ></app-error-message-validator>
+                        [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <app-dropdown 
-                    [label]="'Block'"
-                    [placeholder]="'Select block'" 
-                    [options]="(blocks$|async)" 
-                    formControlName="blockId"
-                    [showSearch]="true"
-                    ></app-dropdown>
+                    <app-dropdown [label]="'Block'" [placeholder]="'Select block'" [options]="(blocks$|async)"
+                        formControlName="blockId" [showSearch]="true"></app-dropdown>
                 </div>
             </div>
             <!-- <div class="col-4">
@@ -35,13 +29,13 @@
                 <div class="input-group">
                     <app-input label="Diện tích" formControlName="area"></app-input>
                     <app-error-message-validator [formGroup]="form" [controlName]="'area'"
-                    [validationMessages]="{'required':ERROR_MSG.INVALID,'pattern':ERROR_MSG.ONLY_NUMBER}"
-                    ></app-error-message-validator>
+                        [validationMessages]="{'required':ERROR_MSG.INVALID,'pattern':ERROR_MSG.ONLY_NUMBER}">
+                    </app-error-message-validator>
                 </div>
             </div>
         </div>
         <div class="row">
-           
+
             <div class="col-4">
                 <div class="input-group">
                     <app-input label="Số dân" formControlName="totalResident" [disabled]="true"></app-input>
@@ -53,16 +47,20 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="input-group">
             <app-textarea label="Mô tả" formControlName="description"></app-textarea>
         </div>
-        <button type="submit" class="vcc-btn-fill blue" [disabled]="form.invalid || form.pristine">Save</button>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="vcc-btn-fill blue w-100" [disabled]="form.invalid || form.pristine">Save</button>
+            </div>
+        </div>
     </form>
 </div>
 
 <ng-template #loading>
-<app-loading></app-loading>
+    <app-loading></app-loading>
 </ng-template>
 
 

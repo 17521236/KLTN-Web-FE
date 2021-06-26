@@ -1,14 +1,14 @@
 <div class="mb-32">
-    <h6 class="mb-16">Dân cư</h6>
+    <h6 class="mb-16">Danh sách Cư dân</h6>
     <form [formGroup]="tableHelper.filterForm" (submit)="search()">
         <div class="d-flex">
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blocks$|async)"
+                <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blockDD$|async)"
                     formControlName="blockId" [showSearch]="true" (ngModelChange)="blockSelected($event)">
                 </app-dropdown>
             </div>
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'All'" [options]="(apt$|async)"
+                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'All'" [options]="(aptsDD$|async)"
                     formControlName="aptId" (ngModelChange)="search()">
                 </app-dropdown>
             </div>
@@ -21,6 +21,10 @@
                 <app-input label="Name" formControlName="name" [placeholder]="'Seach by Name'" [clearfix]="true"
                     (onClear)="search()"></app-input>
             </div>
+            <!-- <i class="ml-auto">Refresh</i> -->
+            <div class="ml-auto d-flex ai-end">
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+            </div>
         </div>
         <button type="submit" hidden></button>
     </form>
@@ -30,7 +34,7 @@
         <thead>
             <tr>
                 <th scope="col" width="5%">#</th>
-                <th scope="col" width="15%">Tên</th>
+                <th scope="col" width="15%">Họ & Tên</th>
                 <th scope="col" width="15%">Block</th>
                 <th scope="col" width="10%">Căn hộ</th>
                 <th scope="col" width="10%">Loại</th>
@@ -39,21 +43,23 @@
                 <th scope="col" width="13%">Số điện thoại</th>
             </tr>
         </thead>
-        <tbody>
-            <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}}</td>
-                <td width="15%">{{item.name}} </td>
-                <td width="15%">{{item.blockName}} </td>
-                <td width="10%">{{item.aptName}} </td>
-                <td width="10%">
-                    {{item.type === RESIDENT_TYPE_LIST[0].id
-                    ?RESIDENT_TYPE_LIST[0].text:RESIDENT_TYPE_LIST[1].text}}
-                </td>
-                <td width="12%">{{item.dateOfBirth|date:"dd-MM-yyyy"}} </td>
-                <td width="20%">{{item.email}} </td>
-                <td width="13%">{{item.phoneNumber}} </td>
-            </tr>
-        </tbody>
+        <ng-container *ngIf="(blocksP$|async) as blocks; else loading">
+            <tbody *ngIf="(apts$|async) as apts;else loading">
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}}</td>
+                    <td width="15%">{{item.name}} </td>
+                    <td width="15%">{{item.blockId | block:blocks}} </td>
+                    <td width="10%">{{item.aptId | apt: apts}} </td>
+                    <td width="10%">
+                        {{item.type === RESIDENT_TYPE_LIST[0].id
+                        ?RESIDENT_TYPE_LIST[0].text:RESIDENT_TYPE_LIST[1].text}}
+                    </td>
+                    <td width="12%">{{item.dateOfBirth|date:"dd-MM-yyyy"}} </td>
+                    <td width="20%">{{item.email}} </td>
+                    <td width="13%">{{item.phoneNumber}} </td>
+                </tr>
+            </tbody>
+        </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"
         nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">

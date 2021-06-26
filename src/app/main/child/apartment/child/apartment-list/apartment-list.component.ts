@@ -62,4 +62,8 @@ export class ApartmentListComponent implements OnInit {
   success() {
     this.tableHelper.next();
   }
+  refreshFilter(){
+    this.tableHelper.filterForm.reset();
+    this.tableHelper.next();
+  }
 }

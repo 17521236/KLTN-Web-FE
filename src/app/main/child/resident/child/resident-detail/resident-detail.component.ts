@@ -16,7 +16,7 @@ import { BlockService } from '../../../block/service/block.service';
 import { SingleResidentRes } from '../../model/resident.model';
 import { ResidentAccountService } from '../../service/resident-account.service';
 import { ResidentService } from '../../service/resident.service';
-
+import { isEqual } from 'lodash';
 @Component({
   selector: 'app-resident-detail',
   templateUrl: './resident-detail.component.html',
@@ -29,13 +29,11 @@ export class ResidentDetailComponent implements OnInit {
   @ViewChild('deleteConfirm') deleteConfirm;
 
   pending = false;
-  account = { username: '', password: '*******' };
   id = this.route.snapshot.params['id'];
   apt$;
   resident$ = this.residentService.getResidentById(this.id).pipe(
     tap((res: any) => {
       console.log('resident Detail:', res);
-      this.account.username = res.email;
       this.apt$ = this.aptService.getApartment(0, 999, null, res.blockId).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
       this.buildFormDetail(res);
     })
@@ -64,6 +62,10 @@ export class ResidentDetailComponent implements OnInit {
 
   }
 
+  isEqual() {
+    return isEqual(this.prevForm, this.form.value);
+  }
+  prevForm;
   buildFormDetail(apt) {
     this.form = this.fb.group({
       name: [apt.name, Validators.required],
@@ -77,6 +79,7 @@ export class ResidentDetailComponent implements OnInit {
       totalVehicle: apt.totalVehicle,
       note: apt.note
     });
+    this.prevForm = this.form.value;
   }
 
   buildFormAccount() {
@@ -87,11 +90,14 @@ export class ResidentDetailComponent implements OnInit {
     if (this.form.valid) {
       this.pending = true;
       this.residentService.updateResident(this.route.snapshot.params.id, this.form.value).subscribe(res => {
-        this.form.markAsPristine();
         setTimeout(() => this.refresh())
         this.snackbarService.success(SUCCESS_MSG.edit);
         this.pending = false;
-      })
+      }, _ => {
+        this.pending = false;
+        this.form.patchValue(this.prevForm)
+      }
+      )
     }
   }
   close() {
@@ -118,10 +124,9 @@ export class ResidentDetailComponent implements OnInit {
       this.snackbarService.warning('Bạn cần cập nhật Email trước khi tạo tài khoản')
     }
   }
-  createAccount(resident: SingleResidentRes) {
+  createAccount() {
     this.pending = true;
-    let account = { username: resident.email }
-    this.residentAccountService.createAccount(account, this.id).subscribe((x: any) => {
+    this.residentService.createAccount(this.id).subscribe((x: any) => {
       this.modal.close();
       this.snackbarService.success(SUCCESS_MSG.create_resident_account);
       setTimeout(() => this.refresh());
@@ -133,9 +138,9 @@ export class ResidentDetailComponent implements OnInit {
   }
   resetPassword() {
     this.pending = true;
-    this.residentAccountService.resetPassword(this.id).subscribe(_ => {
+    this.residentService.resetPassword(this.id).subscribe(_ => {
       this.snackbarService.success(SUCCESS_MSG.reset_pass);
-      setTimeout(() => this.refresh())
+      // setTimeout(() => this.refresh())
       this.pending = false;
     });
   }
@@ -149,12 +154,12 @@ export class ResidentDetailComponent implements OnInit {
   }
   deleteAccount() {
     this.pending = true;
-    this.residentAccountService.deleteAccount(this.id).subscribe(x => {
+    this.residentService.deleteAccount(this.id).subscribe(x => {
       this.snackbarService.success(SUCCESS_MSG.delete);
       this.modal.close();
       setTimeout(() => this.refresh())
       this.pending = false;
-    });
+    }, _ => this.pending = false);
   }
 
 

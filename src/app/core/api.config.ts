@@ -18,7 +18,10 @@ export const API = {
         ADD: "/api/resident",
         GET_ONE: (id)=>`/api/resident/${id}`,
         UPDATE: (id)=>`/api/resident/${id}`,
-        DELETE: (id)=>`/api/resident/${id}`
+        DELETE: (id)=>`/api/resident/${id}`,
+        DELETE_ACCOUNT: (id)=>`/api/resident/deleteAccount/${id}`,
+        CREATE_ACCOUNT: (id)=>`/api/resident/createAccount/${id}`,
+        RESET_PASSWORD: (id)=>`/api/resident/resetPassword/${id}`
     },
     VEHICLE:{
         GET_ALL: "/api/vehicle",

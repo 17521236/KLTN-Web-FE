@@ -5,7 +5,6 @@ import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.m
 import { ApartmentService } from '../../../apartment/service/apartment.service';
 import { BlockService } from '../../../block/service/block.service';
 import { ServiceService } from '../../../service/sevice/sevice.service';
-import { BillListStoreService } from '../../child/bill-list/bill-list-store.service';
 import { BillService, IAddBillReq } from '../../service/bill.service';
 
 export interface IBlock {
@@ -23,16 +22,6 @@ export interface IApartment {
   type: string,
   _id: string
 }
-
-// export interface IServive {
-//   area: string,
-//   blockId: string,
-//   blockName: string,
-//   description: string,
-//   name: string,
-//   type: string,
-//   _id: string
-// }
 
 export interface IService {
   cost: number,
@@ -76,8 +65,7 @@ export class BillAddStoreService extends Store<IBillAddStoreState>{
   constructor(
     private blockService: BlockService,
     private aptService: ApartmentService,
-    private billService: BillService,
-    private billListStore: BillListStoreService
+    private billService: BillService
 
   ) {
     super({
@@ -107,6 +95,6 @@ export class BillAddStoreService extends Store<IBillAddStoreState>{
   }
 
   add(data: IAddBillReq) {
-    return this.billService.create(data).pipe(tap(_=>this.billListStore.refresh()));
+    return this.billService.create(data);
   }
 }

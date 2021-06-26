@@ -37,7 +37,7 @@
         </thead>
         <tbody *ngIf="details?.resident as residents; else loading">
             <tr class="table-row" *ngFor="let el of residents; index as index">
-                <td>{{index}}</td>
+                <td>{{index+1}}</td>
                 <td>{{el.type | residentType}}</td>
                 <td>{{el.name}}</td>
                 <td>{{moment(el.dateOfBirth).format('yyyy')}}</td>
@@ -262,9 +262,13 @@
             </tr>
         </tbody>
     </table>
-    <div>
-        <span class="title-2 text-error">Tổng chi phí: </span>
+    <div class="mb-16">
+        <span class="title-2">Tổng chi phí trong kỳ: </span>
         <span class="title-2">{{details?.bill.amount | vnd}}</span>
+    </div>
+    <div>
+        <span class="title-1 text-error">Tổng nợ cuối kỳ: </span>
+        <span class="title-1">{{details?.bill.lastBalance | vnd}}</span>
     </div>
     <!-- <pre>
         {{details|json}}

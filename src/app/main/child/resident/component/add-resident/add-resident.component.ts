@@ -37,7 +37,7 @@ export class AddResidentComponent implements OnInit {
     identityCard: ["",  Validators.pattern(PATTERN.ONLY_NUMBER)],
     phoneNumber:["",  Validators.pattern(PATTERN.ONLY_NUMBER)],
     email:["",  Validators.pattern(PATTERN.EMAIL)],
-    note: "",
+    note: ""
   });
   constructor(
     private fb: FormBuilder,

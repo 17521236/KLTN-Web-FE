@@ -31,23 +31,23 @@ export class SingleResidentRes extends ResidentReq {
     }
 }
 
-export class ResidentRes {
-    _id: string;
-    blockName: string;
-    aptName: string;
-    type: string;
-    name: string;
-    dateOfBirth: number;
-    phoneNumber: string;
-    email: string;
-    constructor(obj) {
-        this._id = obj._id;
-        this.blockName = obj.blockName;
-        this.aptName = obj.aptName;
-        this.type = obj.type;
-        this.name = obj.name;
-        this.dateOfBirth = obj.dateOfBirth;
-        this.email = obj.email;
-        this.phoneNumber = obj.phoneNumber;
-    }
-}
+// export class ResidentRes {
+//     _id: string;
+//     blockName: string;
+//     aptName: string;
+//     type: string;
+//     name: string;
+//     dateOfBirth: number;
+//     phoneNumber: string;
+//     email: string;
+//     constructor(obj) {
+//         this._id = obj._id;
+//         this.blockName = obj.blockName;
+//         this.aptName = obj.aptName;
+//         this.type = obj.type;
+//         this.name = obj.name;
+//         this.dateOfBirth = obj.dateOfBirth;
+//         this.email = obj.email;
+//         this.phoneNumber = obj.phoneNumber;
+//     }
+// }

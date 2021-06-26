@@ -7,7 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { BillAddComponent } from './component/bill-add/bill-add.component';
 import { BillService } from './service/bill.service';
 import { BillListComponent } from './child/bill-list/bill-list.component';
-import { BillListStoreService } from './child/bill-list/bill-list-store.service';
 // import { ServiceComponent } from './service/service.component';
 
 
@@ -19,6 +18,6 @@ import { BillListStoreService } from './child/bill-list/bill-list-store.service'
     BillRoutingModule,
     SharedModule
   ],
-  providers: [BillService, BillListStoreService]
+  providers: [BillService]
 })
 export class BillModule { }

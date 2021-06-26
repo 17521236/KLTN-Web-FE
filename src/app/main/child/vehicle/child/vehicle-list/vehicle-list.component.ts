@@ -32,7 +32,6 @@ export class VehicleListComponent implements OnInit {
         x.filterForm.value['residentId'],
         x.filterForm.value['licensePlate'],
         x.filterForm.value['type'],
-        x.filterForm.value['status']
       );
     })
   )
@@ -69,5 +68,10 @@ export class VehicleListComponent implements OnInit {
   }
   showModal(tpl) {
     this.modal.createComponentModal(tpl, {}, false, '')
+  }
+
+  refreshFilter(){
+    this.tableHelper.filterForm.reset();
+    this.tableHelper.next();
   }
 }

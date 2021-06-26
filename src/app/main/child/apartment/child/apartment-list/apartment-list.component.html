@@ -1,5 +1,5 @@
 <div class="mb-32">
-    <h6 class="mb-16">Apartment</h6>
+    <h6 class="mb-16">Danh sách Căn hộ</h6>
     <form [formGroup]="tableHelper.filterForm" (submit)="search()">
         <div class="d-flex">
             <div class="mr-16" style="width: 252px;">
@@ -15,6 +15,9 @@
                 </ng-template>
                 <button type="submit" hidden></button>
             </div>
+            <div class="ml-auto d-flex ai-end">
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+            </div>
         </div>
     </form>
 </div>
@@ -23,7 +26,7 @@
         <thead>
             <tr>
                 <th scope="col" width="10%">#</th>
-                <th scope="col" width="15%">Tên</th>
+                <th scope="col" width="15%">Tên căn hộ</th>
                 <th scope="col" width="20%">Block</th>
                 <th scope="col" width="15%">Diện tích</th>
                 <th scope="col" width="25%">Mô tả</th>

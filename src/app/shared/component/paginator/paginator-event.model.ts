@@ -10,6 +10,9 @@ export class PaginatorEvent {
     getStart() {
         return this.currentPage * this.pageSize - this.pageSize;
     }
+    getLimit() {
+        return this.pageSize;
+    }
     genStartLimit() {
         return {
             start: this.getStart(),

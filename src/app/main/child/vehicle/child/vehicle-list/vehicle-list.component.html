@@ -1,29 +1,23 @@
 <div class="mb-32">
-    <h6 class="mb-16">Quản lý Xe</h6>
+    <h6 class="mb-32">Danh sách Xe</h6>
     <form [formGroup]="tableHelper.filterForm" (submit)="tableHelper.next()">
         <div class="d-flex">
-            <div class="mr-16">
+            <div class="mr-16" style="width: 252px;">
                 <app-dropdown [label]="'Cư dân'" [placeholder]="'Select Resident'" [options]="(residentDD$|async)"
                     formControlName="residentId" [showSearch]="true" (ngModelChange)="tableHelper.next()">
                 </app-dropdown>
             </div>
-            <!-- <div class="mr-16">
-                <app-dropdown label="Trạng thái" [showSearch]="true" [placeholder]="'Search by Status'"
-                    [options]="VEHICLE_STATUS" formControlName="status" (ngModelChange)="tableHelper.next()">
-                </app-dropdown>
-            </div> -->
-            <!-- <div class="mr-16">
-                <app-input label="Loại" formControlName="type" [placeholder]="'Seach by Type'" [clearfix]="true"
-                    (onClear)="tableHelper.next()"></app-input>
-            </div> -->
-            <div class="mr-16">
+            <div class="mr-16" style="width: 252px;">
                 <app-dropdown label="Loại" [showSearch]="true" [placeholder]="'Search by Type'" [options]="typeList"
                     formControlName="type" (ngModelChange)="tableHelper.next()">
                 </app-dropdown>
             </div>
-            <div>
+            <div class="mr-16" style="width: 252px;">
                 <app-input label="Biển số xe" formControlName="licensePlate" [placeholder]="'Seach by LicensePlate'"
                     [clearfix]="true" (onClear)="tableHelper.next()"></app-input>
+            </div>
+            <div class="ml-auto d-flex ai-end">
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
             </div>
         </div>
         <button type="submit" hidden></button>

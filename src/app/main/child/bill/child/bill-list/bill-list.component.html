@@ -1,31 +1,34 @@
 <div class="mb-32">
     <h6 class="mb-16">Chi phí</h6>
-    <form [formGroup]="filterForm">
-        <div class="d-flex">
+    <form [formGroup]="tableHelper.filterForm">
+        <div class="d-flex" *ngIf="apts$|async; else loading">
             <div class="mr-16" style="width: 252px;">
                 <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blocksDD$|async)"
-                    formControlName="blockId" [showSearch]="true" (ngModelChange)="blockSelected($event)">
+                    [showSearch]="true" formControlName="blockId" (ngModelChange)="blockSelected($event)">
                 </app-dropdown>
             </div>
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'Select apartment'" [options]="(apts$|async)"
-                    formControlName="apartmentId" (ngModelChange)="selectApt($event)">
+                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'Select apartment'"
+                    [options]="(aptsDD$|async)" formControlName="apartmentId" (ngModelChange)="search()">
                 </app-dropdown>
             </div>
             <div class="mr-16" style="width: 252px;">
-               <app-date-picker [classList]="'w-100'" label="Tháng" type="month" formControlName="month" (ngModelChange)="search()"></app-date-picker>
+                <app-date-picker [classList]="'w-100'" label="Tháng" type="month" formControlName="month"
+                    (ngModelChange)="search()"></app-date-picker>
             </div>
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown label="Tình trạng thanh toán" [showSearch]="true" [placeholder]="'Select status'" [options]="status"
-                    formControlName="status" (ngModelChange)="selectApt($event)">
+                <app-dropdown label="Tình trạng thanh toán" [showSearch]="true" [placeholder]="'Select status'"
+                    [options]="status" formControlName="status" (ngModelChange)="search()">
                 </app-dropdown>
+            </div>
+            <div class="ml-auto d-flex ai-end">
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
             </div>
         </div>
         <button type="submit" hidden></button>
     </form>
 </div>
-<div *ngIf="(records$|async) as result, else loading">
-
+<ng-container *ngIf="(result$|async) as result; else loading">
     <table class="vcc-table mb-24">
         <thead>
             <tr>
@@ -41,11 +44,11 @@
                 <th scope="col">Hình thức TT</th>
             </tr>
         </thead>
-        <ng-container *ngIf="!(loading$ | async) else loading">
-            <tbody *ngIf="blocksP$ |async as blocks">
-                <tr class="table-row" *ngFor="let item of result, index as id" (click)="viewDetail(item)">
+        <ng-container *ngIf="(blocks$ |async) as blocks; else loading">
+            <tbody>
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
                     <td>{{item.blockId | block: blocks}} </td>
-                    <td>{{item.aptName}} </td>
+                    <td>{{item.aptName}}</td>
                     <td>{{item.date | date:"MM / yyyy"}}</td>
                     <td>{{item.balanceFowards | vnd}}</td>
                     <td>{{item.amount | vnd}}</td>
@@ -58,13 +61,15 @@
             </tbody>
         </ng-container>
     </table>
-    <nz-empty class="mt-48" *ngIf="result.length == 0 && !(loading$ | async)"
+    <nz-empty class="mt-48" *ngIf="result.total == 0"
         nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
     </nz-empty>
-    <div *ngIf="(total$|async) as total" class="text-center">
-        <app-paginator #paginator [total]="total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
+    <div class="text-center">
+        <app-paginator #paginator [total]="result.total" (onPageChange)="tableHelper.onPageChange($event)"
+            [pageSize]="5">
+        </app-paginator>
     </div>
-</div>
+</ng-container>
 <ng-template #loading>
     <app-loading></app-loading>
 </ng-template>
@@ -74,5 +79,5 @@
 </div>
 <app-modal #modal></app-modal>
 <ng-template #addTpl>
-    <app-bill-add></app-bill-add>
-</ng-template> 
+    <app-bill-add (success)="search()"></app-bill-add>
+</ng-template>

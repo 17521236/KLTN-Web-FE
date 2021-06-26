@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SnackbarService } from 'ngx-snackbar';
@@ -21,6 +21,7 @@ import * as moment from 'moment';
 })
 export class BillAddComponent implements OnInit, OnDestroy {
 
+  @Output() success = new EventEmitter<any>();
   form: FormGroup;
   ERROR_MSG = ERROR_MSG;
   pending = false;
@@ -108,6 +109,7 @@ export class BillAddComponent implements OnInit, OnDestroy {
       this.pending = true;
       const dataReq = this.formatData(this.form.value);
       this.billAddStore.add(dataReq).subscribe(_ => {
+        this.success.emit('');
         this.toast.success('Added successfully');
         setTimeout(() => this.modal.closeAll(), 0)
         this.pending = false;
@@ -125,7 +127,7 @@ export class BillAddComponent implements OnInit, OnDestroy {
       pmId: null,
       date: new Date().getTime(),
       status: STATUS_BILL_NOT_APPROVE,
-      amount: this.totalPrice * 1.1,
+      amount: Number((this.totalPrice * 1.1).toFixed(0)),
       details: rest
     }
     return dataReq;

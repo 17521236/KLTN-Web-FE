@@ -1,9 +1,6 @@
-<app-header [pageName]="'Resident details'" (close)="close()"></app-header>
+<app-header [pageName]="'Thông tin cư dân'" (close)="close()"></app-header>
 <div *ngIf=" (resident$|async) as resident, else loading">
-    <div class="note mb-48" *ngIf="!resident.accountId; else formAccount"> Bạn chưa có tài khoản -
-        <span class="vcc-text-btn" (click)="openModal(resident)">Tạo ngay</span>
-    </div>
-    <!-- háEMail -->
+    <!-- hasAccount -->
     <ng-template #hasEmail>
         <div>
             <i class="font20 pointer mb-32" nz-icon nzType="close" nzTheme="outline"></i>
@@ -16,26 +13,30 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="createAccount(resident)">Ok</button>
+                    <button [disabled]="pending" class="vcc-btn-fill blue w-100"
+                        (click)="createAccount(resident)">Ok</button>
                 </div>
                 <div class="col-6">
-                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100" (click)="modal.close()">Cancel</button>
+                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100"
+                        (click)="modal.close()">Cancel</button>
                 </div>
             </div>
         </div>
     </ng-template>
 
 
-
+    <div class="note mb-48" *ngIf="!resident.hasAccount; else formAccount"> Bạn chưa có tài khoản -
+        <span class="vcc-text-btn" (click)="openModal(resident)">Tạo ngay</span>
+    </div>
     <ng-template #formAccount>
         <div class="mb-48 detail-section">
             <div class="detail-section__title">Thông tin Tài khoản</div>
             <div class="row mb-32">
                 <div class="col-4">
                     <div class="input-group">
-                        <app-input [disabled]="true" label="Username" [(ngModel)]="account.username"></app-input>
+                        <app-input [disabled]="true" label="Username" [ngModel]="resident.email"></app-input>
                     </div>
-                    <app-input [disabled]="true" type="password" label="Password" [(ngModel)]="account.password">
+                    <app-input [disabled]="true" type="password" label="Password" [ngModel]="'********'">
                     </app-input>
                 </div>
                 <div class="col-8 text-center">
@@ -46,10 +47,12 @@
                 <div class="col-4">
                     <div class="row">
                         <div class="col-6">
-                            <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="resetPassword()">Reset Password</button>
+                            <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="resetPassword()">Reset
+                                Password</button>
                         </div>
                         <div class="col-6">
-                            <button [disabled]="pending" class="vcc-btn-unfill red w-100" (click)="openModalConfirm()">Delete</button>
+                            <button [disabled]="pending" class="vcc-btn-unfill red w-100"
+                                (click)="openModalConfirm()">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -68,14 +71,15 @@
                     <button [disabled]="pending" class="vcc-btn-fill blue w-100" (click)="deleteAccount()">Ok</button>
                 </div>
                 <div class="col-6">
-                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100" (click)="modal.close()">Cancel</button>
+                    <button [disabled]="pending" class="vcc-btn-unfill blue w-100"
+                        (click)="modal.close()">Cancel</button>
                 </div>
             </div>
         </div>
     </ng-template>
 
     <div class="mb-48 detail-section">
-        <div class="detail-section__title">Thông tin cư dân</div>
+        <div class="detail-section__title">Chi tiết cư dân</div>
         <form [formGroup]="form" (submit)="update()">
             <div class="row">
                 <div class="col-4">
@@ -134,7 +138,7 @@
 
                 <div class="col-4">
                     <div class="input-group">
-                        <app-input label="Email" formControlName="email" [disabled]="!!resident.accountId"></app-input>
+                        <app-input label="Email" formControlName="email" [disabled]="resident.hasAccount"></app-input>
                         <app-error-message-validator [formGroup]="form" [controlName]="'email'"
                             [validationMessages]="{'pattern':ERROR_MSG.EMAIL}"></app-error-message-validator>
                     </div>
@@ -159,7 +163,7 @@
             <div class="row">
                 <div class="col-4">
                     <button type="submit" class="vcc-btn-fill blue w-100"
-                        [disabled]="form.invalid || form.pristine || pending">Save</button>
+                        [disabled]="form.invalid || isEqual() || pending">Save</button>
                 </div>
             </div>
         </form>

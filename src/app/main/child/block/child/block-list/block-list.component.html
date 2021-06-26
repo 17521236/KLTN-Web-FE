@@ -1,10 +1,13 @@
 <div class="mb-32">
-    <h6 class="mb-16">Block</h6>
+    <h6 class="mb-16">Danh sách Block</h6>
     <form [formGroup]="tableHelper.filterForm" (submit)="tableHelper.next()">
         <div class="d-flex">
-            <app-input [label]="'Tên'" formControlName="searchText" [placeholder]="'Seach by Name'" [clearfix]="true"
+            <app-input class="mr-16" style="width: 252px;" [label]="'Tên'" formControlName="searchText" [placeholder]="'Seach by Name'" [clearfix]="true"
                 (onClear)="tableHelper.next()"></app-input>
             <button type="submit" hidden></button>
+            <div class="ml-auto d-flex ai-end">
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+            </div>
         </div>
     </form>
 </div>
@@ -23,7 +26,7 @@
         <thead>
             <tr>
                 <th scope="col" width="15%">#</th>
-                <th scope="col" width="35%">Tên Block</th>
+                <th scope="col" width="35%">Tên block</th>
                 <th scope="col" width="50%">Mô tả</th>
             </tr>
         </thead>
