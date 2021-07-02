@@ -54,7 +54,7 @@
     <div class="title-2 mb-32">
         Chi phí tháng {{moment().format('MM-yyyy')}}
     </div>
-    <div class="row">
+    <div class="row mb-32">
         <div class="col-4">
             <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels">
                 [fill]="chartOptions.fill" [responsive]="chartOptions.responsive"
@@ -93,7 +93,18 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center title-2">
+                        Số căn hộ chưa tạo bill: {{
+                            detail?.apt 
+                            - detail?.billInfos.approve.length
+                            - detail?.billInfos.pending.length
+                            - detail?.billInfos.not_approve.length
+                        }} căn
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

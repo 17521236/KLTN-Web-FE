@@ -27,18 +27,20 @@
             <tr>
                 <th scope="col" width="10%">#</th>
                 <th scope="col" width="15%">Tên căn hộ</th>
-                <th scope="col" width="20%">Block</th>
-                <th scope="col" width="15%">Diện tích</th>
-                <th scope="col" width="25%">Mô tả</th>
+                <th scope="col" width="15%">Tên Block</th>
+                <th scope="col" width="25%">Diện tích</th>
+                <th scope="col" width="35%">Mô tả</th>
             </tr>
         </thead>
         <tbody *ngIf="( blocksP$ |async) as blocks; else loading">
             <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                <td width="10%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
-                <td width="15%">{{item.name}} </td>
-                <td width="20%">{{item.blockId | block: blocks}} </td>
-                <td width="15%">{{item.area}} m²</td>
-                <td width="25%">{{item.description}} </td>
+                <td>{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                <td>{{item.name}} </td>
+                <td>{{item.blockId | block: blocks}} </td>
+                <td>{{item.area}} m²</td>
+                <td class="text-overflow">
+                  {{item.description}}
+                </td>
             </tr>
         </tbody>
     </table>

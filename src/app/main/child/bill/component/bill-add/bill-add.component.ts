@@ -115,7 +115,8 @@ export class BillAddComponent implements OnInit, OnDestroy {
         this.pending = false;
       }, _ => {
         this.pending = false;
-        setTimeout(() => this.modal.closeAll(), 0);
+        this.billAddStore.selectBlock('');
+        // setTimeout(() => this.modal.closeAll(), 0);
       })
     }
   }
