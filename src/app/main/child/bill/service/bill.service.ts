@@ -11,7 +11,7 @@ export interface IFilter {
 export interface IFilterBill extends IFilter {
   status: string,
   apartmentId: string,
-  month: string
+  month: number | string
 }
 
 export interface IAddBillReq {

@@ -23,13 +23,15 @@ export class BillListComponent implements OnInit {
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((tb: TableHelper) => {
-      let filter: IFilterBill = {
+      const filter: IFilterBill = {
         start: tb.paginator.getStart(),
         limit: tb.paginator.getLimit(),
         status: tb.filterForm.value['status'],
         apartmentId: tb.filterForm.value['apartmentId'],
-        month: moment(new Date(tb.filterForm.controls['month'].value).getTime()).format('MM-YYYY')
+        month: new Date(tb.filterForm.value['month']).getTime()
       }
+    console.log(filter)
+
       return this.billService.getList(filter);
     })
   )

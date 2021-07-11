@@ -40,7 +40,17 @@
                     </app-input>
                 </div>
                 <div class="col-8 text-center">
-                    <div class="avatar"></div>
+                    <!-- <div class="avatar"></div> -->
+                    <img (onLoad)="onLoad()" #avatarImg class="avatar"
+                        [src]="'./assets/avatar.png'" alt="no img"
+                        (click)="imgIp.click()">
+                    <form #formAvatar name="avatarUrl" [action]="URL" method="post" enctype="multipart/form-data">
+                        <input #imgIp type="file" 
+                            name="avatarUrl"
+                            style="height: 0; width: 0;"
+                            (change)="selectImg(imgIp,avatarImg)">
+                    </form>
+                    <button class="vcc-btn-fill w-100 blue" (click)="formAvatar.submit()">Save avatar</button>
                 </div>
             </div>
             <div class="row">

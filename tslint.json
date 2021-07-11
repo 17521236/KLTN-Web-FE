@@ -1,4 +1,5 @@
 {
+  "alwaysShowRuleFailuresAsWarnings": true,
   "extends": "tslint:recommended",
   "rulesDirectory": [
     "codelyzer"

@@ -12,3 +12,16 @@ export class FormHelper {
         this.preVal = form.value;
     }
 }
+export const coverFileToBase64 = async (file) => {
+    return new Promise((resolve, reject) => {
+        var reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = function () {
+            const encoded = btoa(String(reader.result));
+            resolve(encoded)
+        };
+        reader.onerror = function () {
+            reject('there are some problems');
+        };
+    })
+}

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { PATTERN } from 'src/app/core/pattern';
 import { ROUTER_CONST } from 'src/app/core/router.config';
@@ -13,7 +12,6 @@ import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.m
 import { ToastrService } from 'ngx-toastr';
 import { ApartmentService } from '../../../apartment/service/apartment.service';
 import { BlockService } from '../../../block/service/block.service';
-import { SingleResidentRes } from '../../model/resident.model';
 import { ResidentAccountService } from '../../service/resident-account.service';
 import { ResidentService } from '../../service/resident.service';
 import { isEqual } from 'lodash';
@@ -29,12 +27,13 @@ export class ResidentDetailComponent implements OnInit {
   @ViewChild('deleteConfirm') deleteConfirm;
 
   pending = false;
-  id = this.route.snapshot.params['id'];
+  id = this.route.snapshot.params.id;
   apt$;
   resident$ = this.residentService.getResidentById(this.id).pipe(
     tap((res: any) => {
       console.log('resident Detail:', res);
-      this.apt$ = this.aptService.getApartment(0, 999, null, res.blockId).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
+      this.apt$ = this.aptService.getApartment(0, 999, null, res.blockId)
+      .pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
       this.buildFormDetail(res);
     })
   );
