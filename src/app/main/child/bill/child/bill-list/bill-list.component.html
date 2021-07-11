@@ -3,14 +3,18 @@
     <form [formGroup]="tableHelper.filterForm">
         <div class="d-flex" *ngIf="apts$|async; else loading">
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="(blocksDD$|async)"
-                    [showSearch]="true" formControlName="blockId" (ngModelChange)="blockSelected($event)">
-                </app-dropdown>
+                <ng-container *ngIf="(blocksDD$|async) as blocksDD; else loading">
+                    <app-dropdown [label]="'Block'" [placeholder]="'Select Block'" [options]="blocksDD"
+                        [showSearch]="true" formControlName="blockId" (ngModelChange)="blockSelected($event)">
+                    </app-dropdown>
+                </ng-container>
             </div>
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown label="Căn hộ" [showSearch]="true" [placeholder]="'Select apartment'"
-                    [options]="(aptsDD$|async)" formControlName="apartmentId" (ngModelChange)="search()">
-                </app-dropdown>
+                <ng-container>
+                    <app-dropdown [isLoading]="aptLoading" label="Căn hộ" [showSearch]="true" [placeholder]="'Select apartment'"
+                        [options]="(aptsDD$|async)" formControlName="apartmentId" (ngModelChange)="search()">
+                    </app-dropdown>
+                </ng-container>
             </div>
             <div class="mr-16" style="width: 252px;">
                 <app-date-picker [classList]="'w-100'" label="Tháng" type="month" formControlName="month"
@@ -22,7 +26,7 @@
                 </app-dropdown>
             </div>
             <div class="ml-auto d-flex ai-end">
-                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>
             </div>
         </div>
         <button type="submit" hidden></button>
@@ -44,21 +48,23 @@
                 <th scope="col">Hình thức TT</th>
             </tr>
         </thead>
-        <ng-container *ngIf="(blocks$ |async) as blocks; else loading">
-            <tbody>
-                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                    <td>{{item.blockId | block: blocks}} </td>
-                    <td>{{item.aptName}}</td>
-                    <td>{{item.date | date:"MM / yyyy"}}</td>
-                    <td>{{item.balanceFowards | vnd}}</td>
-                    <td>{{item.amount | vnd}}</td>
-                    <td>{{item.balanceFowards + item.amount | vnd}}</td>
-                    <td>{{item.paidAmount | vnd}}</td>
-                    <td>{{item.lastBalance | vnd}}</td>
-                    <td>{{item.status | billStatus}}</td>
-                    <td>{{item.pmId | paymentMethod}}</td>
-                </tr>
-            </tbody>
+        <ng-container *ngIf="(blocks$ |async) as blocks">
+            <ng-container *ngIf="!tableHelper.isLoading else loading">
+                <tbody>
+                    <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                        <td>{{item.blockId | block: blocks}} </td>
+                        <td>{{item.aptName}}</td>
+                        <td>{{item.date | date:"MM / yyyy"}}</td>
+                        <td>{{item.balanceFowards | vnd}}</td>
+                        <td>{{item.amount | vnd}}</td>
+                        <td>{{item.balanceFowards + item.amount | vnd}}</td>
+                        <td>{{item.paidAmount | vnd}}</td>
+                        <td>{{item.lastBalance | vnd}}</td>
+                        <td>{{item.status | billStatus}}</td>
+                        <td>{{item.pmId | paymentMethod}}</td>
+                    </tr>
+                </tbody>
+            </ng-container>
         </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"

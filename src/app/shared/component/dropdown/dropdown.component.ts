@@ -13,16 +13,17 @@ import { DropdownItem } from './model/dropdown.model';
   }]
 })
 export class DropdownComponent implements OnInit, ControlValueAccessor {
-  @Input() placeholder: string = "";
+  @Input() placeholder = '';
   @Input() options: Array<DropdownItem> = [];
   @Input() disabled: boolean;
   @Input() clearable: boolean;
   value;
   @Input() label: string;
-  mode: string = "default";
-  @Input() showSearch: boolean = false;
+  mode = 'default';
+  @Input() showSearch = false;
   error: boolean;
   @Input() isRequired = false;
+  @Input() isLoading = false;
 
   private onChange = (_: any) => { };
   private onTouched = (_: any) => { };

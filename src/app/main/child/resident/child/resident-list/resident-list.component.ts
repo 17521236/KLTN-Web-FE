@@ -33,12 +33,13 @@ export class ResidentListComponent implements OnInit {
         x.filterForm.value['aptId'],
         x.filterForm.value['blockId']
       );
-    })
-  )
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
   blocks$ = this.blockService.getBlocks('', 0, 999);
-  blocksP$ = this.blocks$.pipe(map((x: any) => x.items))
+  blocksP$ = this.blocks$.pipe(map((x: any) => x.items));
   blockDD$ = this.blocks$.pipe(map((x: any) => {
-    let tmp = x.items.map(item => new DropdownItem(item._id, item.name));
+    const tmp = x.items.map(item => new DropdownItem(item._id, item.name));
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
@@ -56,10 +57,10 @@ export class ResidentListComponent implements OnInit {
     private blockService: BlockService,
     private fb: FormBuilder) {
     this.tableHelper.filterForm = this.fb.group({
-      name: "",
-      type: "",
-      aptId: "",
-      blockId: ""
+      name: '',
+      type: '',
+      aptId: '',
+      blockId: ''
     });
   }
 

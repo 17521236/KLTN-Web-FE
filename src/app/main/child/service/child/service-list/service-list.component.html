@@ -1,26 +1,26 @@
 <div class="mb-16">
     <h6 class="mb-48">Quản lý Dịch vụ</h6>
 </div>
-<div *ngIf="(result$|async) as result, else loading">
+<ng-container *ngIf="(result$|async) as result; else loading ">
     <table class="vcc-table mb-24">
         <thead>
             <tr>
-                <!-- <th scope="col">#</th> -->
                 <th scope="col">Tên dịch vụ</th>
                 <th scope="col">Giá tiền</th>
                 <th scope="col">Đơn vị</th>
                 <th scope="col">Mô tả</th>
             </tr>
         </thead>
-        <tbody>
-            <tr class="table-row" *ngFor="let item of result, index as id" (click)="viewDetail(item)">
-                <!-- <td>{{id + 1}}</td> -->
-                <td>{{item.name}}</td>
-                <td>{{item.cost|vnd}}</td>
-                <td>{{item.unit}}</td>
-                <td class="desc">{{item.desc}}</td>
-            </tr>
-        </tbody>
+        <ng-container *ngIf="!tableHelper.isLoading else loading">
+            <tbody>
+                <tr class="table-row" *ngFor="let item of result, index as id" (click)="viewDetail(item)">
+                    <td>{{item.name}}</td>
+                    <td>{{item.cost|vnd}}</td>
+                    <td>{{item.unit}}</td>
+                    <td class="desc">{{item.desc}}</td>
+                </tr>
+            </tbody>
+        </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="total == 0"
         nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">
@@ -29,7 +29,7 @@
         <app-paginator [total]="total" (onPageChange)="tableHelper.onPageChange($event)" [pageSize]="5">
         </app-paginator>
     </div>
-</div>
+</ng-container>
 <ng-template #loading>
     <app-loading></app-loading>
 </ng-template>

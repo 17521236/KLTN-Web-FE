@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { PaginatorEvent } from 'src/app/shared/component/paginator/paginator-event.model';
@@ -16,17 +16,20 @@ import { BlockService } from '../../service/block.service';
 })
 export class BlockListComponent implements OnInit {
 
-  @ViewChild('modal') modal:ActionModalComponent
+  isLoading = false;
+
+  @ViewChild('modal') modal: ActionModalComponent;
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((x: any) => {
       return this.blockService.getBlocks(
-        x.filterForm.value['searchText'], 
-        x.paginator.getStart(), 
+        x.filterForm.value['searchText'],
+        x.paginator.getStart(),
         x.paginator.pageSize
-        )
-    })
-  )
+      );
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
 
   showRightMenu = false;
 
@@ -34,7 +37,7 @@ export class BlockListComponent implements OnInit {
     private blockService: BlockService,
     private router: Router,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.tableHelper.filterForm = this.fb.group({ searchText: '' });
   }
   ngOnInit(): void {
@@ -42,13 +45,13 @@ export class BlockListComponent implements OnInit {
   viewDetail(block) {
     this.router.navigate([ROUTER_CONST.BLOCK.DETAIL, block._id]);
   }
-  showModal(tpl){
-    this.modal.createComponentModal(tpl,{},false,'')
+  showModal(tpl) {
+    this.modal.createComponentModal(tpl, {}, false, '')
   }
-  success(){
+  success() {
     this.tableHelper.next();
   }
-  refreshFilter(){
+  refreshFilter() {
     this.tableHelper.filterForm.reset();
     this.tableHelper.next();
   }

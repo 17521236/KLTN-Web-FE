@@ -19,16 +19,19 @@ export class ServiceListComponent implements OnInit {
   showRightMenu = false;
   @ViewChild('modal') modal: ActionModalComponent;
 
-  // init table 
+  // init table
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<Service[]> = this.tableHelper.query$.pipe(
     switchMap((table: TableHelper) => {
       return this.sService.getList({}).pipe(
         tap((x: any[]) => this.total = x.length),
-        map((res: any[]) => res.filter((i, index) => (index >= table.paginator.getStart()) && (index < table.paginator.getStart() + table.paginator.pageSize)))
+        map((res: any[]) =>
+          res.filter((i, index) =>
+            (index >= table.paginator.getStart()) && (index < table.paginator.getStart() + table.paginator.pageSize)))
       );
-    })
-  )
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
   total = 0;
 
   constructor(private sService: ServiceService, private router: Router) { }
@@ -37,11 +40,11 @@ export class ServiceListComponent implements OnInit {
   }
 
   showModal(tpl) {
-    this.modal.createComponentModal(tpl, {}, false, '')
+    this.modal.createComponentModal(tpl, {}, false, '');
   }
 
   viewDetail(item) {
-    this.router.navigate([ROUTER_CONST.SERVICE.DETAIL(item._id)])
+    this.router.navigate([ROUTER_CONST.SERVICE.DETAIL(item._id)]);
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
@@ -24,11 +24,12 @@ export class ApartmentListComponent implements OnInit {
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((x: TableHelper) => {
       return this.aptService.getApartment(x.paginator.getStart(), x.paginator.pageSize, x.filterForm.value['name'], x.filterForm.value['blockId']);
-    })
-  )
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
   blocks$ = this.blockService.getBlocks('', 0, 999);
   blocksDD$ = this.blocks$.pipe(map((x: any) => {
-    let tmp = x.items.map(item => new DropdownItem(item._id, item.name));
+    const tmp = x.items.map(item => new DropdownItem(item._id, item.name));
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
@@ -62,7 +63,7 @@ export class ApartmentListComponent implements OnInit {
   success() {
     this.tableHelper.next();
   }
-  refreshFilter(){
+  refreshFilter() {
     this.tableHelper.filterForm.reset();
     this.tableHelper.next();
   }

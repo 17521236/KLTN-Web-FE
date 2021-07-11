@@ -3,8 +3,8 @@
     <form [formGroup]="tableHelper.filterForm" (submit)="search()">
         <div class="d-flex">
             <div class="mr-16" style="width: 252px;">
-                <app-dropdown [label]="'Block'" [showSearch]="true" [placeholder]="'Search by Block'" [options]="(blocksDD$|async)"
-                    formControlName="blockId" (ngModelChange)="search()">
+                <app-dropdown [label]="'Block'" [showSearch]="true" [placeholder]="'Search by Block'"
+                    [options]="(blocksDD$|async)" formControlName="blockId" (ngModelChange)="search()">
                 </app-dropdown>
             </div>
             <div>
@@ -16,7 +16,7 @@
                 <button type="submit" hidden></button>
             </div>
             <div class="ml-auto d-flex ai-end">
-                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>
             </div>
         </div>
     </form>
@@ -32,17 +32,21 @@
                 <th scope="col" width="35%">Mô tả</th>
             </tr>
         </thead>
-        <tbody *ngIf="( blocksP$ |async) as blocks; else loading">
-            <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                <td>{{id + 1 + tableHelper.paginator.getStart()}} </td>
-                <td>{{item.name}} </td>
-                <td>{{item.blockId | block: blocks}} </td>
-                <td>{{item.area}} m²</td>
-                <td class="text-overflow">
-                  {{item.description}}
-                </td>
-            </tr>
-        </tbody>
+        <ng-container *ngIf="(blocksP$ |async) as blocks">
+            <ng-container *ngIf="!tableHelper.isLoading else loading">
+                <tbody>
+                    <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                        <td>{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                        <td>{{item.name}} </td>
+                        <td>{{item.blockId | block: blocks}} </td>
+                        <td>{{item.area}} m²</td>
+                        <td class="text-overflow">
+                            {{item.description}}
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-container>
+        </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"
         nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">

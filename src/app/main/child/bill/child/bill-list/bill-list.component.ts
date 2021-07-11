@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
 import { BillService, IFilterBill } from '../../service/bill.service';
-import * as moment from 'moment';
 import { STATUS_BILL_LIST } from 'src/app/core/system.config';
 import { Router } from '@angular/router';
 import { ROUTER_CONST } from 'src/app/core/router.config';
@@ -29,18 +28,18 @@ export class BillListComponent implements OnInit {
         status: tb.filterForm.value['status'],
         apartmentId: tb.filterForm.value['apartmentId'],
         month: new Date(tb.filterForm.value['month']).getTime()
-      }
-    console.log(filter)
-
+      };
       return this.billService.getList(filter);
-    })
-  )
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
   status = [new DropdownItem(null, 'All'), ...STATUS_BILL_LIST.map(x => new DropdownItem(x.id, x.name))];
   blocks$ = this.blockService.getBlocks('', 0, 999).pipe(map((x: any) => x.items));
   blocksDD$ = this.blocks$.pipe(map(x => [new DropdownItem(null, 'All'), ...x.map(i => new DropdownItem(i._id, i.name))]));
 
   apts$ = this.aptService.getApartment(0, 999).pipe(map((res: any) => res.items));
   aptsDD$;
+  aptLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -61,11 +60,11 @@ export class BillListComponent implements OnInit {
       apartmentId: null,
       month: null,
       status: null
-    })
+    });
   }
 
   showModal(addTpl) {
-    this.modal.createComponentModal(addTpl, {}, false, '')
+    this.modal.createComponentModal(addTpl, {}, false, '');
   }
 
   search() {
@@ -74,19 +73,17 @@ export class BillListComponent implements OnInit {
   }
 
   blockSelected(e) {
-    console.log(e)
     this.tableHelper.filterForm.controls['apartmentId'].setValue(null);
     this.aptsDD$ = this.apts$.pipe(
-      tap(console.log),
-      map(res => res.filter(x => x.blockId == e)),
+      map(res => res.filter(x => x.blockId === e)),
       map(res => res.map((x: any) => new DropdownItem(x._id, x.name))),
       map(res => [new DropdownItem(null, 'All'), ...res])
-    )
+    );
     this.search();
   }
 
   viewDetail(item) {
-    this.router.navigate([ROUTER_CONST.BILL.DETAIL(item._id)])
+    this.router.navigate([ROUTER_CONST.BILL.DETAIL(item._id)]);
   }
 
   refreshFilter() {

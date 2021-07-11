@@ -23,13 +23,13 @@
             </div>
             <!-- <i class="ml-auto">Refresh</i> -->
             <div class="ml-auto d-flex ai-end">
-                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>
             </div>
         </div>
         <button type="submit" hidden></button>
     </form>
 </div>
-<div *ngIf="(result$|async) as result, else loading">
+<ng-container *ngIf="(result$|async) as result; else loading">
     <table class="vcc-table mb-24">
         <thead>
             <tr>
@@ -43,22 +43,27 @@
                 <th scope="col" width="13%">Số điện thoại</th>
             </tr>
         </thead>
-        <ng-container *ngIf="(blocksP$|async) as blocks; else loading">
-            <tbody *ngIf="(apts$|async) as apts;else loading">
-                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                    <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}}</td>
-                    <td width="15%">{{item.name}} </td>
-                    <td width="15%">{{item.blockId | block:blocks}} </td>
-                    <td width="10%">{{item.aptId | apt: apts}} </td>
-                    <td width="10%">
-                        {{item.type === RESIDENT_TYPE_LIST[0].id
-                        ?RESIDENT_TYPE_LIST[0].text:RESIDENT_TYPE_LIST[1].text}}
-                    </td>
-                    <td width="12%">{{item.dateOfBirth|date:"dd-MM-yyyy"}} </td>
-                    <td width="20%">{{item.email}} </td>
-                    <td width="13%">{{item.phoneNumber}} </td>
-                </tr>
-            </tbody>
+
+        <ng-container *ngIf="(blocksP$|async) as blocks">
+            <ng-container *ngIf="(apts$|async) as apts">
+                <ng-container *ngIf="!tableHelper.isLoading else loading">
+                    <tbody>
+                        <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                            <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}}</td>
+                            <td width="15%">{{item.name}} </td>
+                            <td width="15%">{{item.blockId | block:blocks}} </td>
+                            <td width="10%">{{item.aptId | apt: apts}} </td>
+                            <td width="10%">
+                                {{item.type === RESIDENT_TYPE_LIST[0].id
+                                ?RESIDENT_TYPE_LIST[0].text:RESIDENT_TYPE_LIST[1].text}}
+                            </td>
+                            <td width="12%">{{item.dateOfBirth|date:"dd-MM-yyyy"}} </td>
+                            <td width="20%">{{item.email}} </td>
+                            <td width="13%">{{item.phoneNumber}} </td>
+                        </tr>
+                    </tbody>
+                </ng-container>
+            </ng-container>
         </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"
@@ -67,7 +72,8 @@
     <div class="text-center">
         <app-paginator [total]="result.total" (onPageChange)="onPageChange($event)" [pageSize]="5"></app-paginator>
     </div>
-</div>
+</ng-container>
+
 <ng-template #loading>
     <app-loading></app-loading>
 </ng-template>

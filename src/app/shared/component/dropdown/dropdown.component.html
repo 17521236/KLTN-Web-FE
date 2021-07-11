@@ -7,22 +7,17 @@
   </div>
 </ng-template>
 
-<div class="medium-body-text text-dark-grey lh-19 mb-16"  *ngIf="label">{{label}}  <span *ngIf="isRequired" class="text-error"> (*)</span></div>
-<nz-select 
-  [nzSuffixIcon]="suffixDown" 
-  [nzNotFoundContent]="notFoundData"
-  (nzBlur)="onBlur()" 
-  [nzAllowClear]="clearable" 
-  (ngModelChange)="onValueChange($event)" 
-  [nzDisabled]="disabled"
-  class="dropdown-container w-100" 
-  nzOptionHeightPx="50" 
-  nzOptionOverflowSize='7' 
-  [nzShowSearch]="showSearch"
-  [nzAllowClear]="clearable" 
-  [nzPlaceHolder]="placeholder" 
-  [(ngModel)]="value"
-  >
-  <nz-option class="dropdown-item" *ngFor="let item of options" [nzValue]="item.id" [nzLabel]="item.text">
-  </nz-option>
-</nz-select>
+<div class="medium-body-text text-dark-grey lh-19 mb-16" *ngIf="label">{{label}} <span *ngIf="isRequired"
+    class="text-error"> (*)</span></div>
+<ng-container *ngIf="!isLoading else loading">
+  <nz-select [nzSuffixIcon]="suffixDown" [nzNotFoundContent]="notFoundData" (nzBlur)="onBlur()"
+    [nzAllowClear]="clearable" (ngModelChange)="onValueChange($event)" [nzDisabled]="disabled"
+    class="dropdown-container w-100" nzOptionHeightPx="50" nzOptionOverflowSize='7' [nzShowSearch]="showSearch"
+    [nzAllowClear]="clearable" [nzPlaceHolder]="placeholder" [(ngModel)]="value">
+    <nz-option class="dropdown-item" *ngFor="let item of options" [nzValue]="item.id" [nzLabel]="item.text">
+    </nz-option>
+  </nz-select>
+</ng-container>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
