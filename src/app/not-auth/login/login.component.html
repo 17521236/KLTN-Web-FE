@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="container-login100-form-btn" (click)="login()">
-                    <button class="login100-form-btn" type="submit">
+                    <button class="login100-form-btn" type="submit" [disabled]="pending">
                         Login
                     </button>
                 </div>

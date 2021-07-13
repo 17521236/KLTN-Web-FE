@@ -81,7 +81,7 @@
                 </tbody>
             </table>
             <div class="w-100">
-                <button class="vcc-btn-fill blue  mb-32 ml-auto" [disabled]="el.status == 'APPROVE'||pending" (click)="showModal(confirmTpl)">Duyệt</button>
+                <button class="vcc-btn-fill blue  mb-32 ml-auto" [disabled]="el.status == 'APPROVE'||pending" (click)="showModal(confirmTpl)">Xác nhận đã thanh toán</button>
             </div>
         </form>
     </ng-container>
@@ -290,7 +290,7 @@
         Are you sure?
     </div>
     <div class="medium-body-text mb-24">
-        Duyệt hóa đơn đã thanh toán {{form.controls['paidAmount'].value | vnd}} ?
+        Xác nhận đã thanh toán <b>{{form.controls['paidAmount'].value | vnd}}</b> ?
     </div>
     <button class="vcc-btn-fill w-100 blue mb-16" (click)="update()">Ok</button>
     <button class="vcc-btn-unfill w-100 blue" (click)="modal.close()">Cancel</button>

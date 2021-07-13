@@ -1,4 +1,4 @@
-@import 'variable.scss';
+@import "variable.scss";
 
 a:focus {
     outline: none !important;
@@ -315,7 +315,8 @@ iframe {
     transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
+.login100-form-btn:hover,
+.login100-form-btn:disabled {
     background: #333333;
 }
 

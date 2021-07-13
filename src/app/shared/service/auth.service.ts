@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
+import { API } from 'src/app/core/api.config';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { Store } from '../abstracts/store';
+import { HttpService } from './http.service';
 import { UserService } from './user.service';
 export class User {
   _id: string = '';
@@ -33,7 +35,7 @@ export class AuthService extends Store<AuthState> {
   role$ = this.state$.pipe(map(x => x.currentUser.role));
   _id$ = this.state$.pipe(map(x => x.currentUser._id))
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private http: HttpService) {
     super({
       currentUser: null
     });
@@ -47,7 +49,7 @@ export class AuthService extends Store<AuthState> {
         this.state = { ...this.state, currentUser: user };
         this.router.navigate([ROUTER_CONST.DASHBOARD]);
       })
-    )
+    );
   }
 
   logout() {
@@ -56,4 +58,7 @@ export class AuthService extends Store<AuthState> {
     this.router.navigate(['/not-auth']);
   }
 
+  startServer() {
+    return this.http.sendToServer('GET', API.START_SERVER, {}, null);
+  }
 }

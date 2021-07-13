@@ -14,20 +14,21 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   ERROR_MSG = ERROR_MSG;
+  pending = false;
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(PATTERN.EMAIL)]],
       password: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD)]]
-    })
+    });
   }
 
   login() {
     this.form.markAsDirty();
     if (this.form.valid) {
-      this.authService.login(this.form.value).pipe(take(1)).subscribe(_ => {
-      });
+      this.pending = true;
+      this.authService.login(this.form.value).pipe(take(1)).subscribe(_ => {}, _ => this.pending = false);
     }
   }
 

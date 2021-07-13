@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { RESIDENT_TYPE_LIST } from 'src/app/core/system.config';
