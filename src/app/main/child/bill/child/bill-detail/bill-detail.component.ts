@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { PATTERN } from 'src/app/core/pattern';
@@ -19,11 +18,14 @@ import { BillService } from '../../service/bill.service';
 })
 export class BillDetailComponent implements OnInit {
 
-  id: string = '';
+  id = '';
   details$;
   types = STATUS_BILL_LIST.map(x => new DropdownItem(x.id, x.name));
   form: FormGroup;
   bill;
+  moment = moment;
+  pending = false;
+  @ViewChild('modal') modal: ActionModalComponent;
 
   constructor(
     private router: Router,
@@ -39,7 +41,7 @@ export class BillDetailComponent implements OnInit {
     this.form = this.fb.group({
       paidAmount: [0, Validators.pattern(PATTERN.ONLY_NUMBER)],
       status: ''
-    })
+    });
     this.build();
   }
 
@@ -50,7 +52,7 @@ export class BillDetailComponent implements OnInit {
         this.form.patchValue({
           paidAmount: res?.bill.paidAmount,
           status: res?.bill.status
-        })
+        });
       })
     );
   }
@@ -59,13 +61,11 @@ export class BillDetailComponent implements OnInit {
     this.router.navigate([ROUTER_CONST.BILL.LIST]);
   }
 
-  moment = moment;
-  pending = false;
   update() {
     if (this.form.valid) {
       this.pending = true;
-      let paidAmount = this.form.controls['paidAmount'].value;
-      let data = {
+      const paidAmount = this.form.controls['paidAmount'].value;
+      const data = {
         paidAmount,
         status: 'APPROVE',
         lastBalance: Number(this.bill.balanceFowards) + Number(this.bill.amount) - Number(paidAmount)
@@ -74,10 +74,9 @@ export class BillDetailComponent implements OnInit {
         this.toast.success('Duyệt thành công chi phí');
         this.modal.close();
         this.build();
-      })
+      });
     }
   }
-  @ViewChild('modal') modal: ActionModalComponent
   showModal(tpl) {
     this.modal.createComponentModal(tpl);
   }

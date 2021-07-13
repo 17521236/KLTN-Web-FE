@@ -23,18 +23,19 @@ export class DashboardComponent implements OnInit {
         res?.billInfos.approve.length,
         res?.billInfos.pending.length,
         res?.billInfos.not_approve.length
-      ]
+      ];
     })
   );
   chartOptions = {
-    series: [0, 0, 0],
+    series: [0, 0, 0, 1],
     chart: {
       type: "pie"
     },
     labels: [
       STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_APPROVE).name,
       STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_PENDING).name,
-      STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_NOT_APPROVE).name
+      STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_NOT_APPROVE).name,
+      'Chưa tạo bill'
     ]
   };
 
