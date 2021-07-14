@@ -54,22 +54,21 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   ![Alt text]("/screenshot/login.png?raw=true")
+   <img src="/screenshot/login.png?raw=true">
    </p>
 
     
 ### Dashboard
    * Dashboard
    <p align="center">
-   <img src="/screenshot/dashboard.png">
+   <img src="./screenshot/dashboard.png">
    </p>
 
    
 ### Quản lý Block
-
    * Danh sách Block   
    <p align="center">
-   <img src="./screenshot/block_list.png">
+   <img src="/screenshot/block_list.png">
    </p>
 
    * Thêm mới Block
