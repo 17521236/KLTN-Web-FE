@@ -54,7 +54,7 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   <img src="/screenshot/login.png">
+   <img src="/screenshot/login.png?raw=true">
    </p>
 
     
