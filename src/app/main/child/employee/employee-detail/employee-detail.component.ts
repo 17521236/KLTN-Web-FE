@@ -24,8 +24,15 @@ export class EmployeeDetailComponent implements OnInit {
     tap(res => {
       this.form.patchValue(res);
     })
-  )
+  );
   role$ = this.authService.role$;
+  form: FormGroup;
+  ERROR_MSG = ERROR_MSG;
+  @ViewChild('modal') modal: ActionModalComponent;
+  disabledDate = (date) => {
+    return new Date().getTime() < new Date(date).getTime();
+  }
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -37,37 +44,35 @@ export class EmployeeDetailComponent implements OnInit {
     this.id = this.route.snapshot.params.id;
     this.buildFormDetail();
   }
-  form: FormGroup;
-  ERROR_MSG = ERROR_MSG;
+
   buildFormDetail() {
     this.form = this.fb.group({
-      email: ["", Validators.pattern(PATTERN.EMAIL)],
-      password: ["", Validators.required],
-      name: ["", Validators.required],
-      identityCard: ["", Validators.pattern(PATTERN.ONLY_NUMBER)],
-      phoneNumber: ["", Validators.pattern(PATTERN.ONLY_NUMBER)],
-      addr: ["", Validators.required],
-      dateOfBirth: ["", Validators.required]
+      email: ['', Validators.pattern(PATTERN.EMAIL)],
+      password: ['', Validators.required],
+      name: ['', Validators.required],
+      identityCard: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+      phoneNumber: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+      addr: ['', Validators.required],
+      dateOfBirth: ['', Validators.required]
     });
   }
   update() {
     if (this.form.valid) {
       this.pending = true;
-      let data = { ...this.form.value, dateOfBirth: new Date(this.form.value.dateOfBirth).getTime() }
+      const data = { ...this.form.value, dateOfBirth: new Date(this.form.value.dateOfBirth).getTime() };
       this.employeeService.update(this.route.snapshot.params.id, data).subscribe(res => {
         this.form.markAsPristine();
         this.toast.success(SUCCESS_MSG.edit);
         this.pending = false;
-      }, _ => this.pending = false)
+      }, _ => this.pending = false);
     }
   }
   close() {
     window.history.back();
   }
 
-  @ViewChild('modal') modal: ActionModalComponent;
   showModal(tpl) {
-    this.modal.createComponentModal(tpl)
+    this.modal.createComponentModal(tpl);
   }
   deleteItem() {
     this.employeeService.delete(this.id).subscribe(res => {

@@ -128,7 +128,7 @@
                 <div class="col-4">
                     <div class="input-group">
                         <app-date-picker [isRequired]="true" label="Ngày sinh" formControlName="dateOfBirth"
-                            [dateFormat]="'dd-MM-yyyy'"></app-date-picker>
+                            [dateFormat]="'dd-MM-yyyy'" [disabledDate]="disabledDate"></app-date-picker>
                         <app-error-message-validator [formGroup]="form" [controlName]="'dateOfBirth'"
                             [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
                     </div>

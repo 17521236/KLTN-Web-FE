@@ -12,8 +12,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   }]
 })
 export class DatePickerComponent implements OnInit {
-  private onChange = (_: any) => { };
-  private onTouched = (_: any) => { };
+
   @Input() isShowClear = true;
   @Input() isDisabled = false;
   @Input() label: string;
@@ -21,13 +20,15 @@ export class DatePickerComponent implements OnInit {
   @Input() dateFormat = 'yyyy/MM/dd';
   @Input() disabledDate;
   @Output() onClose = new EventEmitter();
-  @Input() classList='';
+  @Input() classList = '';
   @Input() isRequired = false;
   @ViewChild('datePicker') datePicker: any;
   today = new Date();
   canClose = false;
   @Input() type = 'date';
 
+  private onChange = (_: any) => { };
+  private onTouched = (_: any) => { };
   constructor() { }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class DatePickerComponent implements OnInit {
       this.datePicker.open();
       this.onTouched(true);
     }
-    if(!isOpen && this.canClose){
+    if (!isOpen && this.canClose) {
       this.onClose.emit();
     }
   }
@@ -62,20 +63,20 @@ export class DatePickerComponent implements OnInit {
     this.canClose = false;
   }
 
-  open(){
+  open() {
     this.datePicker.open();
   }
 
   // 
-  writeValue(value:any){
+  writeValue(value: any) {
     this.value = value;
   }
-  registerOnChange(fn:any){
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn:any){
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
-  setDisabledState(isDisable:boolean){
+  setDisabledState(isDisable: boolean) {
   }
 }

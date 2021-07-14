@@ -15,10 +15,9 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeAddComponent implements OnInit {
 
-  @Output() success = new EventEmitter<any>();
+  @Output() successAdded = new EventEmitter<any>();
 
   constructor(
-    private router: Router,
     private employeeService: EmployeeService,
     private fb: FormBuilder,
     public modal: NzModalService,
@@ -27,34 +26,36 @@ export class EmployeeAddComponent implements OnInit {
   ERROR_MSG = ERROR_MSG;
   form: FormGroup;
   pending = false;
-
+  disabledDate = (date) => {
+    return new Date().getTime() < new Date(date).getTime();
+  }
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ["", Validators.pattern(PATTERN.EMAIL)],
-      password: ["", Validators.required],
-      name: ["", Validators.required],
-      identityCard: ["", Validators.pattern(PATTERN.ONLY_NUMBER)],
-      phoneNumber: ["", Validators.pattern(PATTERN.ONLY_NUMBER)],
-      addr: ["", Validators.required],
-      dateOfBirth: ["", Validators.required],
-      role: "0"
-    })
+      email: ['', Validators.pattern(PATTERN.EMAIL)],
+      password: ['', Validators.required],
+      name: ['', Validators.required],
+      identityCard: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+      phoneNumber: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+      addr: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      role: '1'
+    });
   }
   add() {
     if (this.form.valid) {
       this.pending = true;
-      let data = { ...this.form.value, dateOfBirth: new Date(this.form.value.dateOfBirth).getTime() }
+      const data = { ...this.form.value, dateOfBirth: new Date(this.form.value.dateOfBirth).getTime() }
       this.employeeService.add(data).subscribe(_ => {
         this.toast.success(SUCCESS_MSG.add);
         this.pending = false;
-        this.success.emit();
+        this.successAdded.emit('');
         this.modal.closeAll();
       }, err => {
         this.pending = false;
         if (err.error.error.keyValue.email) {
           this.toast.error(`Email ${err.error.error.keyValue.email} đã tồn tại`);
         }
-      })
+      });
     }
   }
 

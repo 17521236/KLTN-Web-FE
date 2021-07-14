@@ -33,15 +33,18 @@ export class ResidentDetailComponent implements OnInit {
     tap((res: any) => {
       console.log('resident Detail:', res);
       this.apt$ = this.aptService.getApartment(0, 999, null, res.blockId)
-      .pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
+        .pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
       this.buildFormDetail(res);
     })
   );
   blocks$ = this.blockService.getBlocks('', 0, 999).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
   options = RESIDENT_TYPE_LIST.map(x => new DropdownItem(x.id, x.text));
-
-
-  // form for account 
+  @ViewChild('modal') modal: ActionModalComponent;
+  disabledDate = (date) => {
+    return new Date().getTime() < new Date(date).getTime();
+  }
+  prevForm;
+  // form for account
 
   constructor(
     private route: ActivatedRoute,
@@ -50,8 +53,7 @@ export class ResidentDetailComponent implements OnInit {
     private aptService: ApartmentService,
     private blockService: BlockService,
     private snackbarService: ToastrService,
-    private residentService: ResidentService,
-    private residentAccountService: ResidentAccountService,
+    private residentService: ResidentService
 
   ) {
     // this.buildFormAccount();
@@ -64,7 +66,6 @@ export class ResidentDetailComponent implements OnInit {
   isEqual() {
     return isEqual(this.prevForm, this.form.value);
   }
-  prevForm;
   buildFormDetail(apt) {
     this.form = this.fb.group({
       name: [apt.name, Validators.required],
@@ -89,14 +90,14 @@ export class ResidentDetailComponent implements OnInit {
     if (this.form.valid) {
       this.pending = true;
       this.residentService.updateResident(this.route.snapshot.params.id, this.form.value).subscribe(res => {
-        setTimeout(() => this.refresh())
+        setTimeout(() => this.refresh());
         this.snackbarService.success(SUCCESS_MSG.edit);
         this.pending = false;
       }, _ => {
         this.pending = false;
-        this.form.patchValue(this.prevForm)
+        this.form.patchValue(this.prevForm);
       }
-      )
+      );
     }
   }
   close() {
@@ -107,9 +108,10 @@ export class ResidentDetailComponent implements OnInit {
   }
 
   blockSelected(e) {
-    this.apt$ = this.aptService.getApartment(0, 999, null, e).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
-    this.form.controls['aptId'].markAsTouched;
-    this.form.controls['aptId'].setValue(null)
+    this.apt$ = this.aptService.getApartment(0, 999, null, e)
+      .pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
+    this.form.controls['aptId'].markAsTouched();
+    this.form.controls['aptId'].setValue(null);
   }
 
   updateAccount() {
@@ -117,10 +119,11 @@ export class ResidentDetailComponent implements OnInit {
   }
 
   openModal(resident) {
-    if (new RegExp(PATTERN.EMAIL).test(resident.email))
-      this.modal.createComponentModal(this.hasEmail, {}, false, 'alert')
+    if (new RegExp(PATTERN.EMAIL).test(resident.email)) {
+      this.modal.createComponentModal(this.hasEmail, {}, false, 'alert');
+    }
     else {
-      this.snackbarService.warning('Bạn cần cập nhật Email trước khi tạo tài khoản')
+      this.snackbarService.warning('Bạn cần cập nhật Email trước khi tạo tài khoản');
     }
   }
   createAccount() {
@@ -132,8 +135,8 @@ export class ResidentDetailComponent implements OnInit {
       this.pending = false;
     }, _ => {
       this.modal.close();
-      this.pending = false
-    })
+      this.pending = false;
+    });
   }
   resetPassword() {
     this.pending = true;
@@ -146,7 +149,7 @@ export class ResidentDetailComponent implements OnInit {
   refresh() {
     this.router.navigate([ROUTER_CONST.REDIRECT]).then(value => {
       this.router.navigate([ROUTER_CONST.RESIDENT.DETAIL(this.id)]);
-    })
+    });
   }
   openModalConfirm() {
     this.modal.createComponentModal(this.deleteConfirm, {}, false, 'alert')
@@ -156,7 +159,7 @@ export class ResidentDetailComponent implements OnInit {
     this.residentService.deleteAccount(this.id).subscribe(x => {
       this.snackbarService.success(SUCCESS_MSG.delete);
       this.modal.close();
-      setTimeout(() => this.refresh())
+      setTimeout(() => this.refresh());
       this.pending = false;
     }, _ => this.pending = false);
   }
@@ -164,9 +167,8 @@ export class ResidentDetailComponent implements OnInit {
 
   // delete
 
-  @ViewChild('modal') modal: ActionModalComponent;
   showModal(tpl) {
-    this.modal.createComponentModal(tpl)
+    this.modal.createComponentModal(tpl);
   }
   deleteItem() {
     this.residentService.delete(this.id).subscribe(_ => {

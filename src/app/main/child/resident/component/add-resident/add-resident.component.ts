@@ -23,28 +23,31 @@ export class AddResidentComponent implements OnInit {
   ERROR_MSG = ERROR_MSG;
   @Input() tableHelper: TableHelper;
   apt$;
-  blocks$ = this.blockService.getBlocks('',0,999).pipe(map((x: any) =>  x.items.map(item => new DropdownItem(item._id, item.name))));
+  blocks$ = this.blockService.getBlocks('', 0, 999).pipe(map((x: any) => x.items.map(item => new DropdownItem(item._id, item.name))));
   options = RESIDENT_TYPE_LIST.map(x => new DropdownItem(x.id, x.text));
   pending = false;
-
+  disabledDate = (date) => {
+    return new Date().getTime() < new Date(date).getTime();
+  }
 
   form: FormGroup = this.fb.group({
-    blockId: ["", Validators.required],
-    aptId: ["", Validators.required],
-    name: ["", Validators.required],
-    type: ["", Validators.required],
-    dateOfBirth:["", Validators.required],
-    identityCard: ["",  Validators.pattern(PATTERN.ONLY_NUMBER)],
-    phoneNumber:["",  Validators.pattern(PATTERN.ONLY_NUMBER)],
-    email:["",  Validators.pattern(PATTERN.EMAIL)],
-    note: ""
-  });
+    blockId: ['', Validators.required],
+    aptId: ['', Validators.required],
+    name: ['', Validators.required],
+    type: ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    identityCard: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+    phoneNumber: ['', Validators.pattern(PATTERN.ONLY_NUMBER)],
+    email: ['', Validators.pattern(PATTERN.EMAIL)],
+    note: ''
+  })
+
   constructor(
     private fb: FormBuilder,
     private aptService: ApartmentService,
     private blockService: BlockService,
     private snackbarService: ToastrService,
-    private residentService:ResidentService,
+    private residentService: ResidentService,
     public modal: NzModalService
   ) { }
 
@@ -59,8 +62,8 @@ export class AddResidentComponent implements OnInit {
         this.modal.closeAll();
         this.tableHelper.next();
         this.snackbarService.success(SUCCESS_MSG.add);
-      }, _=> {
-        this.pending=false;
+      }, _ => {
+        this.pending = false;
         this.modal.closeAll()
       })
     }

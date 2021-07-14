@@ -16,7 +16,7 @@
             [validationMessages]="{'pattern':ERROR_MSG.PASSWORD}"></app-error-message-validator>
     </div>
     <div class="input-group">
-        <app-date-picker [isRequired]="true" label="Ngày sinh" formControlName="dateOfBirth"></app-date-picker>
+        <app-date-picker [isRequired]="true" label="Ngày sinh" formControlName="dateOfBirth" [disabledDate]="disabledDate"></app-date-picker>
         <app-error-message-validator [formGroup]="form" [controlName]="'dateOfBirth'"
             [validationMessages]="{'required':ERROR_MSG.INVALID}"></app-error-message-validator>
     </div>
