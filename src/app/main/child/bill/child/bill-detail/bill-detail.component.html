@@ -36,7 +36,7 @@
             </tr>
         </thead>
         <tbody *ngIf="details?.resident as residents; else loading">
-            <tr class="table-row" *ngFor="let el of residents; index as index">
+            <tr class="table-row" *ngFor="let el of residents; index as index" (click)="gotoResidentDetail(el)">
                 <td>{{index+1}}</td>
                 <td>{{el.type | residentType}}</td>
                 <td>{{el.name}}</td>

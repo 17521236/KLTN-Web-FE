@@ -11,8 +11,12 @@ export class HeaderComponent implements OnInit {
   @Input() isShowClose = true;
   @Output() close = new EventEmitter();
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnInit(): void {
+  }
+  closePage() {
+    // this.close.emit('');
+    history.back();
   }
 }

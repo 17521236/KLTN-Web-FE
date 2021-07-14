@@ -82,4 +82,7 @@ export class BillDetailComponent implements OnInit {
   showModal(tpl) {
     this.modal.createComponentModal(tpl);
   }
+  gotoResidentDetail(el) {
+    this.router.navigate([ROUTER_CONST.RESIDENT.DETAIL(el._id)]);
+  }
 }
