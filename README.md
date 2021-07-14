@@ -72,14 +72,14 @@ npm start
    </p>
 
    * Thêm mới Block
-    <p align="center">
-    <img src="/screenshoot/add_block.png">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/add_block.png">
+   </p>
 
-    * Xem, Sửa Block
-    <p align="center">
-    <img src="/screenshoot/block_detail.png">
-    </p>
+   * Xem, Sửa Block
+   <p align="center">
+   <img src="/screenshoot/block_detail.png">
+   </p>  
     
 ### Quản lý Căn hộ
    * Danh sách Căn hộ   
@@ -119,17 +119,17 @@ npm start
 ### Quản lý Xe
    * Danh sách Xe   
    <p align="center">
-   <img src="/screenshoot/">
+   <img src="/screenshoot/vehicle_list.png">
    </p>
 
    * Thêm mới Xe
    <p align="center">
-   <img src="/screenshoot/">
+   <img src="/screenshoot/add_vehicle.png">
    </p>
 
    * Xem, Sửa Xe
    <p align="center">
-   <img src="/screenshoot/">
+   <img src="/screenshoot/vehicle_detail.png">
    </p>
 
 ### Quản lý Dịch vụ
@@ -151,7 +151,7 @@ npm start
 
    * Thêm mới Chi phí
    <p align="center">
-   <img src="/screenshoot/add_list.png">
+   <img src="/screenshoot/add_bill.png">
    </p>
 
    * Xem Chi phí
@@ -161,23 +161,23 @@ npm start
 
    * Xác nhận thanh toán Chi phí
    <p align="center">
-   <img src="/screenshoot/bill_detail1.png">
+   <img src="/screenshoot/bill_detail_1.png">
    </p>
 
 ### Quản lý Tài khoản
    * Danh sách Tài khoản
    <p align="center">
-   <img src="/screenshoot/manager_list">
+   <img src="/screenshoot/manager_list.png">
    </p>
 
    * Thêm mới Tài khoản
    <p align="center">
-   <img src="/screenshoot/add_manager">
+   <img src="/screenshoot/add_manager.png">
    </p>
 
    * Xem, Sửa Tài khoản
    <p align="center">
-   <img src="/screenshoot/manager_detail">
+   <img src="/screenshoot/manager_detail.png">
    </p>
 ## Yêu cầu thiết bị
 - Not support:
