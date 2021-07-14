@@ -54,8 +54,9 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   <img src="/screenshot/login.png?raw=true">
+    ![Alt text]("/screenshot/login.png?raw=true")
    </p>
+  
 
     
 ### Dashboard
