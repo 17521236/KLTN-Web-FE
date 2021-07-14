@@ -1,10 +1,9 @@
-
 // flex
 .d-flex {
     display: flex;
 }
 
-.d-inline-block{
+.d-inline-block {
     display: inline-block;
 }
 
@@ -20,26 +19,29 @@
     justify-content: flex-end;
 }
 
-.ai-center{
+.ai-center {
     align-items: center;
 }
-.ai-end{
+.ai-end {
     align-items: flex-end;
 }
-.flow-row{
+.flow-row {
     flex-flow: row;
 }
-.wrap{
+.wrap {
     flex-wrap: wrap;
 }
 .w-100 {
     width: 100%;
 }
-.h-100{
+.h-100 {
     height: 100%;
 }
+.h-35 {
+    height: 35%;
+}
 
-.h-50{
+.h-50 {
     height: 50%;
 }
 
@@ -47,7 +49,7 @@
     width: 50% !important;
 }
 
-.fw-bold{
+.fw-bold {
     font-weight: bold !important;
 }
 
@@ -58,14 +60,14 @@
     flex-wrap: wrap;
     margin-right: -10px;
     margin-left: -10px;
-    > div[class^='col-'], div[class*='col-']{
+    > div[class^="col-"],
+    div[class*="col-"] {
         padding-left: 10px;
         padding-right: 10px;
-    }   
+    }
 }
 
-
-.row>*{
+.row > * {
     width: 100%;
 }
 
@@ -347,7 +349,6 @@
     }
 }
 
-
 @media screen and (min-width: $screen-type-desktop) {
     .col-xl {
         flex: 1 0 0%;
@@ -491,10 +492,10 @@
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-  }
+    .sticky-top {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
 }

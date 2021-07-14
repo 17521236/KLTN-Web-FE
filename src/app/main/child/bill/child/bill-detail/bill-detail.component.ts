@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
+import { ERROR_MSG } from 'src/app/core/error-msg.config';
 import { PATTERN } from 'src/app/core/pattern';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { STATUS_BILL_LIST } from 'src/app/core/system.config';
@@ -19,6 +20,7 @@ import { BillService } from '../../service/bill.service';
 export class BillDetailComponent implements OnInit {
 
   id = '';
+  ERROR_MSG = ERROR_MSG;
   details$;
   types = STATUS_BILL_LIST.map(x => new DropdownItem(x.id, x.name));
   form: FormGroup;

@@ -70,8 +70,7 @@
                         <td>{{el.amount | vnd}}</td>
                         <td>{{el.balanceFowards + el.amount | vnd}}</td>
                         <td style="width: 20%">
-                            <app-input [disabled]="el.status == 'APPROVE'"  formControlName="paidAmount" [suffixTpl]="vnd"
-                            ></app-input>
+                            <app-input [disabled]="el.status == 'APPROVE'"  formControlName="paidAmount" [suffixTpl]="vnd"></app-input>
                             <app-error-message-validator [formGroup]="form" [controlName]="'paidAmount'"
                             [validationMessages]="{'required':ERROR_MSG.INVALID, 'pattern':ERROR_MSG.ONLY_NUMBER}">
                         </app-error-message-validator>
@@ -85,7 +84,7 @@
                 </tbody>
             </table>
             <div class="w-100">
-                <button class="vcc-btn-fill blue  mb-32 ml-auto" [disabled]="el.status == 'APPROVE'||pending" (click)="showModal(confirmTpl)">Xác nhận đã thanh toán</button>
+                <button class="vcc-btn-fill blue  mb-32 ml-auto" [disabled]="el.status == 'APPROVE'||pending||form.invalid" (click)="showModal(confirmTpl)">Xác nhận đã thanh toán</button>
             </div>
         </form>
     </ng-container>

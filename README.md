@@ -1,27 +1,204 @@
-# KLTNWebFE
+﻿# Ứng dụng Sổ tay chung cư
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.7.
+Hiện nay, với nhu cầu nhà ở ngày càng tăng, các khu chung cư liên tục được hình thành với mật độ, quy mô vô cùng lớn và trở thành địa điểm “an cư lạc nghiệp” của rất nhiều đối tượng khách hàng. 
 
-## Development server
+Tuy nhiên, với mật độ sinh sống của mỗi khu chung cư từ 100-200 căn hộ/ tòa chung cư thì vấn đề nan giải đặt ra cho các nhà quản lý là làm sao có thể quản lý tốt tòa nhà, để đảm bảo quyền lợi của dân cư, nắm rõ tình trạng của tòa nhà, từ đó đưa ra các giải pháp hiệu quả và kịp thời. 
+  
+Mặt khác với những cư dân sinh sống trong các khu chung cư thì có nhu cầu tra cứu thông tin, để có phương thức liên lạc hiệu quả với BQL kịp thời - chính xác, cũng như thanh toán các phí dịch vụ một cách nhanh chóng thuận tiện, không bị giới hạn thời gian      
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ứng dụng **Sổ tay chung cư** được tạo ra nhằm giải quyết các nhu cầu trên cho ban quản lý cũng cư dân của một chung cư vừa và nhỏ
 
-## Code scaffolding
+## Nội dung
+1. [Live demo](#live-demo)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. [Chức năng](#chức-năng)
 
-## Build
+   1. [Đăng nhập](#đăng-nhập)
+   
+   1. [Dashboard](#dashboard)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+   1. [Quản lý Block](#quản-lý-block)
+   
+   1. [Quản lý Căn hộ](#quản-lý-căn-hộ)
+   
+   1. [Quản lý Cư dân](#quản-lý-cư-dân)
 
-## Running unit tests
+   1. [Quản lý Xe](#quản-lý-xe)
+   
+   1. [Quản lý Dịch vụ](#quản-lý-dịch-vụ)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   1. [Quản lý Chi phí](#quản-lý-chi-phí)
 
-## Running end-to-end tests
+   1. [Quản lý Chi phí](#quản-lý-chi-phí)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1. [Thư viện và công nghệ](#thư-viện-và-công-nghệ)
 
-## Further help
+1. [Tác giả](#tác-giả)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Live Demo
+-  Live demo Web: [Apartment-Handbook](https://kltn-17521236.vercel.app/)
+-  Live demo Mobile app: [Apartment-Handbook-Mobile](https://kltn-mobile.vercel.app/)
+-  Backend: [Task Manager Server](https://github.com/17521236/KLTN-Backend)
+
+## Cài đặt
+
+Use the package manager [npm](https://www.npmjs.com/) to install and run.
+
+```bash
+npm install
+npm start
+```
+
+## Chức năng
+### Đăng nhập
+   * Đăng nhập
+   <p align="center">
+   <img src="/screenshot/localhost_4200_main_dashboard (13).png">
+   </p>
+
+    
+### Dashboard
+   * Dashboard
+   <p align="center">
+   <img src="/screenshot/localhost_4200_main_dashboard (14).png">
+   </p>
+
+   
+### Quản lý Block
+   * Danh sách Block   
+   <p align="center">
+   <img src="/screenshot/localhost_4200_main_dashboard (15).png">
+   </p>
+
+   * Thêm mới Block
+    <p align="center">
+    <img src="/screenshot/localhost_4200_main_dashboard (16).png">
+    </p>
+
+    * Xem, Sửa Block
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+    
+### Quản lý Căn hộ
+   * Danh sách Căn hộ   
+   <p align="center">
+   <img src="/screenshot/">
+   </p>
+
+   * Thêm mới Căn hộ
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+    * Xem, Sửa Căn hộ
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+### Quản lý Cư dân
+   * Danh sách Cư dân   
+   <p align="center">
+   <img src="/screenshot/">
+   </p>
+
+   * Thêm mới Cư dân
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+    * Xem, Sửa Cư dân
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+### Quản lý Xe
+   * Danh sách Xe   
+   <p align="center">
+   <img src="/screenshot/">
+   </p>
+
+   * Thêm mới Xe
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+    * Xem, Sửa Xe
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+### Quản lý Dịch vụ
+   * Danh sách Dịch vụ
+   <p alig="center">
+   <img src="/screenshot/">
+   </p>
+
+    * Xem, Sửa giá thành Dịch vụ
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+### Quản lý Chi phí
+   * Danh sách Chi phí   
+   <p align="center">
+   <img src="/screenshot/">
+   </p>
+
+   * Thêm mới Chi phí
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+    * Xem Chi phí
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+  * Xác nhận thanh toán Chi phí
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+### Quản lý Tài khoản
+   * Danh sách Tài khoản
+   <p align="center">
+   <img src="/screenshot/">
+   </p>
+
+   * Thêm mới Tài khoản
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+
+    * Xem, Sửa Tài khoản
+    <p align="center">
+    <img src="/screenshot/">
+    </p>
+## Yêu cầu thiết bị
+- Not support:
+
+   + IE-10
+
+## Thư viện và công nghệ
+
+- Language : Typescript, Javascript, HTML, SCSS
+
+- FrameWork : Angular, Nodejs, Express
+
+- Database: MongoDB
+
+   <p align="center">
+   <img src="https://cdn.helpex.vn/upload/2019/2/2/ar/06-27-36-618-0ddc2999-fe68-4483-8fe7-03bdb6c5ab43.jpg">
+   </p>
+
+
+## Tác giả
+
+- Nguyễn Mạnh Tùng - 17521236@gm.uit.edu.vn
+
+- Cán bộ hướng dẫn: ThS. Huỳnh Nguyễn Khắc Huy
+
+- Cán bộ phản biện: ThS. Huỳnh Tuấn Anh
+

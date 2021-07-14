@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
       this.chartOptions.series = [
         res?.billInfos.approve.length,
         res?.billInfos.pending.length,
-        res?.billInfos.not_approve.length
+        res?.billInfos.not_approve.length,
+        res?.apt - res?.billInfos.approve.length - res?.billInfos.pending.length - res?.billInfos.not_approve.length
       ];
     })
   );
