@@ -1,10 +1,10 @@
 ﻿# Ứng dụng Sổ tay chung cư
 
-Hiện nay, với nhu cầu nhà ở ngày càng tăng, các khu chung cư liên tục được hình thành với mật độ, quy mô vô cùng lớn và trở thành địa điểm “an cư lạc nghiệp” của rất nhiều đối tượng khách hàng. 
+- Hiện nay, với nhu cầu nhà ở ngày càng tăng, các khu chung cư liên tục được hình thành với mật độ, quy mô vô cùng lớn và trở thành địa điểm “an cư lạc nghiệp” của rất nhiều đối tượng khách hàng. 
 
-Tuy nhiên, với mật độ sinh sống của mỗi khu chung cư từ 100-200 căn hộ/ tòa chung cư thì vấn đề nan giải đặt ra cho các nhà quản lý là làm sao có thể quản lý tốt tòa nhà, để đảm bảo quyền lợi của dân cư, nắm rõ tình trạng của tòa nhà, từ đó đưa ra các giải pháp hiệu quả và kịp thời. 
+- Tuy nhiên, với mật độ sinh sống của mỗi khu chung cư từ 100-200 căn hộ/ tòa chung cư thì vấn đề nan giải đặt ra cho các nhà quản lý là làm sao có thể quản lý tốt tòa nhà, để đảm bảo quyền lợi của dân cư, nắm rõ tình trạng của tòa nhà, từ đó đưa ra các giải pháp hiệu quả và kịp thời. 
   
-Mặt khác với những cư dân sinh sống trong các khu chung cư thì có nhu cầu tra cứu thông tin, để có phương thức liên lạc hiệu quả với BQL kịp thời - chính xác, cũng như thanh toán các phí dịch vụ một cách nhanh chóng thuận tiện, không bị giới hạn thời gian      
+- Mặt khác với những cư dân sinh sống trong các khu chung cư thì có nhu cầu tra cứu thông tin, để có phương thức liên lạc hiệu quả với BQL kịp thời - chính xác, cũng như thanh toán các phí dịch vụ một cách nhanh chóng thuận tiện, không bị giới hạn thời gian      
 
 Ứng dụng **Sổ tay chung cư** được tạo ra nhằm giải quyết các nhu cầu trên cho ban quản lý cũng cư dân của một chung cư vừa và nhỏ
 
@@ -179,6 +179,8 @@ npm start
    <p align="center">
    <img src="/screenshoot/manager_detail.png">
    </p>
+
+
 ## Yêu cầu thiết bị
 - Not support:
 
