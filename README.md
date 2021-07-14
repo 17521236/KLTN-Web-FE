@@ -54,128 +54,131 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   <img src="/screenshot/login.png?raw=true">
+   <img src="/screenshoot/login.png">
    </p>
 
     
 ### Dashboard
    * Dashboard
    <p align="center">
-   <img src="./screenshot/dashboard.png">
+   <img src="./screenshoot/dashboard.png">
    </p>
 
    
 ### Quản lý Block
    * Danh sách Block   
    <p align="center">
-   <img src="/screenshot/block_list.png">
+   <img src="/screenshoot/block_list.png">
    </p>
 
    * Thêm mới Block
     <p align="center">
-    <img src="/screenshot/add_block.png">
+    <img src="/screenshoot/add_block.png">
     </p>
 
     * Xem, Sửa Block
     <p align="center">
-    <img src="/screenshot/block_detail">
+    <img src="/screenshoot/block_detail.png">
     </p>
     
 ### Quản lý Căn hộ
    * Danh sách Căn hộ   
    <p align="center">
-   <img src="/screenshot/apt_list">
+   <img src="/screenshoot/apt_list.png">
    </p>
 
    * Thêm mới Căn hộ
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/add_apt.png">
+   </p>
 
-    * Xem, Sửa Căn hộ
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem, Sửa Căn hộ
+   <p align="center">
+   <img src="/screenshoot/apt_detail.png">
+   </p>
 
 ### Quản lý Cư dân
    * Danh sách Cư dân   
    <p align="center">
-   <img src="/screenshot/block_list">
+   <img src="/screenshoot/resident_list.png">
    </p>
 
    * Thêm mới Cư dân
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/add_resident.png">
+   </p>
 
-    * Xem, Sửa Cư dân
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem, Sửa Cư dân
+   <p align="center">
+   <img src="/screenshoot/resident_detail1.png">
+   </p>
+   <p align="center">
+   <img src="/screenshoot/resident_detail2.png">
+   </p>
 
 ### Quản lý Xe
    * Danh sách Xe   
    <p align="center">
-   <img src="/screenshot/block_list">
+   <img src="/screenshoot/">
    </p>
 
    * Thêm mới Xe
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/">
+   </p>
 
-    * Xem, Sửa Xe
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem, Sửa Xe
+   <p align="center">
+   <img src="/screenshoot/">
+   </p>
 
 ### Quản lý Dịch vụ
    * Danh sách Dịch vụ
    <p alig="center">
-   <img src="/screenshot/block_list">
+   <img src="/screenshoot/service_list.png">
    </p>
 
-    * Xem, Sửa giá thành Dịch vụ
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem, Sửa giá thành Dịch vụ
+   <p align="center">
+   <img src="/screenshoot/service_detail.png">
+   </p>
 
 ### Quản lý Chi phí
    * Danh sách Chi phí   
    <p align="center">
-   <img src="/screenshot/block_list">
+   <img src="/screenshoot/bill_list.png">
    </p>
 
    * Thêm mới Chi phí
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/add_list.png">
+   </p>
 
-    * Xem Chi phí
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem Chi phí
+   <p align="center">
+   <img src="/screenshoot/bill_detail.png">
+   </p>
 
-  * Xác nhận thanh toán Chi phí
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xác nhận thanh toán Chi phí
+   <p align="center">
+   <img src="/screenshoot/bill_detail1.png">
+   </p>
 
 ### Quản lý Tài khoản
    * Danh sách Tài khoản
    <p align="center">
-   <img src="/screenshot/block_list">
+   <img src="/screenshoot/manager_list">
    </p>
 
    * Thêm mới Tài khoản
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   <p align="center">
+   <img src="/screenshoot/add_manager">
+   </p>
 
-    * Xem, Sửa Tài khoản
-    <p align="center">
-    <img src="/screenshot/">
-    </p>
+   * Xem, Sửa Tài khoản
+   <p align="center">
+   <img src="/screenshoot/manager_detail">
+   </p>
 ## Yêu cầu thiết bị
 - Not support:
 
