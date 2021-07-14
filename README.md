@@ -61,7 +61,7 @@ npm start
 ### Dashboard
    * Dashboard
    <p align="center">
-   <img src="/screenshot/dashboard.png">
+   <img src="./screenshot/dashboard.png">
    </p>
 
    
