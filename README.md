@@ -38,7 +38,7 @@ Mặt khác với những cư dân sinh sống trong các khu chung cư thì có
 
 ## Live Demo
 -  Live demo Web: [Apartment-Handbook](https://kltn-17521236.vercel.app/)
--  Live demo Mobile app: [Apartment-Handbook-Mobile](https://kltn-mobile.vercel.app/)
+-  Live demo Mobile app (F12 để xem dưới dạng mobile): [Apartment-Handbook-Mobile](https://kltn-mobile.vercel.app/)
 -  Backend: [Task Manager Server](https://github.com/17521236/KLTN-Backend)
 
 ## Cài đặt
@@ -54,37 +54,37 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   <img src="/screenshot/localhost_4200_main_dashboard (13).png">
+   <img src="/screenshot/login.png">
    </p>
 
     
 ### Dashboard
    * Dashboard
    <p align="center">
-   <img src="/screenshot/localhost_4200_main_dashboard (14).png">
+   <img src="/screenshot/dashboard.png">
    </p>
 
    
 ### Quản lý Block
    * Danh sách Block   
    <p align="center">
-   <img src="/screenshot/localhost_4200_main_dashboard (15).png">
+   <img src="/screenshot/block_list.png">
    </p>
 
    * Thêm mới Block
     <p align="center">
-    <img src="/screenshot/localhost_4200_main_dashboard (16).png">
+    <img src="/screenshot/add_block.png">
     </p>
 
     * Xem, Sửa Block
     <p align="center">
-    <img src="/screenshot/">
+    <img src="/screenshot/block_detail">
     </p>
     
 ### Quản lý Căn hộ
    * Danh sách Căn hộ   
    <p align="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/apt_list">
    </p>
 
    * Thêm mới Căn hộ
@@ -100,7 +100,7 @@ npm start
 ### Quản lý Cư dân
    * Danh sách Cư dân   
    <p align="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/block_list">
    </p>
 
    * Thêm mới Cư dân
@@ -116,7 +116,7 @@ npm start
 ### Quản lý Xe
    * Danh sách Xe   
    <p align="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/block_list">
    </p>
 
    * Thêm mới Xe
@@ -132,7 +132,7 @@ npm start
 ### Quản lý Dịch vụ
    * Danh sách Dịch vụ
    <p alig="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/block_list">
    </p>
 
     * Xem, Sửa giá thành Dịch vụ
@@ -143,7 +143,7 @@ npm start
 ### Quản lý Chi phí
    * Danh sách Chi phí   
    <p align="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/block_list">
    </p>
 
    * Thêm mới Chi phí
@@ -164,7 +164,7 @@ npm start
 ### Quản lý Tài khoản
    * Danh sách Tài khoản
    <p align="center">
-   <img src="/screenshot/">
+   <img src="/screenshot/block_list">
    </p>
 
    * Thêm mới Tài khoản
