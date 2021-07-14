@@ -44,8 +44,8 @@
             </tr>
         </thead>
 
-        <ng-container *ngIf="(blocksP$|async) as blocks">
-            <ng-container *ngIf="(apts$|async) as apts">
+        <ng-container *ngIf="(blocksP$|async) as blocks; else loading">
+            <ng-container *ngIf="(apts$|async) as apts; else loading">
                 <ng-container *ngIf="!tableHelper.isLoading else loading">
                     <tbody>
                         <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">

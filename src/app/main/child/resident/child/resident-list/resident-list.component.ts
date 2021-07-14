@@ -89,7 +89,7 @@ export class ResidentListComponent implements OnInit {
       map(res => res.filter(x => x.blockId == e)),
       map(res => res.map((x: any) => new DropdownItem(x._id, x.name))),
       map(res => [new DropdownItem(null, 'All'), ...res])
-    )
+    );
     this.search();
   }
   refreshFilter(){
