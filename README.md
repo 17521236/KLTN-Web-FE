@@ -62,14 +62,14 @@ npm start
 ### Dashboard
    * Dashboard
    <p align="center">
-   <img src="./screenshot/dashboard.png">
+   <img src="/screenshoot/dashboard.png?raw=true">
    </p>
 
    
 ### Quản lý Block
    * Danh sách Block   
    <p align="center">
-   <img src="/screenshot/block_list.png">
+   <img src="/screenshoot/block_list.png">
    </p>
 
    * Thêm mới Block
