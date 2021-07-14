@@ -54,7 +54,7 @@ npm start
 ### Đăng nhập
    * Đăng nhập
    <p align="center">
-   <img src="/screenshot/login.png">
+   ![Alt text]("/screenshot/login.png?raw=true")
    </p>
 
     
@@ -66,9 +66,10 @@ npm start
 
    
 ### Quản lý Block
+
    * Danh sách Block   
    <p align="center">
-   <img src="/screenshot/block_list.png">
+   <img src="./screenshot/block_list.png">
    </p>
 
    * Thêm mới Block
