@@ -39,7 +39,7 @@
 ## Live Demo
 -  Live demo Web: [Apartment-Handbook](https://kltn-17521236.vercel.app/)
 -  Live demo Mobile app (F12 để xem dưới dạng mobile): [Apartment-Handbook-Mobile](https://kltn-mobile.vercel.app/)
--  Backend: [Task Manager Server](https://github.com/17521236/KLTN-Backend)
+-  Backend: [KLTN-Backend](https://github.com/17521236/KLTN-Backend)
 
 ## Cài đặt
 
