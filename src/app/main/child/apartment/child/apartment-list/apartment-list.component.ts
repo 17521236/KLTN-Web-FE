@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { delay, map, switchMap, tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
@@ -33,10 +33,15 @@ export class ApartmentListComponent implements OnInit {
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
-  blocksP$ = this.blocks$.pipe(map((x: any) => x.items))
+  blocksP$ = this.blocks$.pipe(map((x: any) => x.items));
   showRightMenu = false;
 
-  constructor(private router: Router, private aptService: ApartmentService, private blockService: BlockService, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private aptService: ApartmentService,
+    private blockService: BlockService,
+    private fb: FormBuilder
+    ) {
     this.tableHelper.filterForm = this.fb.group({
       blockId: '',
       name: ''

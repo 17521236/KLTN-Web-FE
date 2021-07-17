@@ -32,20 +32,18 @@
                 <th scope="col" width="35%">Mô tả</th>
             </tr>
         </thead>
-        <ng-container *ngIf="(blocksP$ |async) as blocks">
-            <ng-container *ngIf="!tableHelper.isLoading else loading">
-                <tbody>
-                    <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                        <td>{{id + 1 + tableHelper.paginator.getStart()}} </td>
-                        <td>{{item.name}} </td>
-                        <td>{{item.blockId | block: blocks}} </td>
-                        <td>{{item.area}} m²</td>
-                        <td class="text-overflow">
-                            {{item.description}}
-                        </td>
-                    </tr>
-                </tbody>
-            </ng-container>
+        <ng-container *ngIf="!tableHelper.isLoading else loading">
+            <tbody>
+                <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                    <td>{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                    <td>{{item.name}} </td>
+                    <td *ngIf="(blocksP$ |async) as blocks; else blockTpl">{{item.blockId | block: blocks}} </td>
+                    <td>{{item.area}} m²</td>
+                    <td class="text-overflow">
+                        {{item.description}}
+                    </td>
+                </tr>
+            </tbody>
         </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"
@@ -66,4 +64,8 @@
 <ng-template #addTpl>
     <!-- <i class="font20 pointer" nz-icon nzType="close" nzTheme="outline"></i> -->
     <app-add-apartment [tableHelper]="tableHelper" (success)="success()"></app-add-apartment>
+</ng-template>
+
+<ng-template #blockTpl>
+    <td>--.--</td>
 </ng-template>

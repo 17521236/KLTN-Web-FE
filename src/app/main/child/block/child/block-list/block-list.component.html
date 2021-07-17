@@ -11,7 +11,7 @@
         </div>
     </form>
 </div>
-<div *ngIf="(result$|async) as blocks">
+<div *ngIf="(result$|async) as blocks; else loading">
     <table class="vcc-table mb-24">
         <thead>
             <tr>

@@ -6,7 +6,7 @@ export class TableHelper {
     paginator: PaginatorEvent = new PaginatorEvent();
     query$;
     filterForm: FormGroup = new FormGroup({});
-    isLoading = false;
+    isLoading = true;
     constructor() {
         this.query$ = new BehaviorSubject(this);
     }

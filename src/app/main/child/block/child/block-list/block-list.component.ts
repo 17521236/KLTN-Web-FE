@@ -22,6 +22,7 @@ export class BlockListComponent implements OnInit {
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((x: any) => {
+      this.tableHelper.isLoading = true;
       return this.blockService.getBlocks(
         x.filterForm.value['searchText'],
         x.paginator.getStart(),
