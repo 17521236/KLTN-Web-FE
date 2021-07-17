@@ -1,4 +1,4 @@
-<app-header [isShowClose]="(role$ | async) == '0'" [pageName]="'Thông tin ban quản lý'" (close)="close()"></app-header>
+<app-header  [back]="true" [isShowClose]="(role$ | async) == '0'" [pageName]="'Thông tin ban quản lý'" (close)="close()"></app-header>
 
 <form *ngIf="(details$|async)  as detail; else loading" [formGroup]="form" (submit)="update()">
     <div *ngIf="(role$ | async) == '0'" class="mb-48 detail-section">

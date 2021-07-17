@@ -1,6 +1,6 @@
 <ng-container *ngIf="(details$|async) as details; else loading">
     <app-header [pageName]="'Thông tin thu phí tháng ' + moment(details?.bill.date).format('MM-yyyy') | uppercase"
-        (close)="close()"></app-header>
+        (close)="close()"  [back]="true"></app-header>
     <div class="row mb-48">
         <div class="col-4">
             <div class="medium-body-text">

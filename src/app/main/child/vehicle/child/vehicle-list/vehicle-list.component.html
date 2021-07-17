@@ -17,7 +17,7 @@
                     [clearfix]="true" (onClear)="tableHelper.next()"></app-input>
             </div>
             <div class="ml-auto d-flex ai-end">
-                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>             
+                <i class='bx bx-refresh pointer refresh' style="font-size: 48px;" (click)="refreshFilter()"></i>
             </div>
         </div>
         <button type="submit" hidden></button>
@@ -35,16 +35,19 @@
                 <!-- <th scope="col" width="15%">Trạng thái</th> -->
             </tr>
         </thead>
-        <tbody *ngIf="(residentP$|async) as residents; else loading">
-            <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
-                <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
-                <td width="15%">{{item.residentId | resident: residents}} </td>
-                <td width="15%">{{item.licensePlate || '---'}} </td>
-                <td width="15%">{{item.price|vnd}} </td>
-                <td width="15%">{{item.type|vehicle}} </td>
-                <!-- <td width="15%">{{item.status === '0'?'Chưa duyệt':'Đã duyệt'}} </td> -->
-            </tr>
-        </tbody>
+        <ng-container *ngIf="(residentP$|async) as residents; else loading">
+            <ng-container *ngIf="!tableHelper.isLoading else loading">
+                <tbody>
+                    <tr class="table-row" *ngFor="let item of result.items, index as id" (click)="viewDetail(item)">
+                        <td width="5%">{{id + 1 + tableHelper.paginator.getStart()}} </td>
+                        <td width="15%">{{item.residentId | resident: residents}} </td>
+                        <td width="15%">{{item.licensePlate || '---'}} </td>
+                        <td width="15%">{{item.price|vnd}} </td>
+                        <td width="15%">{{item.type|vehicle}} </td>
+                    </tr>
+                </tbody>
+            </ng-container>
+        </ng-container>
     </table>
     <nz-empty class="mt-48" *ngIf="result.total == 0"
         nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg">

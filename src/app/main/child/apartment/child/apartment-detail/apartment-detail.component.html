@@ -1,4 +1,4 @@
-<app-header [pageName]="'Thông tin căn hộ'" (close)="close()"></app-header>
+<app-header [pageName]="'Thông tin căn hộ'" (close)="close()" [back]="true"></app-header>
 <div *ngIf=" (apartment$|async) as apartment, else loading">
     <form [formGroup]="form" (submit)="update()">
         <div class="row">

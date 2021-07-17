@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { RESIDENT_TYPE_LIST, VEHICLE_STATUS_LIST, VEHICLE_TYPE } from 'src/app/core/system.config';
 import { ActionModalComponent } from 'src/app/shared/component/action-modal/action-modal.component';
@@ -26,6 +26,7 @@ export class VehicleListComponent implements OnInit {
   tableHelper: TableHelper = new TableHelper();
   result$: Observable<any> = this.tableHelper.query$.pipe(
     switchMap((x: TableHelper) => {
+      this.tableHelper.isLoading = true;
       return this.vehicleService.getVehicle(
         x.paginator.getStart(),
         x.paginator.pageSize,
@@ -33,8 +34,9 @@ export class VehicleListComponent implements OnInit {
         x.filterForm.value['licensePlate'],
         x.filterForm.value['type'],
       );
-    })
-  )
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
 
   // filter
   resident$ = this.residentService.getResident(0, 999);
@@ -43,7 +45,7 @@ export class VehicleListComponent implements OnInit {
     tmp.unshift(new DropdownItem('', 'All'));
     return tmp;
   }));
-  residentP$ = this.resident$.pipe(map((x:any)=>x.items));
+  residentP$ = this.resident$.pipe(map((x: any) => x.items));
   VEHICLE_STATUS = [new DropdownItem('', 'All'), ...VEHICLE_STATUS_LIST].map(x => new DropdownItem(x.id, x.text));
   typeList = [{ id: '', name: 'All' }, ...VEHICLE_TYPE].map(x => new DropdownItem(x.id, x.name));
 
@@ -70,7 +72,7 @@ export class VehicleListComponent implements OnInit {
     this.modal.createComponentModal(tpl, {}, false, '')
   }
 
-  refreshFilter(){
+  refreshFilter() {
     this.tableHelper.filterForm.reset();
     this.tableHelper.next();
   }
