@@ -9,7 +9,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() pageName = '';
   @Input() isShowClose = true;
-  @Input() back = false;
+  @Input() back = true;
   @Output() close = new EventEmitter<any>();
 
   constructor() { }

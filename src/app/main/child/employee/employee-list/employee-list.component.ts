@@ -42,4 +42,7 @@ export class EmployeeListComponent implements OnInit {
   viewDetail(employee){
     this.router.navigate([ROUTER_CONST.EMPLOYEE.DETAIL(employee._id)])
   }
+  getLists(){
+    this.tableHelper.next();
+  }
 }
