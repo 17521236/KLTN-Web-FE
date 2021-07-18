@@ -9,7 +9,6 @@ export class HeaderComponent implements OnInit {
 
   @Input() pageName = '';
   @Input() isShowClose = true;
-  @Input() back = true;
   @Output() close = new EventEmitter<any>();
 
   constructor() { }
@@ -17,10 +16,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   closePage() {
-    if (this.back) {
-      history.back();
-    } else {
       this.close.emit('');
-    }
   }
 }

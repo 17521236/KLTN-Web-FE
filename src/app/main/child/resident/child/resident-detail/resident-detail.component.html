@@ -1,4 +1,4 @@
-<app-header  [back]="true" [pageName]="'Thông tin cư dân'" (close)="close()"></app-header>
+<app-header    [pageName]="'Thông tin cư dân'" (close)="close()"></app-header>
 <div *ngIf=" (resident$|async) as resident, else loading">
     <!-- hasAccount -->
     <ng-template #hasEmail>

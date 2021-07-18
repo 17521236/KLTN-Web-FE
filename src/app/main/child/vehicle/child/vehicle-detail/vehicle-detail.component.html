@@ -1,4 +1,4 @@
-<app-header  [back]="true" [pageName]="'Thông tin xe'" (close)="close()"></app-header>
+<app-header    [pageName]="'Thông tin xe'" (close)="close()"></app-header>
 <div *ngIf=" (vehicle$|async) as vehicle, else loading">
     <form [formGroup]="form" (submit)="update()">
         <div class="row">
