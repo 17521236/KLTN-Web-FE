@@ -795,3 +795,12 @@ li:focus {
     font-family: "Nunito";
     color: $color-dark-grey;
 }
+.high-light{
+    &:hover{
+        transform: scale(1.01);
+        cursor: pointer;
+    }
+}
+.ant-drawer-content-wrapper{
+    width: 350px !important;
+}

@@ -15,7 +15,7 @@ export class PaginatorComponent implements OnInit {
   @Input() currentPage = 1;
   @Input() pageSizeOptions = [5, 10, 15];
   @Input() pageSize = 5;
-
+  @Input() size = 'medium';
   constructor() {
   }
 

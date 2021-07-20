@@ -5,12 +5,14 @@ import { ActionModalComponent } from 'src/app/shared/component/action-modal/acti
 import { DropdownItem } from 'src/app/shared/component/dropdown/model/dropdown.model';
 import { BillService, IFilterBill } from '../../service/bill.service';
 import { STATUS_BILL_LIST } from 'src/app/core/system.config';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { TableHelper } from 'src/app/shared/utils/table-helper';
 import { Observable } from 'rxjs';
 import { BlockService } from '../../../block/service/block.service';
 import { ApartmentService } from '../../../apartment/service/apartment.service';
+import { Location } from '@angular/common';
+import { PaginatorEvent } from 'src/app/shared/component/paginator/paginator-event.model';
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
@@ -40,18 +42,42 @@ export class BillListComponent implements OnInit {
   apts$ = this.aptService.getApartment(0, 999).pipe(map((res: any) => res.items));
   aptsDD$;
   aptLoading = false;
+  visible = false;
+  aptNotCreateBill$ = this.aptService.getApartmentDontHaveBill();
+  tableHelper1: TableHelper = new TableHelper();
+  result1$: Observable<any[]> = this.tableHelper1.query$.pipe(
+    switchMap((table: TableHelper) => {
+      return this.aptNotCreateBill$.pipe(
+        map((res: any[]) =>
+          res.filter((i, index) =>
+            (index >= table.paginator.getStart()) && (index < table.paginator.getStart() + table.paginator.pageSize)))
+      );
+    }),
+    tap(_ => this.tableHelper.isLoading = false)
+  );
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private billService: BillService,
     private blockService: BlockService,
-    private aptService: ApartmentService
+    private aptService: ApartmentService,
+    private route: ActivatedRoute,
+    private location: Location
   ) {
   }
-
   ngOnInit(): void {
+    this.location.go(`${ROUTER_CONST.BILL.LIST}`);
     this.buildForm();
+    if (this.route.snapshot.queryParams.status) {
+      this.tableHelper.filterForm.patchValue({
+        status: this.route.snapshot.queryParams.status,
+        month: new Date()
+      });
+    }
+    if (this.route.snapshot.queryParams.showApts) {
+      this.visible = true;
+    }
   }
 
   buildForm() {
@@ -89,5 +115,20 @@ export class BillListComponent implements OnInit {
   refreshFilter() {
     this.tableHelper.filterForm.reset();
     this.search();
+  }
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
+  onPageChange(e: PaginatorEvent) {
+    this.tableHelper1.paginator = e;
+    this.tableHelper1.next();
+  }
+  viewApt(apartment) {
+    this.router.navigate([ROUTER_CONST.APARTMENT.DETAIL(apartment._id)]);
   }
 }

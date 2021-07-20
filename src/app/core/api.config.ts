@@ -12,7 +12,8 @@ export const API = {
         ADD: "/api/apartment",
         GET_ONE: (id) => `/api/apartment/${id}`,
         UPDATE: (id) => `/api/apartment/${id}`,
-        DELETE: (id) => `/api/apartment/${id}`
+        DELETE: (id) => `/api/apartment/${id}`,
+        GET_NOT_HAVE_BILL: "/api/apartment/bill/not-create"
     },
     RESIDENT: {
         GET_ALL: "/api/resident",

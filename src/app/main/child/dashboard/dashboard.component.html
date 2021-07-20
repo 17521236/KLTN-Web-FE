@@ -64,7 +64,7 @@
             <div class="row h-100  text-center">
                 <div class="col-3 d-flex ai-center ">
                     <div class="right-line h-35 w-100 d-flex ai-center jc-center">
-                        <div>
+                        <div class="high-light" (click)="navToBill(2)">
                             <h4>{{this.chartOptions.series[0]|number}} </h4>
                             <div class="medium-body-text fw-bold" style=" color: rgb(0, 143, 251) ">
                                 Đã thanh toán
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-3 d-flex ai-center">
                     <div class="right-line h-35 w-100 d-flex ai-center jc-center">
-                        <div>
+                        <div class="high-light" (click)="navToBill(1)">
                             <h4>{{this.chartOptions.series[1]|number}} </h4>
                             <div class="medium-body-text fw-bold" style=" color: rgb(0, 227, 150)">
                                 Chờ duyệt
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-3 d-flex ai-center">
                     <div class="right-line h-35 w-100 d-flex ai-center jc-center">
-                        <div>
+                        <div class="high-light" (click)="navToBill(0)">
                             <h4>{{this.chartOptions.series[2]|number}} </h4>
                             <div class="medium-body-text fw-bold" style=" color: rgb(254, 176, 25)">
                                 Chưa thanh toán
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-3 d-flex ai-center">
                     <div class="h-35 w-100 d-flex ai-center jc-center">
-                        <div>
+                        <div class="high-light" (click)="navToBill(-1)">
                             <h4>{{this.chartOptions.series[3]|number}} </h4>
                             <div class="medium-body-text fw-bold" style=" color: rgb(255, 69, 96)">
                                 Chưa tạo hóa đơn

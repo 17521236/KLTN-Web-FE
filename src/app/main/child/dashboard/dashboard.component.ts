@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ROUTER_CONST } from 'src/app/core/router.config';
 import { STATUS_BILL_APPROVE, STATUS_BILL_LIST, STATUS_BILL_NOT_APPROVE, STATUS_BILL_PENDING } from 'src/app/core/system.config';
@@ -30,12 +29,12 @@ export class DashboardComponent implements OnInit {
   chartOptions = {
     series: [0, 0, 0, 1],
     chart: {
-      type: "pie"
+      type: 'pie'
     },
     labels: [
-      STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_APPROVE).name,
-      STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_PENDING).name,
-      STATUS_BILL_LIST.find(x => x.id == STATUS_BILL_NOT_APPROVE).name,
+      STATUS_BILL_LIST.find(x => x.id === STATUS_BILL_APPROVE).name,
+      STATUS_BILL_LIST.find(x => x.id === STATUS_BILL_PENDING).name,
+      STATUS_BILL_LIST.find(x => x.id === STATUS_BILL_NOT_APPROVE).name,
       'Chưa tạo bill'
     ]
   };
@@ -54,19 +53,34 @@ export class DashboardComponent implements OnInit {
   }
 
   navBlock() {
-    this.router.navigate([ROUTER_CONST.BLOCK.LIST])
+    this.router.navigate([ROUTER_CONST.BLOCK.LIST]);
   }
 
   navApt() {
-    this.router.navigate([ROUTER_CONST.APARTMENT.LIST])
+    this.router.navigate([ROUTER_CONST.APARTMENT.LIST]);
   }
 
   navResident() {
-    this.router.navigate([ROUTER_CONST.RESIDENT.LIST])
+    this.router.navigate([ROUTER_CONST.RESIDENT.LIST]);
   }
 
   navVeh() {
-    this.router.navigate([ROUTER_CONST.VEHICLE.LIST])
+    this.router.navigate([ROUTER_CONST.VEHICLE.LIST]);
   }
 
+  navToBill(evt) {
+    if (evt === -1) {
+      this.router.navigate([ROUTER_CONST.BILL.LIST], {
+        queryParams: { showApts: true }
+      });
+      return;
+    }
+    const queryParams = {
+      status: ''
+    };
+    queryParams.status = STATUS_BILL_LIST[evt].id;
+    this.router.navigate([ROUTER_CONST.BILL.LIST], {
+      queryParams
+    });
+  }
 }

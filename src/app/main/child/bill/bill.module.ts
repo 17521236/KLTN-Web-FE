@@ -8,7 +8,7 @@ import { BillAddComponent } from './component/bill-add/bill-add.component';
 import { BillService } from './service/bill.service';
 import { BillListComponent } from './child/bill-list/bill-list.component';
 // import { ServiceComponent } from './service/service.component';
-
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { BillListComponent } from './child/bill-list/bill-list.component';
   imports: [
     CommonModule,
     BillRoutingModule,
-    SharedModule
+    SharedModule,
+    NzDrawerModule
   ],
   providers: [BillService]
 })

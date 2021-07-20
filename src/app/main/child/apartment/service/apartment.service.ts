@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { API } from 'src/app/core/api.config';
 import { HttpService } from 'src/app/shared/service/http.service';
 import { ApartmentReq } from '../model/apartment.model';
@@ -29,7 +29,12 @@ export class ApartmentService {
     const tmp: ApartmentReq = new ApartmentReq(data);
     return this.http.sendToServer("PATCH", API.APARTMENT.UPDATE(id), tmp).pipe(shareReplay());
   }
-  delete(id){
+  delete(id) {
     return this.http.sendToServer("DELETE", API.APARTMENT.DELETE(id)).pipe(shareReplay());
+  }
+  getApartmentDontHaveBill() {
+    return this.http.sendToServer("GET", API.APARTMENT.GET_NOT_HAVE_BILL, null, null).pipe(
+      map((x: any) => x.result),
+      shareReplay());
   }
 }

@@ -8,5 +8,7 @@
     [nzDisabled]="isDisabled"
     (nzPageIndexChange)="changePage($event)"
     (nzPageSizeChange)="changePageSize($event)"
-
+    [nzSize]="size"
+    [nzSimple]="size=='small'"
+    [nzResponsive]="size=='small'"
 ></nz-pagination>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SnackbarService } from 'ngx-snackbar';
@@ -20,7 +20,7 @@ import * as moment from 'moment';
   providers: [BillAddStoreService]
 })
 export class BillAddComponent implements OnInit, OnDestroy {
-
+  moment = moment;
   @Output() success = new EventEmitter<any>();
   form: FormGroup;
   ERROR_MSG = ERROR_MSG;
@@ -28,6 +28,7 @@ export class BillAddComponent implements OnInit, OnDestroy {
   private _sub$ = new Subject();
   totalPrice = 0;
   selecting = false;
+  @Input() aptSelect;
 
   constructor(
     private fb: FormBuilder,
@@ -37,9 +38,19 @@ export class BillAddComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  block$ = this.billAddStore.block$.pipe(tap(_ => this.selecting = false), map((res: IBlock[]) => res.map(x => new DropdownItem(x._id, x.name))));
-  apt$ = this.billAddStore.apts$.pipe(tap(_ => this.selecting = false), map((res: IApartment[]) => res.map(x => new DropdownItem(x._id, x.name))));;
-  aptSelected$ = this.billAddStore.aptSelected$.pipe(tap(_ => this.selecting = false));
+  block$ = this.billAddStore.block$.pipe(
+    tap(_ => this.selecting = false),
+    map((res: IBlock[]) => res.map(x => new DropdownItem(x._id, x.name)))
+  );
+  apt$ = this.billAddStore.apts$.pipe(
+    tap(_ => this.selecting = false),
+    map((res: IApartment[]) => res.map(x => new DropdownItem(x._id, x.name)))
+  );
+  aptSelected$ = this.billAddStore.aptSelected$.pipe(
+    tap(_ => {
+      this.selecting = false;
+    })
+  );
   area$ = this.billAddStore.aptSelected$.pipe(map((res: IApartment) => Number(res.area)));
   cost$: Observable<ICost> = this.billAddStore.cost$.pipe(
     tap((cost: ICost) => {
@@ -49,7 +60,7 @@ export class BillAddComponent implements OnInit, OnDestroy {
         parking_car: cost.PARKING_CAR.quantity,
         parking_motobike: cost.PARKING_MOTORBIKE.quantity,
         parking_bycircle: cost.PARKING_BYCIRCLE.quantity
-      })
+      });
     })
   );
 
@@ -71,35 +82,35 @@ export class BillAddComponent implements OnInit, OnDestroy {
       takeUntil(this._sub$)
     ).subscribe((value: any) => {
       this.totalPrice = this.calc(value);
-    })
+    });
   }
 
   calc(value) {
     let total = 0;
-    let cost = this.billAddStore.state.cost;
+    const cost = this.billAddStore.state.cost;
     if (value['electronic']) {
-      total += Number(value['electronic']) * Number(cost.ELECTRONIC.cost)
+      total += Number(value['electronic']) * Number(cost.ELECTRONIC.cost);
     }
     if (value['water']) {
-      total += Number(value['water']) * Number(cost.WATER.cost)
+      total += Number(value['water']) * Number(cost.WATER.cost);
     }
     if (value['internet']) {
-      total += Number(cost.INTERNET.quantity) * Number(cost.INTERNET.cost)
+      total += Number(cost.INTERNET.quantity) * Number(cost.INTERNET.cost);
     }
     if (value['service']) {
-      total += Number(cost.SERVICE.quantity) * Number(cost.SERVICE.cost)
+      total += Number(cost.SERVICE.quantity) * Number(cost.SERVICE.cost);
     }
     if (value['parking_bycircle']) {
-      total += Number(cost.PARKING_BYCIRCLE.quantity) * Number(cost.PARKING_BYCIRCLE.cost)
+      total += Number(cost.PARKING_BYCIRCLE.quantity) * Number(cost.PARKING_BYCIRCLE.cost);
     }
     if (value['parking_motobike']) {
-      total += Number(cost.PARKING_MOTORBIKE.quantity) * Number(cost.PARKING_MOTORBIKE.cost)
+      total += Number(cost.PARKING_MOTORBIKE.quantity) * Number(cost.PARKING_MOTORBIKE.cost);
     }
     if (value['parking_car']) {
-      total += Number(cost.PARKING_CAR.quantity) * Number(cost.PARKING_CAR.cost)
+      total += Number(cost.PARKING_CAR.quantity) * Number(cost.PARKING_CAR.cost);
     }
     if (value['orther']) {
-      total += Number(value['orther']) * Number(cost.ORTHER.cost)
+      total += Number(value['orther']) * Number(cost.ORTHER.cost);
     }
     return total;
   }
@@ -111,26 +122,26 @@ export class BillAddComponent implements OnInit, OnDestroy {
       this.billAddStore.add(dataReq).subscribe(_ => {
         this.success.emit('');
         this.toast.success('Added successfully');
-        setTimeout(() => this.modal.closeAll(), 0)
+        setTimeout(() => this.modal.closeAll(), 0);
         this.pending = false;
       }, _ => {
         this.pending = false;
         this.billAddStore.selectBlock('');
         // setTimeout(() => this.modal.closeAll(), 0);
-      })
+      });
     }
   }
 
   formatData(val): IAddBillReq {
     const { blockId, aptId, ...rest } = val;
-    let dataReq = {
+    const dataReq = {
       apartmentId: val.aptId,
       pmId: null,
       date: new Date().getTime(),
       status: STATUS_BILL_NOT_APPROVE,
       amount: Number((this.totalPrice * 1.1).toFixed(0)),
       details: rest
-    }
+    };
     return dataReq;
   }
 
@@ -141,7 +152,9 @@ export class BillAddComponent implements OnInit, OnDestroy {
   }
 
   selectApt(id) {
-    if (!id) return;
+    if (!id) {
+      return;
+    }
     this.billAddStore.selectApt(id);
     this.selecting = true;
   }
@@ -152,5 +165,4 @@ export class BillAddComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._sub$.next();
   }
-  moment = moment;
 }
